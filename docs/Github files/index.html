@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Habitra - Habit Tracking That Adapts to You</title>
+  <meta name="description" content="Habitra is an intelligent habit tracker for iOS that uses on-device AI to learn your patterns, predict your success, and help you build lasting habits.">
+  <meta name="apple-itunes-app" content="app-id=YOUR_APP_ID">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0D0D14;
+      --surface: #1A1A2E;
+      --surface-light: #242442;
+      --accent: #6C63FF;
+      --accent-bright: #7C73FF;
+      --accent-glow: #A89AFF;
+      --text-primary: #EEEDFE;
+      --text-secondary: #AFA9EC;
+      --text-tertiary: #7A74B0;
+      --success: #34D399;
+      --radius: 16px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--accent-glow); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Nav */
+    nav {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--surface-light);
+    }
+    nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.5px;
+    }
+    .logo span { color: var(--accent); }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 28px;
+    }
+    nav ul a {
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    nav ul a:hover { color: var(--text-primary); text-decoration: none; }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 100px 0 80px;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: var(--surface-light);
+      color: var(--accent-glow);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+      border: 1px solid rgba(108, 99, 255, 0.2);
+    }
+    .hero h1 {
+      font-size: clamp(36px, 6vw, 56px);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      letter-spacing: -1px;
+    }
+    .hero h1 .gradient {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-glow) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 560px;
+      margin: 0 auto 36px;
+    }
+    .app-store-btn {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      font-weight: 600;
+      font-size: 16px;
+      padding: 14px 32px;
+      border-radius: 12px;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .app-store-btn:hover {
+      background: var(--accent-bright);
+      text-decoration: none;
+      transform: translateY(-1px);
+    }
+
+    /* Pulse line decoration */
+    .pulse-line {
+      width: 200px;
+      height: 40px;
+      margin: 40px auto 0;
+      opacity: 0.4;
+    }
+    .pulse-line svg { width: 100%; height: 100%; }
+
+    /* Features */
+    .features {
+      padding: 80px 0;
+    }
+    .features h2 {
+      text-align: center;
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .features .subtitle {
+      text-align: center;
+      color: var(--text-secondary);
+      margin-bottom: 60px;
+      font-size: 16px;
+    }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--surface-light);
+      border-radius: var(--radius);
+      padding: 28px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .feature-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+    .feature-icon {
+      font-size: 28px;
+      margin-bottom: 16px;
+    }
+    .feature-card h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .feature-card p {
+      color: var(--text-secondary);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    /* AI Section */
+    .ai-section {
+      padding: 80px 0;
+      border-top: 1px solid var(--surface-light);
+    }
+    .ai-section .container {
+      text-align: center;
+    }
+    .ai-section h2 {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .ai-section .subtitle {
+      color: var(--text-secondary);
+      margin-bottom: 48px;
+      font-size: 16px;
+    }
+    .ai-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      text-align: left;
+    }
+    .ai-item {
+      background: var(--surface);
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid var(--surface-light);
+    }
+    .ai-item h4 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--accent-glow);
+    }
+    .ai-item p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* Privacy callout */
+    .privacy-callout {
+      padding: 60px 0;
+      text-align: center;
+      border-top: 1px solid var(--surface-light);
+    }
+    .privacy-callout .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(52, 211, 153, 0.1);
+      color: var(--success);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 8px 20px;
+      border-radius: 100px;
+      border: 1px solid rgba(52, 211, 153, 0.2);
+      margin-bottom: 16px;
+    }
+    .privacy-callout h3 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .privacy-callout p {
+      color: var(--text-secondary);
+      max-width: 520px;
+      margin: 0 auto;
+      font-size: 15px;
+    }
+
+    /* Footer */
+    footer {
+      padding: 40px 0;
+      border-top: 1px solid var(--surface-light);
+    }
+    footer .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    footer p {
+      color: var(--text-tertiary);
+      font-size: 13px;
+    }
+    footer ul {
+      list-style: none;
+      display: flex;
+      gap: 24px;
+    }
+    footer ul a {
+      color: var(--text-tertiary);
+      font-size: 13px;
+    }
+    footer ul a:hover { color: var(--text-secondary); }
+
+    /* Pricing */
+    .pricing {
+      padding: 80px 0;
+      border-top: 1px solid var(--surface-light);
+    }
+    .pricing h2 {
+      text-align: center;
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .pricing .subtitle {
+      text-align: center;
+      color: var(--text-secondary);
+      margin-bottom: 48px;
+      font-size: 16px;
+    }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      align-items: start;
+    }
+    .pricing-card {
+      background: var(--surface);
+      border: 1px solid var(--surface-light);
+      border-radius: var(--radius);
+      padding: 24px 20px;
+      position: relative;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .pricing-card:hover {
+      transform: translateY(-2px);
+    }
+    .pricing-card.featured {
+      border-color: var(--accent);
+      box-shadow: 0 0 24px rgba(108, 99, 255, 0.15);
+    }
+    .pricing-badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent);
+      color: white;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 100px;
+      white-space: nowrap;
+      letter-spacing: 0.5px;
+    }
+    .lifetime-badge {
+      background: var(--success);
+    }
+    .pricing-header {
+      text-align: center;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--surface-light);
+      margin-bottom: 20px;
+    }
+    .pricing-header h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+    .pricing-price {
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .pricing-period {
+      font-size: 13px;
+      color: var(--text-tertiary);
+    }
+    .pricing-detail {
+      margin-top: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--success);
+    }
+    .pricing-features {
+      list-style: none;
+    }
+    .pricing-features li {
+      font-size: 13px;
+      padding: 6px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .pricing-features li.included {
+      color: var(--text-secondary);
+    }
+    .pricing-features li.excluded {
+      color: var(--text-tertiary);
+      opacity: 0.45;
+    }
+    .pricing-features .check {
+      color: var(--success);
+      font-size: 14px;
+      font-weight: 700;
+      flex-shrink: 0;
+      width: 16px;
+    }
+    .pricing-features .cross {
+      color: var(--text-tertiary);
+      font-size: 14px;
+      flex-shrink: 0;
+      width: 16px;
+    }
+
+    @media (max-width: 640px) {
+      nav ul { gap: 16px; }
+      .hero { padding: 60px 0 50px; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .ai-grid { grid-template-columns: 1fr 1fr; }
+      .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+      footer .container { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="container">
+      <div class="logo">Habitr<span>a</span></div>
+      <ul>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="support.html">Support</a></li>
+        <li><a href="privacy.html">Privacy</a></li>
+        <li><a href="copyright.html">Terms</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-badge">Intelligent Habit Tracking for iOS</div>
+      <h1>Build habits that<br><span class="gradient">actually stick</span></h1>
+      <p>Habitra uses on-device AI to learn your patterns, predict when you're at risk of breaking a streak, and coach you toward lasting change. No cloud. No compromise.</p>
+      <a href="#" class="app-store-btn">Download on the App Store</a>
+      <div class="pulse-line">
+        <svg viewBox="0 0 200 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 20 H60 L70 5 L80 35 L90 10 L100 30 L110 20 H200" stroke="#6C63FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="features" id="features">
+    <div class="container">
+      <h2>Everything you need to build better habits</h2>
+      <p class="subtitle">Simple on the surface. Powerful underneath.</p>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon">&#9889;</div>
+          <h3>Quick Daily Check-In</h3>
+          <p>Tap to complete habits from your Today view. Track streaks, see progress at a glance, and build momentum with satisfying haptic feedback.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">&#128200;</div>
+          <h3>Deep Analytics</h3>
+          <p>Heatmaps, completion charts, best/worst day analysis, and trend tracking across weekly, monthly, quarterly, and yearly ranges.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">&#128276;</div>
+          <h3>Smart Reminders</h3>
+          <p>AI-optimized notification timing that adapts to when you actually complete habits, not just when you set the alarm.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">&#127912;</div>
+          <h3>Categories &amp; Colors</h3>
+          <p>Organize habits with custom categories, icons, and colors. Flexible scheduling: daily, weekdays, weekends, or custom days.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">&#127919;</div>
+          <h3>Streak Milestones</h3>
+          <p>Celebrate 7-day, 30-day, 100-day, and 365-day milestones with shareable streak cards and custom themes.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">&#128241;</div>
+          <h3>Home Screen Widget</h3>
+          <p>See your daily habits and progress right on your home screen with a beautiful, glanceable widget.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ai-section">
+    <div class="container">
+      <h2>AI that runs entirely on your device</h2>
+      <p class="subtitle">Core ML-powered intelligence. Zero data leaves your phone.</p>
+      <div class="ai-grid">
+        <div class="ai-item">
+          <h4>Pattern Detection</h4>
+          <p>Discovers hidden trends in your habit data like day-of-week strengths and completion velocity.</p>
+        </div>
+        <div class="ai-item">
+          <h4>Risk Prediction</h4>
+          <p>Warns you when a streak is at risk of breaking before it happens, so you can intervene.</p>
+        </div>
+        <div class="ai-item">
+          <h4>Mood Correlation</h4>
+          <p>Tracks mood alongside habits and finds which routines drive how you feel.</p>
+        </div>
+        <div class="ai-item">
+          <h4>Weekly Recaps</h4>
+          <p>AI-generated summaries with insights, coaching tips, and motivational feedback.</p>
+        </div>
+        <div class="ai-item">
+          <h4>Health Scoring</h4>
+          <p>Each habit gets a health grade based on consistency, momentum, streak resilience, and engagement.</p>
+        </div>
+        <div class="ai-item">
+          <h4>Habit Correlations</h4>
+          <p>Finds which habits reinforce each other, so you can build powerful habit stacks.</p>
+        </div>
+        <div class="ai-item">
+          <h4>Coaching Messages</h4>
+          <p>Contextual encouragement based on your current performance and upcoming challenges.</p>
+        </div>
+        <div class="ai-item">
+          <h4>HealthKit Insights</h4>
+          <p>Correlates steps, sleep, and heart rate with habit completion to find what fuels your best days.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="privacy-callout">
+    <div class="container">
+      <div class="badge">&#128274; Privacy First</div>
+      <h3>Your data stays on your device</h3>
+      <p>Habitra processes all AI and analytics on-device using Core ML. We never collect, transmit, or store your habit data, mood entries, or health information on any server. Period.</p>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section class="pricing" id="pricing">
+    <div class="container">
+      <h2>Simple, transparent pricing</h2>
+      <p class="subtitle">Start free. Upgrade when you're ready.</p>
+
+      <div class="pricing-grid">
+        <!-- Free Tier -->
+        <div class="pricing-card">
+          <div class="pricing-header">
+            <h3>Free</h3>
+            <div class="pricing-price">$0</div>
+            <div class="pricing-period">forever</div>
+          </div>
+          <ul class="pricing-features">
+            <li class="included"><span class="check">&#10003;</span> Up to 5 habits</li>
+            <li class="included"><span class="check">&#10003;</span> Streak tracking</li>
+            <li class="included"><span class="check">&#10003;</span> XP &amp; badges</li>
+            <li class="included"><span class="check">&#10003;</span> Smart reminders</li>
+            <li class="included"><span class="check">&#10003;</span> Basic widget</li>
+            <li class="excluded"><span class="cross">&#10005;</span> Categories</li>
+            <li class="excluded"><span class="cross">&#10005;</span> AI nudges &amp; coaching</li>
+            <li class="excluded"><span class="cross">&#10005;</span> Predictive alerts</li>
+            <li class="excluded"><span class="cross">&#10005;</span> HealthKit integration</li>
+            <li class="excluded"><span class="cross">&#10005;</span> iCloud sync</li>
+            <li class="excluded"><span class="cross">&#10005;</span> CSV export</li>
+            <li class="excluded"><span class="cross">&#10005;</span> Custom themes</li>
+          </ul>
+        </div>
+
+        <!-- Pro Monthly -->
+        <div class="pricing-card">
+          <div class="pricing-header">
+            <h3>Pro Monthly</h3>
+            <div class="pricing-price">$4.99</div>
+            <div class="pricing-period">per month</div>
+          </div>
+          <ul class="pricing-features">
+            <li class="included"><span class="check">&#10003;</span> Unlimited habits</li>
+            <li class="included"><span class="check">&#10003;</span> Streak tracking</li>
+            <li class="included"><span class="check">&#10003;</span> XP &amp; badges</li>
+            <li class="included"><span class="check">&#10003;</span> Smart reminders</li>
+            <li class="included"><span class="check">&#10003;</span> All widgets + StandBy</li>
+            <li class="included"><span class="check">&#10003;</span> Categories</li>
+            <li class="included"><span class="check">&#10003;</span> AI nudges &amp; coaching</li>
+            <li class="included"><span class="check">&#10003;</span> Predictive alerts</li>
+            <li class="included"><span class="check">&#10003;</span> HealthKit integration</li>
+            <li class="included"><span class="check">&#10003;</span> iCloud sync</li>
+            <li class="included"><span class="check">&#10003;</span> CSV export</li>
+            <li class="included"><span class="check">&#10003;</span> Custom themes</li>
+          </ul>
+        </div>
+
+        <!-- Pro Annual -->
+        <div class="pricing-card featured">
+          <div class="pricing-badge">BEST VALUE — SAVE 33%</div>
+          <div class="pricing-header">
+            <h3>Pro Annual</h3>
+            <div class="pricing-price">$39.99</div>
+            <div class="pricing-period">per year</div>
+            <div class="pricing-detail">14-day free trial included</div>
+          </div>
+          <ul class="pricing-features">
+            <li class="included"><span class="check">&#10003;</span> Unlimited habits</li>
+            <li class="included"><span class="check">&#10003;</span> Streak tracking</li>
+            <li class="included"><span class="check">&#10003;</span> XP &amp; badges</li>
+            <li class="included"><span class="check">&#10003;</span> Smart reminders</li>
+            <li class="included"><span class="check">&#10003;</span> All widgets + StandBy</li>
+            <li class="included"><span class="check">&#10003;</span> Categories</li>
+            <li class="included"><span class="check">&#10003;</span> AI nudges &amp; coaching</li>
+            <li class="included"><span class="check">&#10003;</span> Predictive alerts</li>
+            <li class="included"><span class="check">&#10003;</span> HealthKit integration</li>
+            <li class="included"><span class="check">&#10003;</span> iCloud sync</li>
+            <li class="included"><span class="check">&#10003;</span> CSV export</li>
+            <li class="included"><span class="check">&#10003;</span> Custom themes</li>
+          </ul>
+        </div>
+
+        <!-- Pro Lifetime -->
+        <div class="pricing-card">
+          <div class="pricing-badge lifetime-badge">ONE TIME</div>
+          <div class="pricing-header">
+            <h3>Pro Lifetime</h3>
+            <div class="pricing-price">$79.99</div>
+            <div class="pricing-period">pay once, keep forever</div>
+          </div>
+          <ul class="pricing-features">
+            <li class="included"><span class="check">&#10003;</span> Unlimited habits</li>
+            <li class="included"><span class="check">&#10003;</span> Streak tracking</li>
+            <li class="included"><span class="check">&#10003;</span> XP &amp; badges</li>
+            <li class="included"><span class="check">&#10003;</span> Smart reminders</li>
+            <li class="included"><span class="check">&#10003;</span> All widgets + StandBy</li>
+            <li class="included"><span class="check">&#10003;</span> Categories</li>
+            <li class="included"><span class="check">&#10003;</span> AI nudges &amp; coaching</li>
+            <li class="included"><span class="check">&#10003;</span> Predictive alerts</li>
+            <li class="included"><span class="check">&#10003;</span> HealthKit integration</li>
+            <li class="included"><span class="check">&#10003;</span> iCloud sync</li>
+            <li class="included"><span class="check">&#10003;</span> CSV export</li>
+            <li class="included"><span class="check">&#10003;</span> Custom themes</li>
+          </ul>
+        </div>
+      </div>
+      <p class="subscription-disclosure" style="text-align:center; margin-top:24px; font-size:13px; color:#86868B; max-width:600px; margin-left:auto; margin-right:auto;">Subscriptions automatically renew unless cancelled at least 24 hours before the end of the current period. You can manage or cancel subscriptions in your Apple ID account settings. A 14-day free trial is available with the annual plan; any unused portion is forfeited upon purchasing a subscription. <a href="copyright.html" style="color:#7C5CFC;">Terms of Use</a> · <a href="privacy.html" style="color:#7C5CFC;">Privacy Policy</a></p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Habitra. All rights reserved.</p>
+      <ul>
+        <li><a href="support.html">Support</a></li>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="copyright.html">Terms of Use</a></li>
+      </ul>
+    </div>
+  </footer>
+
+</body>
+</html>

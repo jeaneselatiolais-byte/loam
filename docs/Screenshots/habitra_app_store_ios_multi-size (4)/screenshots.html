@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Habitra - App Store Screenshots</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0D0D14;
+      --surface: #1A1A2E;
+      --surface-light: #242442;
+      --accent: #6C63FF;
+      --accent-bright: #7C73FF;
+      --accent-glow: #A89AFF;
+      --accent-muted: #534AB7;
+      --text-primary: #EEEDFE;
+      --text-secondary: #AFA9EC;
+      --text-tertiary: #7A74B0;
+      --vital: #F59E0B;
+      --vital-glow: #FCD34D;
+      --success: #4ADE80;
+      --warning: #FBBF24;
+      --danger: #F87171;
+      --purple: #6C63FF;
+      --blue: #3B82F6;
+      --cyan: #06B6D4;
+      --green: #22C55E;
+      --yellow: #EAB308;
+      --orange: #F97316;
+      --pink: #EC4899;
+      --red: #EF4444;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: #111;
+      color: #fff;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+    .subtitle {
+      text-align: center;
+      color: #888;
+      font-size: 14px;
+      margin-bottom: 48px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 48px;
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+
+    .screenshot-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .screenshot-label {
+      font-size: 13px;
+      color: #666;
+      font-weight: 500;
+    }
+
+    /* iPhone frame - 6.7" display ratio (1290x2796 scaled) */
+    .iphone-frame {
+      width: 320px;
+      height: 693px;
+      background: var(--bg);
+      border-radius: 40px;
+      border: 4px solid #333;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+
+    /* Dynamic Island */
+    .dynamic-island {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 34px;
+      background: #000;
+      border-radius: 20px;
+      z-index: 10;
+    }
+
+    /* Status bar */
+    .status-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px 0;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-primary);
+      height: 54px;
+    }
+
+    /* Screen content */
+    .screen {
+      padding: 0 16px;
+      height: calc(100% - 54px - 70px);
+      overflow: hidden;
+    }
+
+    /* Tab bar */
+    .tab-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 70px;
+      background: rgba(13, 13, 20, 0.95);
+      backdrop-filter: blur(20px);
+      border-top: 1px solid var(--surface-light);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 0 8px 16px;
+    }
+    .tab-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      font-size: 9px;
+      color: var(--text-tertiary);
+    }
+    .tab-item.active { color: var(--accent); }
+    .tab-icon { font-size: 18px; }
+
+    /* Tagline overlay */
+    .tagline-banner {
+      background: linear-gradient(135deg, #6C63FF 0%, #534AB7 100%);
+      padding: 20px 24px;
+      text-align: center;
+      border-radius: 0 0 20px 20px;
+      margin: -16px -16px 12px;
+      width: calc(100% + 32px);
+    }
+    .tagline-banner h2 {
+      font-size: 16px;
+      font-weight: 700;
+      color: white;
+      line-height: 1.3;
+    }
+    .tagline-banner p {
+      font-size: 10px;
+      color: rgba(255,255,255,0.7);
+      margin-top: 4px;
+    }
+
+    /* UI Components */
+    .section-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 12px 0 10px;
+    }
+    .section-subtitle {
+      font-size: 11px;
+      color: var(--text-tertiary);
+      margin-bottom: 10px;
+    }
+
+    .card {
+      background: var(--surface);
+      border-radius: 14px;
+      padding: 12px 14px;
+      margin-bottom: 8px;
+    }
+
+    .habit-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 0;
+    }
+    .habit-circle {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 2.5px solid;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 12px;
+    }
+    .habit-circle.done {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+    .habit-info { flex: 1; }
+    .habit-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .habit-meta {
+      font-size: 9px;
+      color: var(--text-tertiary);
+    }
+    .streak-badge {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--vital);
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+
+    /* Progress ring */
+    .progress-ring-container {
+      text-align: center;
+      margin: 8px 0;
+    }
+    .progress-ring {
+      width: 80px;
+      height: 80px;
+      position: relative;
+      display: inline-block;
+    }
+    .progress-ring svg {
+      transform: rotate(-90deg);
+    }
+    .progress-ring .label {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+
+    /* Badge */
+    .badge-item {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      width: 52px;
+    }
+    .badge-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+    .badge-label {
+      font-size: 7px;
+      color: var(--text-tertiary);
+      text-align: center;
+    }
+
+    /* Mood */
+    .mood-row {
+      display: flex;
+      justify-content: space-around;
+      padding: 8px 0;
+    }
+    .mood-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      font-size: 24px;
+    }
+    .mood-label {
+      font-size: 8px;
+      color: var(--text-tertiary);
+    }
+
+    /* Stats bars */
+    .stat-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+    .stat-bar-label {
+      font-size: 9px;
+      color: var(--text-secondary);
+      width: 30px;
+      text-align: right;
+    }
+    .stat-bar {
+      flex: 1;
+      height: 8px;
+      background: var(--surface-light);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .stat-bar-fill {
+      height: 100%;
+      border-radius: 4px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-glow));
+    }
+    .stat-bar-value {
+      font-size: 9px;
+      color: var(--text-tertiary);
+      width: 28px;
+    }
+
+    /* Health score */
+    .health-grade {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    /* Prediction card */
+    .prediction-card {
+      background: var(--surface);
+      border-radius: 14px;
+      padding: 12px;
+      margin-bottom: 8px;
+      border-left: 3px solid;
+    }
+    .prediction-card.high { border-color: var(--danger); }
+    .prediction-card.medium { border-color: var(--warning); }
+    .prediction-card.low { border-color: var(--success); }
+
+    /* Widget mockup */
+    .widget-mockup {
+      background: var(--surface);
+      border-radius: 18px;
+      padding: 14px;
+      margin-bottom: 8px;
+    }
+
+    /* Heatmap */
+    .heatmap {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 3px;
+    }
+    .heatmap-cell {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 3px;
+      background: var(--surface-light);
+    }
+    .heatmap-cell.l1 { background: rgba(108, 99, 255, 0.2); }
+    .heatmap-cell.l2 { background: rgba(108, 99, 255, 0.4); }
+    .heatmap-cell.l3 { background: rgba(108, 99, 255, 0.6); }
+    .heatmap-cell.l4 { background: rgba(108, 99, 255, 0.85); }
+    .heatmap-cell.l5 { background: var(--accent); }
+
+    /* Sparkline placeholder */
+    .sparkline {
+      height: 40px;
+      background: linear-gradient(180deg, rgba(108,99,255,0.15) 0%, transparent 100%);
+      border-radius: 8px;
+      position: relative;
+      overflow: hidden;
+    }
+    .sparkline::after {
+      content: '';
+      position: absolute;
+      bottom: 8px;
+      left: 5%;
+      right: 5%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent-muted), var(--accent), var(--accent-glow), var(--accent), var(--accent-bright));
+      border-radius: 1px;
+      clip-path: polygon(0% 80%, 8% 60%, 16% 70%, 24% 30%, 32% 50%, 40% 20%, 48% 40%, 56% 10%, 64% 30%, 72% 15%, 80% 35%, 88% 5%, 96% 25%, 100% 15%);
+      height: 24px;
+    }
+
+    /* Confetti */
+    .confetti-container {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .confetti-piece {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 2px;
+      animation: confetti-fall 2s ease-in forwards;
+    }
+    @keyframes confetti-fall {
+      from { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+      to { transform: translateY(400px) rotate(720deg); opacity: 0; }
+    }
+
+    /* Shield icon */
+    .shield-visual {
+      text-align: center;
+      padding: 16px 0 8px;
+    }
+    .shield-icon {
+      font-size: 48px;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    /* Pro features list */
+    .pro-feature {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 0;
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+    .pro-check {
+      color: var(--accent);
+      font-size: 14px;
+    }
+
+    /* CTA button */
+    .cta-btn {
+      display: block;
+      background: linear-gradient(135deg, var(--accent), var(--accent-bright));
+      color: white;
+      text-align: center;
+      padding: 12px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 14px;
+      margin-top: 8px;
+    }
+    .cta-btn.gold {
+      background: linear-gradient(135deg, var(--vital), #D97706);
+    }
+
+    /* Correlation card */
+    .correlation-card {
+      background: var(--surface);
+      border-radius: 12px;
+      padding: 10px 12px;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .correlation-icon {
+      font-size: 20px;
+    }
+    .correlation-text {
+      font-size: 11px;
+      color: var(--text-secondary);
+      flex: 1;
+    }
+    .correlation-value {
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    /* Recap section */
+    .recap-stat {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--surface-light);
+    }
+    .recap-stat:last-child { border-bottom: none; }
+    .recap-stat-label {
+      font-size: 11px;
+      color: var(--text-secondary);
+    }
+    .recap-stat-value {
+      font-size: 14px;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Habitra - App Store Screenshots</h1>
+  <p class="subtitle">Open each screenshot individually or capture from this page. Sized at 320x693px (iPhone 6.7" ratio). Scale up to 1290x2796 for App Store.</p>
+
+  <div class="grid">
+
+    <!-- ============ SCREENSHOT 1: Today View (Hero) ============ -->
+    <div class="screenshot-wrapper">
+      <div class="screenshot-label">Screenshot 1 / 10</div>
+      <div class="iphone-frame" id="ss1">
+        <div class="dynamic-island"></div>
+        <div class="status-bar">
+          <span>9:41</span>
+          <span style="display:flex;gap:4px;align-items:center;">
+            <span style="font-size:10px">5G</span>
+            <span style="font-size:14px">&#9679;&#9679;&#9679;</span>
+          </span>
+        </div>
+        <div class="screen">
+          <div class="tagline-banner">
+            <h2>Your habits. Your rhythm. Your day.</h2>
+          </div>
+
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+            <div>
+              <div class="section-title" style="margin:0;font-size:18px;">Today</div>
+              <div class="section-subtitle" style="margin:0;">Saturday, Apr 5</div>
+            </div>
+            <div class="progress-ring" style="width:52px;height:52px;">
+              <svg width="52" height="52">
+                <circle cx="26" cy="26" r="22" fill="none" stroke="var(--surface-light)" stroke-width="4"/>
+                <circle cx="26" cy="26" r="22" fill="none" stroke="var(--accent)" stroke-width="4" stroke-dasharray="110" stroke-dashoffset="33" stroke-linecap="round"/>
+              </svg>
+              <span class="label" style="font-size:12px;">4/6</span>
+            </div>
+          </div>
+
+          <!-- AI Banner -->
+          <div class="card" style="background:linear-gradient(135deg, rgba(108,99,255,0.15), rgba(108,99,255,0.05));border:1px solid rgba(108,99,255,0.2);margin-bottom:10px;padding:10px 12px;">
+            <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">
+              <span style="font-size:12px;">&#9733;</span>
+              <span style="font-size:10px;font-weight:600;color:var(--accent-glow);">AI Coach</span>
+            </div>
+            <span style="font-size:10px;color:var(--text-secondary);">Great momentum! 4 habits done before noon. Keep it going.</span>
+          </div>
+
+          <!-- Habits -->
+          <div class="card">
+            <div class="habit-row" style="border-bottom:1px solid var(--surface-light);padding-bottom:8px;">
+              <div class="habit-circle done" style="border-color:var(--purple);background:var(--purple);">&#10003;</div>
+              <div class="habit-info">
+                <div class="habit-name">&#128694; Morning Walk</div>
+                <div class="habit-meta">Daily &middot; 6:30 AM</div>
+              </div>
+              <div class="streak-badge">&#128293; 21</div>
+            </div>
+            <div class="habit-row" style="border-bottom:1px solid var(--surface-light);padding-bottom:8px;">
+              <div class="habit-circle done" style="border-color:var(--cyan);background:var(--cyan);">&#10003;</div>
+              <div class="habit-info">
+                <div class="habit-name">&#128218; Read 20 min</div>
+                <div class="habit-meta">Daily &middot; 7:00 AM</div>
+              </div>
+              <div class="streak-badge">&#128293; 14</div>
+            </div>
+            <div class="habit-row" style="border-bottom:1px solid var(--surface-light);padding-bottom:8px;">
+              <div class="habit-circle done" style="border-color:var(--green);background:var(--green);">&#10003;</div>
+              <div class="habit-info">
+                <div class="habit-name">&#129495; Meditate</div>
+                <div class="habit-meta">Weekdays &middot; 8:00 AM</div>
+              </div>
+              <div class="streak-badge">&#128293; 30</div>
+            </div>
+            <div class="habit-row" style="border-bottom:1px solid var(--surface-light);padding-bottom:8px;">
+              <div class="habit-circle done" style="border-color:var(--orange);background:var(--orange);">&#10003;</div>
+              <div class="habit-info">
+                <div class="habit-name">&#128170; Workout</div>
+                <div class="habit-meta">M/W/F &middot; 9:00 AM</div>
+              </div>
+              <div class="streak-badge">&#128293; 8</div>
+            </div>
+            <div class="habit-row" style="border-bottom:1px solid var(--surface-light);padding-bottom:8px;">
+              <div class="habit-circle" style="border-color:var(--pink);"></div>
+              <div class="habit-info">
+                <div class="habit-name">&#128167; Drink Water</div>
+                <div class="habit-meta">Daily &middot; 5 of 8</div>
+              </div>
+              <div style="font-size:9px;color:var(--text-tertiary);">5/8</div>
+            </div>
+            <div class="habit-row">
+              <div class="habit-circle" style="border-color:var(--blue);"></div>
+              <div class="habit-info">
+                <div class="habit-name">&#128221; Journal</div>
+                <div class="habit-meta">Daily &middot; 9:00 PM</div>
+              </div>
+              <div style="font-size:9px;color:var(--text-tertiary);">Later</div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-bar">
+          <div class="tab-item active"><span class="tab-icon">&#9737;</span> Today</div>
+          <div class="tab-item"><span class="tab-icon">&#9776;</span> Stats</div>
+          <div class="tab-item"><span class="tab-icon">&#9733;</span> Coach</div>
+          <div class="tab-item"><span class="tab-icon">&#9881;</span> Settings</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ SCREENSHOT 2: Streak Celebration ============ -->
+    <div class="screenshot-wrapper">
+      <div class="screenshot-label">Screenshot 2 / 10</div>
+      <div class="iphone-frame" id="ss2">
+        <div class="dynamic-island"></div>
+        <div class="status-bar"><span>9:41</span><span style="display:flex;gap:4px;align-items:center;"><span style="font-size:10px">5G</span><span style="font-size:14px">&#9679;&#9679;&#9679;</span></span></div>
+        <div class="screen">
+          <div class="tagline-banner" style="background:linear-gradient(135deg, #F59E0B, #D97706);">
+            <h2>Every streak is a story of discipline.</h2>
+          </div>
+
+          <!-- Celebration -->
+          <div style="text-align:center;padding:16px 0 8px;">
+            <div style="font-size:48px;margin-bottom:4px;">&#127881;</div>
+            <div style="font-size:22px;font-weight:800;color:var(--vital-glow);">30 Day Streak!</div>
+            <div style="font-size:11px;color:var(--text-secondary);margin-top:4px;">Meditation &middot; Incredible consistency!</div>
+          </div>
+
+          <div class="card" style="text-align:center;padding:16px;">
+            <div style="font-size:36px;font-weight:800;color:var(--vital);">30</div>
+            <div style="font-size:10px;color:var(--text-tertiary);margin-top:2px;">Current Streak</div>
+            <div style="display:flex;justify-content:center;gap:24px;margin-top:12px;">
+              <div>
+                <div style="font-size:16px;font-weight:700;color:var(--text-primary);">30</div>
+                <div style="font-size:8px;color:var(--text-tertiary);">Longest</div>
+              </div>
+              <div>
+                <div style="font-size:16px;font-weight:700;color:var(--success);">96%</div>
+                <div style="font-size:8px;color:var(--text-tertiary);">Completion</div>
+              </div>
+              <div>
+                <div style="font-size:16px;font-weight:700;color:var(--accent-glow);">A+</div>
+                <div style="font-size:8px;color:var(--text-tertiary);">Health Score</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Heatmap -->
+          <div style="font-size:11px;font-weight:600;color:var(--text-primary);margin:10px 0 6px;">Calendar</div>
+          <div class="card" style="padding:10px;">
+            <div class="heatmap">
+              <div class="heatmap-cell l5"></div><div class="heatmap-cell l5"></div><div class="heatmap-cell l4"></div><div class="heatmap-cell l5"></div><div class="heatmap-cell l5"></div><div class="heatmap-cell l3"></div><div class="heatmap-cell l5"></div>
+              <div class="heatmap-cell l5"></div><div class="heatmap-cell l5"></div><div class="heatmap-cell l5"></div><div class="heatmap-cell l4"></div><div class="heatmap-cell l5"></div><div class="heatmap-cell l5"></div><div class="heatmap-cell l5"></div>
+              <div class="heatmap-cell l5"></div><div class="heatmap-cell l4"></div><div class="heatmap-cell l5"></div><div class="heatmap-cell l5"></div><div class="heatmap-cell l5"></div><div class="heatmap-cell l5"></div><div class="heatmap-cell l3"></div>
+              <div class="heatmap-cell l5"></div><div class="heatmap-cell l5"></div><div class="heatmap-cell l5"></div><div class="heatmap-cell l5"></div><div class="heatmap-cell l4"></div><div class="heatmap-cell l5"></div><div class="heatmap-cell l5"></div>
+              <div class="heatmap-cell l5"></div><div class="heatmap-cell l5"></div>
+            </div>
+          </div>
+
+          <!-- Badge earned -->
+          <div class="card" style="display:flex;align-items:center;gap:10px;margin-top:8px;background:linear-gradient(135deg, rgba(245,158,11,0.1), rgba(245,158,11,0.03));border:1px solid rgba(245,158,11,0.2);">
+            <div class="badge-icon" style="background:rgba(245,158,11,0.15);">&#127942;</div>
+            <div>
+              <div style="font-size:12px;font-weight:700;color:var(--vital-glow);">Badge Earned!</div>
+              <div style="font-size:9px;color:var(--text-tertiary);">Monthly Master &middot; 30 days straight</div>
+            </div>
+          </div>
+
+          <div class="cta-btn gold" style="margin-top:10px;font-size:12px;">Share Your Achievement</div>
+        </div>
+        <div class="tab-bar">
+          <div class="tab-item"><span class="tab-icon">&#9737;</span> Today</div>
+          <div class="tab-item active"><span class="tab-icon">&#9776;</span> Stats</div>
+          <div class="tab-item"><span class="tab-icon">&#9733;</span> Coach</div>
+          <div class="tab-item"><span class="tab-icon">&#9881;</span> Settings</div>
+        </div>
+        <!-- Confetti overlay -->
+        <div class="confetti-container">
+          <div class="confetti-piece" style="left:10%;top:-5%;background:var(--accent);animation-delay:0.1s;animation-duration:2.5s;"></div>
+          <div class="confetti-piece" style="left:25%;top:-8%;background:var(--vital);animation-delay:0.3s;animation-duration:2.2s;"></div>
+          <div class="confetti-piece" style="left:40%;top:-3%;background:var(--success);animation-delay:0s;animation-duration:2.8s;"></div>
+          <div class="confetti-piece" style="left:55%;top:-10%;background:var(--pink);animation-delay:0.2s;animation-duration:2.3s;"></div>
+          <div class="confetti-piece" style="left:70%;top:-6%;background:var(--cyan);animation-delay:0.4s;animation-duration:2.6s;"></div>
+          <div class="confetti-piece" style="left:85%;top:-4%;background:var(--vital-glow);animation-delay:0.15s;animation-duration:2.1s;"></div>
+          <div class="confetti-piece" style="left:15%;top:-7%;background:var(--orange);animation-delay:0.5s;animation-duration:2.4s;"></div>
+          <div class="confetti-piece" style="left:60%;top:-9%;background:var(--accent-glow);animation-delay:0.25s;animation-duration:2.7s;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ SCREENSHOT 3: AI Coach ============ -->
+    <div class="screenshot-wrapper">
+      <div class="screenshot-label">Screenshot 3 / 10</div>
+      <div class="iphone-frame" id="ss3">
+        <div class="dynamic-island"></div>
+        <div class="status-bar"><span>9:41</span><span style="display:flex;gap:4px;align-items:center;"><span style="font-size:10px">5G</span><span style="font-size:14px">&#9679;&#9679;&#9679;</span></span></div>
+        <div class="screen">
+          <div class="tagline-banner">
+            <h2>AI that learns you, not the other way around.</h2>
+          </div>
+
+          <div class="section-title" style="font-size:16px;">&#9733; Coach</div>
+
+          <!-- Mood check-in -->
+          <div class="card">
+            <div style="font-size:10px;font-weight:600;color:var(--text-primary);margin-bottom:6px;">How are you feeling?</div>
+            <div class="mood-row">
+              <div class="mood-btn"><span>&#128553;</span><span class="mood-label">Rough</span></div>
+              <div class="mood-btn"><span>&#128533;</span><span class="mood-label">Low</span></div>
+              <div class="mood-btn"><span>&#128528;</span><span class="mood-label">Okay</span></div>
+              <div class="mood-btn" style="transform:scale(1.15);"><span>&#128522;</span><span class="mood-label" style="color:var(--accent);">Good</span></div>
+              <div class="mood-btn"><span>&#129321;</span><span class="mood-label">Great</span></div>
+            </div>
+          </div>
+
+          <!-- Predictions -->
+          <div style="font-size:11px;font-weight:600;color:var(--text-primary);margin:8px 0 6px;">Tomorrow's Predictions</div>
+          <div class="prediction-card high">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <div>
+                <div style="font-size:11px;font-weight:600;color:var(--text-primary);">&#128694; Morning Walk</div>
+                <div style="font-size:9px;color:var(--text-tertiary);">You skip Sundays 80% of the time</div>
+              </div>
+              <div style="font-size:12px;font-weight:800;color:var(--danger);">22%</div>
+            </div>
+          </div>
+          <div class="prediction-card medium">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <div>
+                <div style="font-size:11px;font-weight:600;color:var(--text-primary);">&#128170; Workout</div>
+                <div style="font-size:9px;color:var(--text-tertiary);">Not scheduled, but streak at risk</div>
+              </div>
+              <div style="font-size:12px;font-weight:800;color:var(--warning);">55%</div>
+            </div>
+          </div>
+          <div class="prediction-card low">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <div>
+                <div style="font-size:11px;font-weight:600;color:var(--text-primary);">&#129495; Meditate</div>
+                <div style="font-size:9px;color:var(--text-tertiary);">Strong pattern &middot; 30-day streak</div>
+              </div>
+              <div style="font-size:12px;font-weight:800;color:var(--success);">94%</div>
+            </div>
+          </div>
+
+          <!-- Pattern insight -->
+          <div style="font-size:11px;font-weight:600;color:var(--text-primary);margin:8px 0 6px;">Pattern Insights</div>
+          <div class="card" style="border:1px solid rgba(108,99,255,0.2);background:rgba(108,99,255,0.05);">
+            <div style="font-size:10px;color:var(--accent-glow);font-weight:600;margin-bottom:3px;">&#128161; Correlation Found</div>
+            <div style="font-size:10px;color:var(--text-secondary);">Meditate + Exercise succeed together 87% of the time. Doing one boosts the other.</div>
+          </div>
+
+          <!-- AI Model -->
+          <div class="card" style="margin-top:6px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <div>
+                <div style="font-size:10px;font-weight:600;color:var(--text-primary);">On-Device AI Model</div>
+                <div style="font-size:8px;color:var(--text-tertiary);">Core ML &middot; 145 data points</div>
+              </div>
+              <div style="font-size:11px;font-weight:700;color:var(--success);">82% accurate</div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-bar">
+          <div class="tab-item"><span class="tab-icon">&#9737;</span> Today</div>
+          <div class="tab-item"><span class="tab-icon">&#9776;</span> Stats</div>
+          <div class="tab-item active"><span class="tab-icon">&#9733;</span> Coach</div>
+          <div class="tab-item"><span class="tab-icon">&#9881;</span> Settings</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ SCREENSHOT 4: Stats & Health Scores ============ -->
+    <div class="screenshot-wrapper">
+      <div class="screenshot-label">Screenshot 4 / 10</div>
+      <div class="iphone-frame" id="ss4">
+        <div class="dynamic-island"></div>
+        <div class="status-bar"><span>9:41</span><span style="display:flex;gap:4px;align-items:center;"><span style="font-size:10px">5G</span><span style="font-size:14px">&#9679;&#9679;&#9679;</span></span></div>
+        <div class="screen">
+          <div class="tagline-banner" style="background:linear-gradient(135deg, #22C55E, #16A34A);">
+            <h2>See your progress. Know your patterns.</h2>
+          </div>
+
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <div class="section-title" style="font-size:16px;margin:0;">Stats</div>
+            <div style="display:flex;gap:6px;">
+              <span style="font-size:10px;padding:4px 10px;border-radius:8px;background:var(--accent);color:white;font-weight:600;">30D</span>
+              <span style="font-size:10px;padding:4px 10px;border-radius:8px;background:var(--surface);color:var(--text-tertiary);font-weight:500;">90D</span>
+              <span style="font-size:10px;padding:4px 10px;border-radius:8px;background:var(--surface);color:var(--text-tertiary);font-weight:500;">All</span>
+            </div>
+          </div>
+
+          <!-- Health Scores -->
+          <div style="font-size:11px;font-weight:600;color:var(--text-primary);margin-bottom:6px;">Habit Health Scores</div>
+          <div class="card">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid var(--surface-light);">
+              <div class="health-grade" style="background:rgba(74,222,128,0.15);color:var(--success);">A+</div>
+              <div style="flex:1;">
+                <div style="font-size:11px;font-weight:600;color:var(--text-primary);">&#129495; Meditate</div>
+                <div style="font-size:9px;color:var(--success);">96% completion &middot; 30-day streak</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid var(--surface-light);">
+              <div class="health-grade" style="background:rgba(74,222,128,0.15);color:var(--success);">A</div>
+              <div style="flex:1;">
+                <div style="font-size:11px;font-weight:600;color:var(--text-primary);">&#128218; Read 20 min</div>
+                <div style="font-size:9px;color:var(--success);">89% completion &middot; 14-day streak</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid var(--surface-light);">
+              <div class="health-grade" style="background:rgba(251,191,36,0.15);color:var(--warning);">B</div>
+              <div style="flex:1;">
+                <div style="font-size:11px;font-weight:600;color:var(--text-primary);">&#128170; Workout</div>
+                <div style="font-size:9px;color:var(--warning);">72% completion &middot; Improving</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div class="health-grade" style="background:rgba(248,113,113,0.15);color:var(--danger);">C</div>
+              <div style="flex:1;">
+                <div style="font-size:11px;font-weight:600;color:var(--text-primary);">&#128221; Journal</div>
+                <div style="font-size:9px;color:var(--danger);">48% completion &middot; Needs attention</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Weekly chart -->
+          <div style="font-size:11px;font-weight:600;color:var(--text-primary);margin:10px 0 6px;">Weekly Overview</div>
+          <div class="card">
+            <div style="display:flex;justify-content:space-around;align-items:flex-end;height:80px;padding-bottom:4px;">
+              <div style="text-align:center;">
+                <div style="width:24px;height:50px;background:var(--accent);border-radius:6px 6px 0 0;margin:0 auto;"></div>
+                <div style="font-size:8px;color:var(--text-tertiary);margin-top:3px;">Mon</div>
+              </div>
+              <div style="text-align:center;">
+                <div style="width:24px;height:60px;background:var(--accent);border-radius:6px 6px 0 0;margin:0 auto;"></div>
+                <div style="font-size:8px;color:var(--text-tertiary);margin-top:3px;">Tue</div>
+              </div>
+              <div style="text-align:center;">
+                <div style="width:24px;height:45px;background:var(--accent-muted);border-radius:6px 6px 0 0;margin:0 auto;"></div>
+                <div style="font-size:8px;color:var(--text-tertiary);margin-top:3px;">Wed</div>
+              </div>
+              <div style="text-align:center;">
+                <div style="width:24px;height:65px;background:var(--accent);border-radius:6px 6px 0 0;margin:0 auto;"></div>
+                <div style="font-size:8px;color:var(--accent-glow);margin-top:3px;font-weight:600;">Thu</div>
+              </div>
+              <div style="text-align:center;">
+                <div style="width:24px;height:55px;background:var(--accent);border-radius:6px 6px 0 0;margin:0 auto;"></div>
+                <div style="font-size:8px;color:var(--text-tertiary);margin-top:3px;">Fri</div>
+              </div>
+              <div style="text-align:center;">
+                <div style="width:24px;height:30px;background:var(--accent-muted);border-radius:6px 6px 0 0;margin:0 auto;"></div>
+                <div style="font-size:8px;color:var(--danger);margin-top:3px;font-weight:600;">Sat</div>
+              </div>
+              <div style="text-align:center;">
+                <div style="width:24px;height:35px;background:var(--accent-muted);border-radius:6px 6px 0 0;margin:0 auto;"></div>
+                <div style="font-size:8px;color:var(--text-tertiary);margin-top:3px;">Sun</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="display:flex;justify-content:space-around;text-align:center;margin-top:6px;">
+            <div>
+              <div style="font-size:16px;font-weight:800;color:var(--accent-glow);">78%</div>
+              <div style="font-size:8px;color:var(--text-tertiary);">Avg Rate</div>
+            </div>
+            <div>
+              <div style="font-size:16px;font-weight:800;color:var(--success);">Thu</div>
+              <div style="font-size:8px;color:var(--text-tertiary);">Best Day</div>
+            </div>
+            <div>
+              <div style="font-size:16px;font-weight:800;color:var(--vital);">&#8593; 12%</div>
+              <div style="font-size:8px;color:var(--text-tertiary);">vs Last Month</div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-bar">
+          <div class="tab-item"><span class="tab-icon">&#9737;</span> Today</div>
+          <div class="tab-item active"><span class="tab-icon">&#9776;</span> Stats</div>
+          <div class="tab-item"><span class="tab-icon">&#9733;</span> Coach</div>
+          <div class="tab-item"><span class="tab-icon">&#9881;</span> Settings</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ SCREENSHOT 5: Mood Tracking ============ -->
+    <div class="screenshot-wrapper">
+      <div class="screenshot-label">Screenshot 5 / 10</div>
+      <div class="iphone-frame" id="ss5">
+        <div class="dynamic-island"></div>
+        <div class="status-bar"><span>9:41</span><span style="display:flex;gap:4px;align-items:center;"><span style="font-size:10px">5G</span><span style="font-size:14px">&#9679;&#9679;&#9679;</span></span></div>
+        <div class="screen">
+          <div class="tagline-banner" style="background:linear-gradient(135deg, #EC4899, #BE185D);">
+            <h2>How you feel shapes what you do.</h2>
+          </div>
+
+          <div class="section-title" style="font-size:16px;">Mood Tracker</div>
+
+          <!-- Today's mood -->
+          <div class="card" style="text-align:center;padding:16px;">
+            <div style="font-size:10px;color:var(--text-tertiary);margin-bottom:6px;">Today's Mood</div>
+            <div style="font-size:42px;margin-bottom:4px;">&#128522;</div>
+            <div style="font-size:14px;font-weight:700;color:var(--success);">Good</div>
+            <div style="font-size:9px;color:var(--text-tertiary);margin-top:4px;">Logged at 8:15 AM</div>
+          </div>
+
+          <!-- Journal entry -->
+          <div class="card" style="margin-top:6px;">
+            <div style="font-size:10px;font-weight:600;color:var(--text-primary);margin-bottom:4px;">&#128221; Journal Note</div>
+            <div style="font-size:10px;color:var(--text-secondary);font-style:italic;line-height:1.5;">"Woke up feeling energized. Morning walk really set the tone. Meditation felt deeper today."</div>
+            <div style="display:flex;align-items:center;gap:6px;margin-top:8px;">
+              <span style="font-size:9px;padding:3px 8px;border-radius:6px;background:rgba(74,222,128,0.1);color:var(--success);font-weight:600;">Positive Sentiment</span>
+              <span style="font-size:9px;color:var(--text-tertiary);">Score: 0.84</span>
+            </div>
+          </div>
+
+          <!-- Mood trend -->
+          <div style="font-size:11px;font-weight:600;color:var(--text-primary);margin:10px 0 6px;">30-Day Mood Trend</div>
+          <div class="card">
+            <div class="sparkline" style="height:50px;"></div>
+            <div style="display:flex;justify-content:space-between;margin-top:6px;">
+              <span style="font-size:8px;color:var(--text-tertiary);">Mar 6</span>
+              <span style="font-size:8px;color:var(--text-tertiary);">Apr 5</span>
+            </div>
+          </div>
+
+          <!-- Recent entries -->
+          <div style="font-size:11px;font-weight:600;color:var(--text-primary);margin:10px 0 6px;">Recent Entries</div>
+          <div class="card">
+            <div style="display:flex;align-items:center;gap:8px;padding:4px 0;border-bottom:1px solid var(--surface-light);">
+              <span style="font-size:18px;">&#129321;</span>
+              <div style="flex:1;font-size:10px;color:var(--text-secondary);">Yesterday &middot; "Perfect day! All habits done."</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;padding:4px 0;border-bottom:1px solid var(--surface-light);">
+              <span style="font-size:18px;">&#128522;</span>
+              <div style="flex:1;font-size:10px;color:var(--text-secondary);">Apr 3 &middot; "Productive morning, lazy evening."</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;padding:4px 0;">
+              <span style="font-size:18px;">&#128528;</span>
+              <div style="flex:1;font-size:10px;color:var(--text-secondary);">Apr 2 &middot; "Just an okay day."</div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-bar">
+          <div class="tab-item"><span class="tab-icon">&#9737;</span> Today</div>
+          <div class="tab-item"><span class="tab-icon">&#9776;</span> Stats</div>
+          <div class="tab-item active"><span class="tab-icon">&#9733;</span> Coach</div>
+          <div class="tab-item"><span class="tab-icon">&#9881;</span> Settings</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ SCREENSHOT 6: Widgets & Lock Screen ============ -->
+    <div class="screenshot-wrapper">
+      <div class="screenshot-label">Screenshot 6 / 10</div>
+      <div class="iphone-frame" id="ss6">
+        <div class="dynamic-island"></div>
+        <div class="status-bar"><span>9:41</span><span style="display:flex;gap:4px;align-items:center;"><span style="font-size:10px">5G</span><span style="font-size:14px">&#9679;&#9679;&#9679;</span></span></div>
+        <div class="screen" style="background:linear-gradient(180deg, #0a0a1a 0%, #151530 100%);">
+          <div class="tagline-banner" style="background:linear-gradient(135deg, #06B6D4, #0891B2);">
+            <h2>Streaks on your Lock Screen. Progress at a glance.</h2>
+          </div>
+
+          <div style="font-size:11px;font-weight:600;color:var(--text-primary);margin:8px 0 8px;">Lock Screen Widget</div>
+          <div style="background:rgba(255,255,255,0.06);border-radius:14px;padding:12px 16px;display:flex;align-items:center;gap:12px;border:1px solid rgba(255,255,255,0.08);">
+            <div style="position:relative;width:36px;height:36px;">
+              <svg width="36" height="36" style="transform:rotate(-90deg);">
+                <circle cx="18" cy="18" r="15" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="3"/>
+                <circle cx="18" cy="18" r="15" fill="none" stroke="var(--accent)" stroke-width="3" stroke-dasharray="75" stroke-dashoffset="19" stroke-linecap="round"/>
+              </svg>
+              <span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:10px;font-weight:800;">4/6</span>
+            </div>
+            <div>
+              <div style="font-size:11px;font-weight:600;">Today's Progress</div>
+              <div style="font-size:9px;color:var(--text-tertiary);">&#128293; Best streak: 30 days</div>
+            </div>
+          </div>
+
+          <div style="font-size:11px;font-weight:600;color:var(--text-primary);margin:14px 0 8px;">Home Screen Widgets</div>
+
+          <!-- Progress bar widget -->
+          <div class="widget-mockup" style="border:1px solid var(--surface-light);">
+            <div style="font-size:10px;font-weight:600;color:var(--text-primary);margin-bottom:6px;">Daily Progress</div>
+            <div style="height:10px;background:var(--surface-light);border-radius:5px;overflow:hidden;margin-bottom:4px;">
+              <div style="height:100%;width:67%;background:linear-gradient(90deg,var(--accent),var(--accent-glow));border-radius:5px;"></div>
+            </div>
+            <div style="font-size:8px;color:var(--text-tertiary);">4 of 6 habits complete</div>
+          </div>
+
+          <!-- Habit grid widget -->
+          <div class="widget-mockup" style="border:1px solid var(--surface-light);">
+            <div style="font-size:10px;font-weight:600;color:var(--text-primary);margin-bottom:8px;">Habits</div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;">
+              <div style="text-align:center;padding:8px 4px;background:var(--surface-light);border-radius:10px;">
+                <div style="font-size:16px;">&#128694;</div>
+                <div style="font-size:7px;color:var(--success);margin-top:2px;font-weight:600;">Done</div>
+              </div>
+              <div style="text-align:center;padding:8px 4px;background:var(--surface-light);border-radius:10px;">
+                <div style="font-size:16px;">&#128218;</div>
+                <div style="font-size:7px;color:var(--success);margin-top:2px;font-weight:600;">Done</div>
+              </div>
+              <div style="text-align:center;padding:8px 4px;background:var(--surface-light);border-radius:10px;">
+                <div style="font-size:16px;">&#129495;</div>
+                <div style="font-size:7px;color:var(--success);margin-top:2px;font-weight:600;">Done</div>
+              </div>
+              <div style="text-align:center;padding:8px 4px;background:var(--surface-light);border-radius:10px;">
+                <div style="font-size:16px;">&#128170;</div>
+                <div style="font-size:7px;color:var(--success);margin-top:2px;font-weight:600;">Done</div>
+              </div>
+              <div style="text-align:center;padding:8px 4px;background:var(--surface-light);border-radius:10px;">
+                <div style="font-size:16px;">&#128167;</div>
+                <div style="font-size:7px;color:var(--warning);margin-top:2px;font-weight:600;">5/8</div>
+              </div>
+              <div style="text-align:center;padding:8px 4px;background:var(--surface-light);border-radius:10px;">
+                <div style="font-size:16px;">&#128221;</div>
+                <div style="font-size:7px;color:var(--text-tertiary);margin-top:2px;font-weight:600;">Later</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- StandBy mode hint -->
+          <div class="card" style="text-align:center;padding:10px;margin-top:6px;background:rgba(108,99,255,0.08);border:1px solid rgba(108,99,255,0.15);">
+            <span style="font-size:10px;color:var(--accent-glow);font-weight:600;">Also works in StandBy Mode</span>
+          </div>
+        </div>
+        <div class="tab-bar">
+          <div class="tab-item"><span class="tab-icon">&#9737;</span> Today</div>
+          <div class="tab-item"><span class="tab-icon">&#9776;</span> Stats</div>
+          <div class="tab-item"><span class="tab-icon">&#9733;</span> Coach</div>
+          <div class="tab-item active"><span class="tab-icon">&#9881;</span> Settings</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ SCREENSHOT 7: Privacy ============ -->
+    <div class="screenshot-wrapper">
+      <div class="screenshot-label">Screenshot 7 / 10</div>
+      <div class="iphone-frame" id="ss7">
+        <div class="dynamic-island"></div>
+        <div class="status-bar"><span>9:41</span><span style="display:flex;gap:4px;align-items:center;"><span style="font-size:10px">5G</span><span style="font-size:14px">&#9679;&#9679;&#9679;</span></span></div>
+        <div class="screen">
+          <div class="tagline-banner" style="background:linear-gradient(135deg, #34D399, #059669);">
+            <h2>100% private. Zero cloud. All yours.</h2>
+          </div>
+
+          <div class="shield-visual">
+            <span class="shield-icon">&#128274;</span>
+            <div style="font-size:14px;font-weight:700;color:var(--text-primary);">Privacy-First Architecture</div>
+            <div style="font-size:10px;color:var(--text-secondary);margin-top:4px;">Your data never leaves your device</div>
+          </div>
+
+          <div class="card" style="margin-bottom:6px;">
+            <div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--surface-light);">
+              <span style="font-size:16px;">&#128274;</span>
+              <div style="flex:1;font-size:11px;font-weight:600;color:var(--text-primary);">No accounts required</div>
+              <span style="font-size:9px;padding:3px 8px;border-radius:6px;background:rgba(52,211,153,0.1);color:var(--success);font-weight:600;">Private</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--surface-light);">
+              <span style="font-size:16px;">&#128065;&#8205;&#128488;</span>
+              <div style="flex:1;font-size:11px;font-weight:600;color:var(--text-primary);">Zero tracking or analytics</div>
+              <span style="font-size:9px;padding:3px 8px;border-radius:6px;background:rgba(52,211,153,0.1);color:var(--success);font-weight:600;">Private</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--surface-light);">
+              <span style="font-size:16px;">&#129504;</span>
+              <div style="flex:1;font-size:11px;font-weight:600;color:var(--text-primary);">AI runs 100% on-device</div>
+              <span style="font-size:9px;padding:3px 8px;border-radius:6px;background:rgba(52,211,153,0.1);color:var(--success);font-weight:600;">Private</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--surface-light);">
+              <span style="font-size:16px;">&#10084;&#65039;</span>
+              <div style="flex:1;font-size:11px;font-weight:600;color:var(--text-primary);">HealthKit stays on device</div>
+              <span style="font-size:9px;padding:3px 8px;border-radius:6px;background:rgba(52,211,153,0.1);color:var(--success);font-weight:600;">Private</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--surface-light);">
+              <span style="font-size:16px;">&#128276;</span>
+              <div style="flex:1;font-size:11px;font-weight:600;color:var(--text-primary);">Local notifications only</div>
+              <span style="font-size:9px;padding:3px 8px;border-radius:6px;background:rgba(52,211,153,0.1);color:var(--success);font-weight:600;">Private</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;padding:6px 0;">
+              <span style="font-size:16px;">&#128190;</span>
+              <div style="flex:1;font-size:11px;font-weight:600;color:var(--text-primary);">Export your data anytime</div>
+              <span style="font-size:9px;padding:3px 8px;border-radius:6px;background:rgba(52,211,153,0.1);color:var(--success);font-weight:600;">Yours</span>
+            </div>
+          </div>
+
+          <div class="card" style="text-align:center;background:rgba(52,211,153,0.05);border:1px solid rgba(52,211,153,0.15);padding:12px;">
+            <div style="font-size:11px;font-weight:600;color:var(--success);">Your habits. Your phone. Zero cloud.</div>
+            <div style="font-size:9px;color:var(--text-tertiary);margin-top:4px;">No servers. No sign-ups. No compromises.</div>
+          </div>
+        </div>
+        <div class="tab-bar">
+          <div class="tab-item"><span class="tab-icon">&#9737;</span> Today</div>
+          <div class="tab-item"><span class="tab-icon">&#9776;</span> Stats</div>
+          <div class="tab-item"><span class="tab-icon">&#9733;</span> Coach</div>
+          <div class="tab-item active"><span class="tab-icon">&#9881;</span> Settings</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ SCREENSHOT 8: HealthKit ============ -->
+    <div class="screenshot-wrapper">
+      <div class="screenshot-label">Screenshot 8 / 10</div>
+      <div class="iphone-frame" id="ss8">
+        <div class="dynamic-island"></div>
+        <div class="status-bar"><span>9:41</span><span style="display:flex;gap:4px;align-items:center;"><span style="font-size:10px">5G</span><span style="font-size:14px">&#9679;&#9679;&#9679;</span></span></div>
+        <div class="screen">
+          <div class="tagline-banner" style="background:linear-gradient(135deg, #EF4444, #B91C1C);">
+            <h2>Connect your health. Unlock hidden patterns.</h2>
+          </div>
+
+          <div class="section-title" style="font-size:16px;">&#10084;&#65039; Health Insights</div>
+
+          <!-- Health metrics -->
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:8px;">
+            <div class="card" style="text-align:center;padding:10px 6px;">
+              <div style="font-size:18px;">&#128694;</div>
+              <div style="font-size:14px;font-weight:800;color:var(--accent-glow);">8,243</div>
+              <div style="font-size:7px;color:var(--text-tertiary);">Steps Today</div>
+            </div>
+            <div class="card" style="text-align:center;padding:10px 6px;">
+              <div style="font-size:18px;">&#128164;</div>
+              <div style="font-size:14px;font-weight:800;color:var(--cyan);">7h 42m</div>
+              <div style="font-size:7px;color:var(--text-tertiary);">Sleep</div>
+            </div>
+            <div class="card" style="text-align:center;padding:10px 6px;">
+              <div style="font-size:18px;">&#128147;</div>
+              <div style="font-size:14px;font-weight:800;color:var(--danger);">58 bpm</div>
+              <div style="font-size:7px;color:var(--text-tertiary);">Resting HR</div>
+            </div>
+          </div>
+
+          <!-- Correlations -->
+          <div style="font-size:11px;font-weight:600;color:var(--text-primary);margin:6px 0 6px;">Health-Habit Correlations</div>
+
+          <div class="correlation-card">
+            <span class="correlation-icon">&#128164;</span>
+            <span class="correlation-text">Workout habit <strong style="color:var(--text-primary);">+40%</strong> more likely with 7+ hrs sleep</span>
+          </div>
+          <div class="correlation-card">
+            <span class="correlation-icon">&#128694;</span>
+            <span class="correlation-text">8K+ steps days = <strong style="color:var(--text-primary);">92%</strong> habit completion rate</span>
+          </div>
+          <div class="correlation-card">
+            <span class="correlation-icon">&#128147;</span>
+            <span class="correlation-text">Meditation lowers resting HR by <strong style="color:var(--text-primary);">3 bpm</strong> avg</span>
+          </div>
+          <div class="correlation-card">
+            <span class="correlation-icon">&#129504;</span>
+            <span class="correlation-text">High HRV days = <strong style="color:var(--text-primary);">2.1x</strong> more habits completed</span>
+          </div>
+
+          <!-- Auto-complete -->
+          <div class="card" style="margin-top:8px;background:rgba(108,99,255,0.05);border:1px solid rgba(108,99,255,0.15);">
+            <div style="font-size:10px;font-weight:600;color:var(--accent-glow);margin-bottom:3px;">&#9889; Auto-Complete</div>
+            <div style="font-size:9px;color:var(--text-secondary);">Link habits to HealthKit metrics. Hit 8K steps? Your "Walk" habit auto-completes.</div>
+          </div>
+
+          <div style="text-align:center;margin-top:8px;">
+            <span style="font-size:8px;color:var(--text-tertiary);">All health data stays on your device. Always.</span>
+          </div>
+        </div>
+        <div class="tab-bar">
+          <div class="tab-item"><span class="tab-icon">&#9737;</span> Today</div>
+          <div class="tab-item"><span class="tab-icon">&#9776;</span> Stats</div>
+          <div class="tab-item active"><span class="tab-icon">&#9733;</span> Coach</div>
+          <div class="tab-item"><span class="tab-icon">&#9881;</span> Settings</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ SCREENSHOT 9: Pro / Paywall ============ -->
+    <div class="screenshot-wrapper">
+      <div class="screenshot-label">Screenshot 9 / 10</div>
+      <div class="iphone-frame" id="ss9">
+        <div class="dynamic-island"></div>
+        <div class="status-bar"><span>9:41</span><span style="display:flex;gap:4px;align-items:center;"><span style="font-size:10px">5G</span><span style="font-size:14px">&#9679;&#9679;&#9679;</span></span></div>
+        <div class="screen" style="display:flex;flex-direction:column;">
+          <div class="tagline-banner" style="background:linear-gradient(135deg, var(--vital), #D97706);">
+            <h2>Go Pro. Go unlimited.</h2>
+          </div>
+
+          <div style="text-align:center;padding:12px 0 8px;">
+            <div style="font-size:42px;margin-bottom:4px;">&#128081;</div>
+            <div style="font-size:18px;font-weight:800;color:var(--vital-glow);">Habitra Pro</div>
+            <div style="font-size:10px;color:var(--text-secondary);margin-top:2px;">Unlock the full experience</div>
+          </div>
+
+          <div class="card" style="flex:1;">
+            <div class="pro-feature"><span class="pro-check">&#10003;</span> Unlimited habits</div>
+            <div class="pro-feature"><span class="pro-check">&#10003;</span> On-device AI nudges &amp; predictions</div>
+            <div class="pro-feature"><span class="pro-check">&#10003;</span> All widget sizes + StandBy Mode</div>
+            <div class="pro-feature"><span class="pro-check">&#10003;</span> Apple HealthKit integration</div>
+            <div class="pro-feature"><span class="pro-check">&#10003;</span> iCloud sync across devices</div>
+            <div class="pro-feature"><span class="pro-check">&#10003;</span> Advanced stats &amp; health scores</div>
+            <div class="pro-feature"><span class="pro-check">&#10003;</span> Weekly AI recaps</div>
+            <div class="pro-feature"><span class="pro-check">&#10003;</span> CSV &amp; JSON data export</div>
+
+            <div style="margin-top:12px;display:flex;gap:8px;">
+              <div style="flex:1;background:var(--surface-light);border-radius:12px;padding:12px;text-align:center;">
+                <div style="font-size:8px;color:var(--text-tertiary);">Monthly</div>
+                <div style="font-size:16px;font-weight:800;color:var(--text-primary);">$4.99</div>
+                <div style="font-size:7px;color:var(--text-tertiary);">/month</div>
+              </div>
+              <div style="flex:1;background:var(--surface-light);border:2px solid var(--vital);border-radius:12px;padding:12px;text-align:center;position:relative;">
+                <div style="position:absolute;top:-8px;left:50%;transform:translateX(-50%);font-size:7px;font-weight:700;background:var(--vital);color:#000;padding:2px 8px;border-radius:4px;">BEST VALUE</div>
+                <div style="font-size:8px;color:var(--text-tertiary);">Annual</div>
+                <div style="font-size:16px;font-weight:800;color:var(--vital-glow);">$29.99</div>
+                <div style="font-size:7px;color:var(--vital);">Save 50%</div>
+              </div>
+              <div style="flex:1;background:var(--surface-light);border-radius:12px;padding:12px;text-align:center;">
+                <div style="font-size:8px;color:var(--text-tertiary);">Lifetime</div>
+                <div style="font-size:16px;font-weight:800;color:var(--text-primary);">$49.99</div>
+                <div style="font-size:7px;color:var(--text-tertiary);">one time</div>
+              </div>
+            </div>
+
+            <div class="cta-btn gold" style="margin-top:10px;">Start 14-Day Free Trial</div>
+            <div style="text-align:center;font-size:8px;color:var(--text-tertiary);margin-top:6px;">Cancel anytime. No commitment.</div>
+          </div>
+        </div>
+        <div class="tab-bar">
+          <div class="tab-item"><span class="tab-icon">&#9737;</span> Today</div>
+          <div class="tab-item"><span class="tab-icon">&#9776;</span> Stats</div>
+          <div class="tab-item"><span class="tab-icon">&#9733;</span> Coach</div>
+          <div class="tab-item active"><span class="tab-icon">&#9881;</span> Settings</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ SCREENSHOT 10: Weekly Recap ============ -->
+    <div class="screenshot-wrapper">
+      <div class="screenshot-label">Screenshot 10 / 10</div>
+      <div class="iphone-frame" id="ss10">
+        <div class="dynamic-island"></div>
+        <div class="status-bar"><span>9:41</span><span style="display:flex;gap:4px;align-items:center;"><span style="font-size:10px">5G</span><span style="font-size:14px">&#9679;&#9679;&#9679;</span></span></div>
+        <div class="screen">
+          <div class="tagline-banner" style="background:linear-gradient(135deg, #8B5CF6, #6D28D9);">
+            <h2>Your week, decoded by AI.</h2>
+          </div>
+
+          <div class="section-title" style="font-size:16px;">&#128202; Weekly Recap</div>
+          <div class="section-subtitle">Mar 30 - Apr 5, 2026</div>
+
+          <!-- Summary stats -->
+          <div class="card">
+            <div class="recap-stat">
+              <span class="recap-stat-label">Completion Rate</span>
+              <span class="recap-stat-value" style="color:var(--success);">82%</span>
+            </div>
+            <div class="recap-stat">
+              <span class="recap-stat-label">Habits Completed</span>
+              <span class="recap-stat-value" style="color:var(--accent-glow);">34 / 42</span>
+            </div>
+            <div class="recap-stat">
+              <span class="recap-stat-label">Best Day</span>
+              <span class="recap-stat-value" style="color:var(--vital);">Thursday (100%)</span>
+            </div>
+            <div class="recap-stat">
+              <span class="recap-stat-label">Weakest Day</span>
+              <span class="recap-stat-value" style="color:var(--danger);">Saturday (50%)</span>
+            </div>
+            <div class="recap-stat">
+              <span class="recap-stat-label">Active Streaks</span>
+              <span class="recap-stat-value" style="color:var(--vital);">&#128293; 4</span>
+            </div>
+            <div class="recap-stat">
+              <span class="recap-stat-label">Avg Mood</span>
+              <span class="recap-stat-value">&#128522; Good</span>
+            </div>
+          </div>
+
+          <!-- AI message -->
+          <div class="card" style="background:linear-gradient(135deg, rgba(108,99,255,0.1), rgba(108,99,255,0.03));border:1px solid rgba(108,99,255,0.2);margin-top:6px;">
+            <div style="font-size:10px;font-weight:600;color:var(--accent-glow);margin-bottom:4px;">&#9733; AI Coaching</div>
+            <div style="font-size:10px;color:var(--text-secondary);line-height:1.5;">Strong week overall! Your meditation streak hit 30 days. Weekends are your blind spot - try scheduling habits earlier on Saturday. Your mood correlates positively with morning walks.</div>
+          </div>
+
+          <!-- Highlights -->
+          <div style="font-size:11px;font-weight:600;color:var(--text-primary);margin:8px 0 6px;">Highlights</div>
+          <div class="card">
+            <div style="display:flex;align-items:center;gap:8px;padding:4px 0;border-bottom:1px solid var(--surface-light);">
+              <span style="font-size:16px;">&#127942;</span>
+              <div style="font-size:10px;color:var(--text-secondary);">Earned <strong style="color:var(--vital-glow);">Monthly Master</strong> badge</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;padding:4px 0;border-bottom:1px solid var(--surface-light);">
+              <span style="font-size:16px;">&#128200;</span>
+              <div style="font-size:10px;color:var(--text-secondary);"><strong style="color:var(--success);">+8%</strong> completion vs last week</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;padding:4px 0;">
+              <span style="font-size:16px;">&#129504;</span>
+              <div style="font-size:10px;color:var(--text-secondary);">AI accuracy improved to <strong style="color:var(--accent-glow);">85%</strong></div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-bar">
+          <div class="tab-item"><span class="tab-icon">&#9737;</span> Today</div>
+          <div class="tab-item active"><span class="tab-icon">&#9776;</span> Stats</div>
+          <div class="tab-item"><span class="tab-icon">&#9733;</span> Coach</div>
+          <div class="tab-item"><span class="tab-icon">&#9881;</span> Settings</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /grid -->
+
+</body>
+</html>

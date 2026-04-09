@@ -1,13 +1,13 @@
 //
-//  PulsrUITestsLaunchTests.swift
-//  PulsrUITests
+//  HabitraUITestsLaunchTests.swift
+//  HabitraUITests
 //
 //  Created by Jeanese Raymond on 3/24/26.
 //
 
 import XCTest
 
-final class PulsrUITestsLaunchTests: XCTestCase {
+final class HabitraUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true

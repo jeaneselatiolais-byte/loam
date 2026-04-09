@@ -6,7 +6,20 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		0020B0992F7608BB009E23CE /* PulsrWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AA0000012F730400009B9F57 /* PulsrWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		004371002F883A0F00FA9368 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 004370FF2F883A0F00FA9368 /* .gitignore */; };
+		004371022F883A1000FA9368 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 004371012F883A1000FA9368 /* README.md */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
+		0020B09A2F7608BB009E23CE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 00DBAF3F2F7302FB009B9F57 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AA0000062F730400009B9F57;
+			remoteInfo = PulsrWidgetExtension;
+		};
 		00DBAF592F7302FD009B9F57 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 00DBAF3F2F7302FB009B9F57 /* Project object */;
@@ -21,30 +34,41 @@
 			remoteGlobalIDString = 00DBAF462F7302FB009B9F57;
 			remoteInfo = Pulsr;
 		};
+		AA00000C2F730400009B9F57 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 00DBAF3F2F7302FB009B9F57 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AA0000062F730400009B9F57;
+			remoteInfo = PulsrWidgetExtension;
+		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		AA00000A2F730400009B9F57 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				0020B0992F7608BB009E23CE /* PulsrWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		00DBAF472F7302FB009B9F57 /* Pulsr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pulsr.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		004370FF2F883A0F00FA9368 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		004371012F883A1000FA9368 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		00DBAF472F7302FB009B9F57 /* Pulsr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = Pulsr.app; path = Habitra.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		00DBAF582F7302FD009B9F57 /* PulsrTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PulsrTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00DBAF622F7302FD009B9F57 /* PulsrUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PulsrUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA0000012F730400009B9F57 /* PulsrWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; name = PulsrWidgetExtension.appex; path = HabitraWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		00DBAF6A2F7302FD009B9F57 /* Exceptions for "Pulsr" folder in "Pulsr" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 00DBAF462F7302FB009B9F57 /* Pulsr */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		00DBAF492F7302FB009B9F57 /* Pulsr */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				00DBAF6A2F7302FD009B9F57 /* Exceptions for "Pulsr" folder in "Pulsr" target */,
-			);
 			path = Pulsr;
 			sourceTree = "<group>";
 		};
@@ -56,6 +80,11 @@
 		00DBAF652F7302FD009B9F57 /* PulsrUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = PulsrUITests;
+			sourceTree = "<group>";
+		};
+		AA0000022F730400009B9F57 /* PulsrWidget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = PulsrWidget;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -82,16 +111,34 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AA0000042F730400009B9F57 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0020B0982F7608BB009E23CE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		00DBAF3E2F7302FB009B9F57 = {
 			isa = PBXGroup;
 			children = (
 				00DBAF492F7302FB009B9F57 /* Pulsr */,
+				AA0000022F730400009B9F57 /* PulsrWidget */,
 				00DBAF5B2F7302FD009B9F57 /* PulsrTests */,
 				00DBAF652F7302FD009B9F57 /* PulsrUITests */,
+				0020B0982F7608BB009E23CE /* Frameworks */,
 				00DBAF482F7302FB009B9F57 /* Products */,
+				004370FF2F883A0F00FA9368 /* .gitignore */,
+				004371012F883A1000FA9368 /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				00DBAF472F7302FB009B9F57 /* Pulsr.app */,
+				AA0000012F730400009B9F57 /* PulsrWidgetExtension.appex */,
 				00DBAF582F7302FD009B9F57 /* PulsrTests.xctest */,
 				00DBAF622F7302FD009B9F57 /* PulsrUITests.xctest */,
 			);
@@ -112,13 +160,17 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00DBAF6B2F7302FD009B9F57 /* Build configuration list for PBXNativeTarget "Pulsr" */;
 			buildPhases = (
+				00E85DF32F7DA13200536DC5 /* ShellScript */,
 				00DBAF432F7302FB009B9F57 /* Sources */,
 				00DBAF442F7302FB009B9F57 /* Frameworks */,
 				00DBAF452F7302FB009B9F57 /* Resources */,
+				AA00000A2F730400009B9F57 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				AA00000B2F730400009B9F57 /* PBXTargetDependency */,
+				0020B09B2F7608BB009E23CE /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				00DBAF492F7302FB009B9F57 /* Pulsr */,
@@ -176,6 +228,28 @@
 			productReference = 00DBAF622F7302FD009B9F57 /* PulsrUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		AA0000062F730400009B9F57 /* PulsrWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA0000092F730400009B9F57 /* Build configuration list for PBXNativeTarget "PulsrWidgetExtension" */;
+			buildPhases = (
+				AA0000032F730400009B9F57 /* Sources */,
+				AA0000042F730400009B9F57 /* Frameworks */,
+				AA0000052F730400009B9F57 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				AA0000022F730400009B9F57 /* PulsrWidget */,
+			);
+			name = PulsrWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = PulsrWidgetExtension;
+			productReference = AA0000012F730400009B9F57 /* PulsrWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -197,6 +271,9 @@
 						CreatedOnToolsVersion = 26.2;
 						TestTargetID = 00DBAF462F7302FB009B9F57;
 					};
+					AA0000062F730400009B9F57 = {
+						CreatedOnToolsVersion = 26.2;
+					};
 				};
 			};
 			buildConfigurationList = 00DBAF422F7302FB009B9F57 /* Build configuration list for PBXProject "Pulsr" */;
@@ -214,6 +291,7 @@
 			projectRoot = "";
 			targets = (
 				00DBAF462F7302FB009B9F57 /* Pulsr */,
+				AA0000062F730400009B9F57 /* PulsrWidgetExtension */,
 				00DBAF572F7302FD009B9F57 /* PulsrTests */,
 				00DBAF612F7302FD009B9F57 /* PulsrUITests */,
 			);
@@ -225,6 +303,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				004371002F883A0F00FA9368 /* .gitignore in Resources */,
+				004371022F883A1000FA9368 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,7 +322,34 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AA0000052F730400009B9F57 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		00E85DF32F7DA13200536DC5 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Increment build number using UserDefaults\nCOUNTER_FILE=\"${SRCROOT}/.buildcounter\"\n\nif [ ! -f \"$COUNTER_FILE\" ]; then\n    echo \"1\" > \"$COUNTER_FILE\"\nelse\n    CURRENT=$(cat \"$COUNTER_FILE\")\n    echo $((CURRENT + 1)) > \"$COUNTER_FILE\"\nfi\n\nBUILD_NUMBER=$(cat \"$COUNTER_FILE\")\necho \"Build #$BUILD_NUMBER\"\n\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		00DBAF432F7302FB009B9F57 /* Sources */ = {
@@ -266,9 +373,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AA0000032F730400009B9F57 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		0020B09B2F7608BB009E23CE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AA0000062F730400009B9F57 /* PulsrWidgetExtension */;
+			targetProxy = 0020B09A2F7608BB009E23CE /* PBXContainerItemProxy */;
+		};
 		00DBAF5A2F7302FD009B9F57 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 00DBAF462F7302FB009B9F57 /* Pulsr */;
@@ -279,6 +398,11 @@
 			target = 00DBAF462F7302FB009B9F57 /* Pulsr */;
 			targetProxy = 00DBAF632F7302FD009B9F57 /* PBXContainerItemProxy */;
 		};
+		AA00000B2F730400009B9F57 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AA0000062F730400009B9F57 /* PulsrWidgetExtension */;
+			targetProxy = AA00000C2F730400009B9F57 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -287,6 +411,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Pulsr/Pulsr.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7KAFH2URQL;
@@ -295,24 +420,15 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Pulsr/Info.plist;
-				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
-				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
-				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
-				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
-				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
-				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
-				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
-				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_FILE = "Pulsr-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 26.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.jeanese.Pulsr;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				NEW_SETTING = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jeanese.habitra;
+				PRODUCT_NAME = Habitra;
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = auto;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -332,6 +448,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Pulsr/Pulsr.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7KAFH2URQL;
@@ -340,24 +457,15 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Pulsr/Info.plist;
-				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
-				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
-				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
-				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
-				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
-				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
-				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
-				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_FILE = "Pulsr-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 26.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.jeanese.Pulsr;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				NEW_SETTING = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jeanese.habitra;
+				PRODUCT_NAME = Habitra;
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = auto;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -499,7 +607,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
 				MACOSX_DEPLOYMENT_TARGET = 26.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.jeanese.PulsrTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jeanese.habitraTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;
@@ -509,7 +617,7 @@
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,7";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pulsr.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Pulsr";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Habitra.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Habitra";
 				XROS_DEPLOYMENT_TARGET = 26.2;
 			};
 			name = Debug;
@@ -525,7 +633,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
 				MACOSX_DEPLOYMENT_TARGET = 26.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.jeanese.PulsrTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jeanese.habitraTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;
@@ -535,7 +643,7 @@
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,7";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pulsr.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Pulsr";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Habitra.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Habitra";
 				XROS_DEPLOYMENT_TARGET = 26.2;
 			};
 			name = Release;
@@ -550,7 +658,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
 				MACOSX_DEPLOYMENT_TARGET = 26.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.jeanese.PulsrUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jeanese.habitraUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;
@@ -575,7 +683,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
 				MACOSX_DEPLOYMENT_TARGET = 26.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.jeanese.PulsrUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jeanese.habitraUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;
@@ -587,6 +695,72 @@
 				TARGETED_DEVICE_FAMILY = "1,2,7";
 				TEST_TARGET_NAME = Pulsr;
 				XROS_DEPLOYMENT_TARGET = 26.2;
+			};
+			name = Release;
+		};
+		AA0000072F730400009B9F57 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = PulsrWidget/PulsrWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7KAFH2URQL;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "PulsrWidget-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = HabitraWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jeanese.habitra.HabitraWidget;
+				PRODUCT_NAME = HabitraWidgetExtension;
+				SDKROOT = auto;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AA0000082F730400009B9F57 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = PulsrWidget/PulsrWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7KAFH2URQL;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "PulsrWidget-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = HabitraWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jeanese.habitra.HabitraWidget;
+				PRODUCT_NAME = HabitraWidgetExtension;
+				SDKROOT = auto;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -625,6 +799,15 @@
 			buildConfigurations = (
 				00DBAF742F7302FD009B9F57 /* Debug */,
 				00DBAF752F7302FD009B9F57 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA0000092F730400009B9F57 /* Build configuration list for PBXNativeTarget "PulsrWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA0000072F730400009B9F57 /* Debug */,
+				AA0000082F730400009B9F57 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

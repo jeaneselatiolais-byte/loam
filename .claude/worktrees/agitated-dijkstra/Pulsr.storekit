@@ -1,0 +1,123 @@
+{
+  "version" : "1.0",
+  "locale" : "en_US",
+  "products" : [
+    {
+      "displayPrice" : "29.99",
+      "familyID" : "",
+      "internalID" : "com.jeanese.tethyr.subscription.annual",
+      "localizations" : [
+        {
+          "description" : "Annual subscription with 2-week free trial",
+          "displayName" : "Annual Pro",
+          "locale" : "en_US"
+        }
+      ],
+      "price" : 29.99,
+      "productID" : "com.jeanese.tethyr.subscription.annual",
+      "refund_days" : 14,
+      "subscription" : {
+        "groupID" : "com.jeanese.tethyr.subscription",
+        "introductoryOffer" : {
+          "internalID" : "com.jeanese.tethyr.subscription.annual.trial",
+          "numberOfPeriods" : 1,
+          "paymentMode" : "freeTrial",
+          "subscriptionPeriod" : "P2W"
+        },
+        "renewalType" : "renewable",
+        "subscriptionPeriod" : "P1Y"
+      },
+      "type" : "Auto-Renewable Subscription"
+    },
+    {
+      "displayPrice" : "2.99",
+      "familyID" : "",
+      "internalID" : "com.jeanese.tethyr.subscription.monthly",
+      "localizations" : [
+        {
+          "description" : "Monthly subscription for Pro features",
+          "displayName" : "Monthly Pro",
+          "locale" : "en_US"
+        }
+      ],
+      "price" : 2.99,
+      "productID" : "com.jeanese.tethyr.subscription.monthly",
+      "refund_days" : 14,
+      "subscription" : {
+        "groupID" : "com.jeanese.tethyr.subscription",
+        "introductoryOffer" : null,
+        "renewalType" : "renewable",
+        "subscriptionPeriod" : "P1M"
+      },
+      "type" : "Auto-Renewable Subscription"
+    },
+    {
+      "displayPrice" : "79.99",
+      "familyID" : "",
+      "internalID" : "com.jeanese.tethyr.subscription.lifetime",
+      "localizations" : [
+        {
+          "description" : "Lifetime access to all Pro features",
+          "displayName" : "Lifetime Pro",
+          "locale" : "en_US"
+        }
+      ],
+      "price" : 79.99,
+      "productID" : "com.jeanese.tethyr.subscription.lifetime",
+      "refund_days" : 14,
+      "subscription" : null,
+      "type" : "Non-Consumable"
+    },
+    {
+      "displayPrice" : "1.99",
+      "familyID" : "",
+      "internalID" : "com.jeanese.tethyr.tip.small",
+      "localizations" : [
+        {
+          "description" : "Support indie development with a small tip",
+          "displayName" : "Small Tip",
+          "locale" : "en_US"
+        }
+      ],
+      "price" : 1.99,
+      "productID" : "com.jeanese.tethyr.tip.small",
+      "refund_days" : 14,
+      "subscription" : null,
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "4.99",
+      "familyID" : "",
+      "internalID" : "com.jeanese.tethyr.tip.medium",
+      "localizations" : [
+        {
+          "description" : "Support indie development with a medium tip",
+          "displayName" : "Medium Tip",
+          "locale" : "en_US"
+        }
+      ],
+      "price" : 4.99,
+      "productID" : "com.jeanese.tethyr.tip.medium",
+      "refund_days" : 14,
+      "subscription" : null,
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "9.99",
+      "familyID" : "",
+      "internalID" : "com.jeanese.tethyr.tip.large",
+      "localizations" : [
+        {
+          "description" : "Support indie development with a large tip",
+          "displayName" : "Large Tip",
+          "locale" : "en_US"
+        }
+      ],
+      "price" : 9.99,
+      "productID" : "com.jeanese.tethyr.tip.large",
+      "refund_days" : 14,
+      "subscription" : null,
+      "type" : "Consumable"
+    }
+  ]
+}

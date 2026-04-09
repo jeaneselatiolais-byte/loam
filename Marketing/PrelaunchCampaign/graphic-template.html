@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Habitra Campaign Graphics Generator</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #111;
+    color: #fff;
+    padding: 20px;
+  }
+  h1 { font-size: 24px; margin-bottom: 10px; color: #B8B0FF; }
+  h2 { font-size: 18px; margin: 30px 0 10px; color: #888; }
+  .instructions {
+    background: #1a1a2e;
+    border: 1px solid #333;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 30px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #aaa;
+  }
+  .instructions strong { color: #B8B0FF; }
+  .platform-label {
+    display: inline-block;
+    background: #6C63FF22;
+    border: 1px solid #6C63FF44;
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #B8B0FF;
+    margin-bottom: 8px;
+  }
+  .size-label {
+    font-size: 11px;
+    color: #666;
+    margin-bottom: 12px;
+  }
+  .graphic-wrapper {
+    display: inline-block;
+    margin-bottom: 40px;
+    border: 1px solid #333;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  /* ============================================
+     SHARED GRAPHIC STYLES
+     ============================================ */
+  .graphic {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  /* Gradient backgrounds */
+  .bg-tease {
+    background: linear-gradient(135deg, #0a0a1a 0%, #1a0a2e 30%, #2d1052 60%, #6C63FF 100%);
+  }
+  .bg-problem {
+    background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 40%, #2a1a3e 70%, #3d2060 100%);
+  }
+  .bg-reveal {
+    background: linear-gradient(135deg, #0a0a1a 0%, #1a0e30 25%, #6C63FF 70%, #FF6B9D 100%);
+  }
+  .bg-health {
+    background: linear-gradient(135deg, #0a1a0a 0%, #0a2a1a 25%, #1a3a2a 50%, #6C63FF 85%, #FF6B9D 100%);
+  }
+  .bg-features {
+    background: linear-gradient(135deg, #0a0a1a 0%, #1a1040 30%, #6C63FF 65%, #8B5CF6 100%);
+  }
+  .bg-social {
+    background: linear-gradient(135deg, #1a0a2e 0%, #3d1060 30%, #FF6B9D 70%, #FF9A76 100%);
+  }
+  .bg-launch {
+    background: linear-gradient(135deg, #0a0a1a 0%, #6C63FF 40%, #FF6B9D 70%, #FFD700 100%);
+  }
+
+  /* Animated glow orbs */
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.4;
+  }
+  .orb-purple { background: #6C63FF; }
+  .orb-pink { background: #FF6B9D; }
+  .orb-blue { background: #4ECDC4; }
+
+  /* Typography */
+  .tag {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #FF6B9D;
+    margin-bottom: 12px;
+  }
+  .headline {
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+  .subtext {
+    font-weight: 400;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.5;
+  }
+  .cta-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #6C63FF, #FF6B9D);
+    border-radius: 50px;
+    padding: 10px 28px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    margin-top: 16px;
+    letter-spacing: 0.5px;
+  }
+  .logo-text {
+    font-weight: 900;
+    letter-spacing: 2px;
+  }
+  .countdown-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 12px;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #FF6B9D;
+  }
+  .logo-mark {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,0.3);
+  }
+
+  /* Feature pills */
+  .pill-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 12px;
+  }
+  .pill {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.8);
+  }
+  .pill.active {
+    background: #6C63FF33;
+    border-color: #6C63FF88;
+    color: #B8B0FF;
+  }
+
+  /* Workout grid mock */
+  .workout-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    margin-top: 16px;
+    width: 80%;
+    max-width: 280px;
+  }
+  .workout-chip {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    padding: 10px 4px;
+    text-align: center;
+    font-size: 10px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.5);
+  }
+  .workout-chip.selected {
+    background: #FF6B9D22;
+    border-color: #FF6B9D66;
+    color: #FF6B9D;
+  }
+  .workout-chip .icon { font-size: 18px; display: block; margin-bottom: 4px; }
+
+  /* Streak visualization */
+  .streak-row {
+    display: flex;
+    gap: 6px;
+    margin-top: 16px;
+  }
+  .streak-dot {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+  }
+  .streak-dot.done {
+    background: linear-gradient(135deg, #6C63FF, #8B5CF6);
+    color: #fff;
+  }
+  .streak-dot.empty {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.2);
+  }
+  .streak-dot.today {
+    background: linear-gradient(135deg, #FF6B9D, #FF9A76);
+    color: #fff;
+    box-shadow: 0 0 20px rgba(255,107,157,0.4);
+  }
+</style>
+</head>
+<body>
+
+<h1>Habitra — 7-Day Prelaunch Campaign Graphics</h1>
+<div class="instructions">
+  <strong>How to export:</strong> Right-click each graphic → "Open image in new tab" or take a screenshot at the displayed dimensions.
+  Each graphic is sized exactly for its platform. For TikTok vertical graphics, scroll down within the section.
+  <br><br>
+  <strong>Platforms & Sizes:</strong> Facebook (1200×628) · Twitter/X (1200×675) · Instagram (1080×1080) · TikTok (1080×1920)
+</div>
+
+<!-- =============================================
+     DAY 7 — THE TEASE
+     ============================================= -->
+<h1>DAY 7 — THE TEASE</h1>
+<p style="color:#888; margin-bottom:20px;">Theme: Mystery. Intrigue. "Something is forming."</p>
+
+<!-- Facebook -->
+<div><span class="platform-label">Facebook</span><div class="size-label">1200 × 628</div></div>
+<div class="graphic-wrapper">
+  <div class="graphic bg-tease" style="width:1200px;height:628px;">
+    <div class="orb orb-purple" style="width:300px;height:300px;top:-50px;right:-50px;"></div>
+    <div class="orb orb-pink" style="width:200px;height:200px;bottom:-30px;left:100px;"></div>
+    <div class="countdown-badge">7 DAYS</div>
+    <div class="tag">COMING SOON</div>
+    <div class="headline" style="font-size:52px;">Something is<br>about to change.</div>
+    <div class="subtext" style="font-size:18px;">Your habits will never be the same.</div>
+    <div class="logo-mark">HABITRA</div>
+  </div>
+</div>
+
+<br>
+<!-- Twitter -->
+<div><span class="platform-label">Twitter / X</span><div class="size-label">1200 × 675</div></div>
+<div class="graphic-wrapper">
+  <div class="graphic bg-tease" style="width:1200px;height:675px;">
+    <div class="orb orb-purple" style="width:350px;height:350px;top:-80px;right:100px;"></div>
+    <div class="orb orb-pink" style="width:250px;height:250px;bottom:0;left:50px;"></div>
+    <div class="countdown-badge">7 DAYS</div>
+    <div class="tag">COMING SOON</div>
+    <div class="headline" style="font-size:54px;">Something is<br>about to change.</div>
+    <div class="subtext" style="font-size:18px;">Your habits will never be the same.</div>
+    <div class="logo-mark">HABITRA</div>
+  </div>
+</div>
+
+<br>
+<!-- Instagram -->
+<div><span class="platform-label">Instagram</span><div class="size-label">1080 × 1080</div></div>
+<div class="graphic-wrapper">
+  <div class="graphic bg-tease" style="width:1080px;height:1080px;">
+    <div class="orb orb-purple" style="width:400px;height:400px;top:-100px;right:-50px;"></div>
+    <div class="orb orb-pink" style="width:300px;height:300px;bottom:-50px;left:-30px;"></div>
+    <div class="countdown-badge">7 DAYS</div>
+    <div class="tag" style="font-size:14px;">COMING SOON</div>
+    <div class="headline" style="font-size:64px;">Something<br>is about to<br>change.</div>
+    <div class="subtext" style="font-size:20px;max-width:500px;">Your habits will never be the same.</div>
+    <div class="logo-mark">HABITRA</div>
+  </div>
+</div>
+
+<br>
+<!-- TikTok -->
+<div><span class="platform-label">TikTok</span><div class="size-label">1080 × 1920</div></div>
+<div class="graphic-wrapper">
+  <div class="graphic bg-tease" style="width:1080px;height:1920px;">
+    <div class="orb orb-purple" style="width:500px;height:500px;top:100px;right:-100px;"></div>
+    <div class="orb orb-pink" style="width:400px;height:400px;bottom:200px;left:-50px;"></div>
+    <div class="orb orb-blue" style="width:200px;height:200px;top:400px;left:200px;opacity:0.2;"></div>
+    <div class="countdown-badge">7 DAYS</div>
+    <div style="margin-top:-200px;">
+      <div class="tag" style="font-size:16px;">COMING SOON</div>
+      <div class="headline" style="font-size:72px;">Something<br>is about<br>to change.</div>
+      <div class="subtext" style="font-size:22px;max-width:600px;">Your habits will never<br>be the same.</div>
+    </div>
+    <div class="logo-mark" style="font-size:18px;">HABITRA</div>
+  </div>
+</div>
+
+<!-- =============================================
+     DAY 6 — THE PROBLEM
+     ============================================= -->
+<h1 style="margin-top:60px;">DAY 6 — THE PROBLEM</h1>
+<p style="color:#888; margin-bottom:20px;">Theme: Pain point. "Habits keep falling apart."</p>
+
+<!-- Facebook -->
+<div><span class="platform-label">Facebook</span><div class="size-label">1200 × 628</div></div>
+<div class="graphic-wrapper">
+  <div class="graphic bg-problem" style="width:1200px;height:628px;">
+    <div class="orb orb-purple" style="width:200px;height:200px;top:50px;left:100px;opacity:0.2;"></div>
+    <div class="countdown-badge">6 DAYS</div>
+    <div class="tag">BE HONEST</div>
+    <div class="headline" style="font-size:46px;">How many habit apps<br>have you abandoned?</div>
+    <div class="subtext" style="font-size:17px;max-width:600px;">Most habit trackers are designed for robots, not real people.<br>That's about to change.</div>
+    <div class="logo-mark">HABITRA</div>
+  </div>
+</div>
+
+<br>
+<!-- Twitter -->
+<div><span class="platform-label">Twitter / X</span><div class="size-label">1200 × 675</div></div>
+<div class="graphic-wrapper">
+  <div class="graphic bg-problem" style="width:1200px;height:675px;">
+    <div class="orb orb-purple" style="width:200px;height:200px;top:50px;left:100px;opacity:0.2;"></div>
+    <div class="countdown-badge">6 DAYS</div>
+    <div class="tag">BE HONEST</div>
+    <div class="headline" style="font-size:48px;">How many habit apps<br>have you abandoned?</div>
+    <div class="subtext" style="font-size:17px;max-width:600px;">Most habit trackers are designed for robots, not real people.<br>That's about to change.</div>
+    <div class="logo-mark">HABITRA</div>
+  </div>
+</div>
+
+<br>
+<!-- Instagram -->
+<div><span class="platform-label">Instagram</span><div class="size-label">1080 × 1080</div></div>
+<div class="graphic-wrapper">
+  <div class="graphic bg-problem" style="width:1080px;height:1080px;">
+    <div class="orb orb-purple" style="width:300px;height:300px;top:-50px;right:-50px;opacity:0.2;"></div>
+    <div class="countdown-badge">6 DAYS</div>
+    <div class="tag" style="font-size:14px;">BE HONEST</div>
+    <div class="headline" style="font-size:56px;">How many<br>habit apps<br>have you<br>abandoned?</div>
+    <div class="subtext" style="font-size:18px;max-width:500px;">Most are designed for robots.<br>Not real people.</div>
+    <div style="margin-top:30px;">
+      <div class="subtext" style="font-size:16px;color:#FF6B9D;">That's about to change.</div>
+    </div>
+    <div class="logo-mark">HABITRA</div>
+  </div>
+</div>
+
+<br>
+<!-- TikTok -->
+<div><span class="platform-label">TikTok</span><div class="size-label">1080 × 1920</div></div>
+<div class="graphic-wrapper">
+  <div class="graphic bg-problem" style="width:1080px;height:1920px;">
+    <div class="orb orb-purple" style="width:300px;height:300px;top:200px;right:-50px;opacity:0.2;"></div>
+    <div class="countdown-badge">6 DAYS</div>
+    <div style="margin-top:-200px;">
+      <div class="tag" style="font-size:16px;">BE HONEST</div>
+      <div class="headline" style="font-size:68px;">How many<br>habit apps<br>have you<br>abandoned?</div>
+      <div class="subtext" style="font-size:22px;max-width:600px;margin-top:20px;">Most are designed for robots.<br>Not real people.</div>
+      <div style="margin-top:40px;">
+        <div class="subtext" style="font-size:22px;color:#FF6B9D;font-weight:600;">That's about to change.</div>
+      </div>
+    </div>
+    <div class="logo-mark" style="font-size:18px;">HABITRA</div>
+  </div>
+</div>
+
+<!-- =============================================
+     DAY 5 — THE REVEAL
+     ============================================= -->
+<h1 style="margin-top:60px;">DAY 5 — THE BRAND REVEAL</h1>
+<p style="color:#888; margin-bottom:20px;">Theme: Name drop. "Meet Habitra."</p>
+
+<!-- Facebook -->
+<div><span class="platform-label">Facebook</span><div class="size-label">1200 × 628</div></div>
+<div class="graphic-wrapper">
+  <div class="graphic bg-reveal" style="width:1200px;height:628px;">
+    <div class="orb orb-purple" style="width:400px;height:400px;top:-100px;left:300px;"></div>
+    <div class="orb orb-pink" style="width:300px;height:300px;bottom:-80px;right:200px;"></div>
+    <div class="countdown-badge">5 DAYS</div>
+    <div class="tag">INTRODUCING</div>
+    <div class="headline logo-text" style="font-size:80px;background:linear-gradient(135deg,#fff,#B8B0FF,#FF6B9D);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">HABITRA</div>
+    <div class="subtext" style="font-size:18px;max-width:550px;">Habits that actually stick.<br>Built for the way you really live.</div>
+    <div class="pill-row" style="margin-top:20px;">
+      <span class="pill active">Apple Health</span>
+      <span class="pill active">Smart Streaks</span>
+      <span class="pill active">Flexible Schedules</span>
+    </div>
+    <div class="logo-mark">HABITRA</div>
+  </div>
+</div>
+
+<br>
+<!-- Twitter -->
+<div><span class="platform-label">Twitter / X</span><div class="size-label">1200 × 675</div></div>
+<div class="graphic-wrapper">
+  <div class="graphic bg-reveal" style="width:1200px;height:675px;">
+    <div class="orb orb-purple" style="width:400px;height:400px;top:-100px;left:300px;"></div>
+    <div class="orb orb-pink" style="width:300px;height:300px;bottom:-80px;right:200px;"></div>
+    <div class="countdown-badge">5 DAYS</div>
+    <div class="tag">INTRODUCING</div>
+    <div class="headline logo-text" style="font-size:82px;background:linear-gradient(135deg,#fff,#B8B0FF,#FF6B9D);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">HABITRA</div>
+    <div class="subtext" style="font-size:18px;max-width:550px;">Habits that actually stick.<br>Built for the way you really live.</div>
+    <div class="pill-row" style="margin-top:20px;">
+      <span class="pill active">Apple Health</span>
+      <span class="pill active">Smart Streaks</span>
+      <span class="pill active">Flexible Schedules</span>
+    </div>
+    <div class="logo-mark">HABITRA</div>
+  </div>
+</div>
+
+<br>
+<!-- Instagram -->
+<div><span class="platform-label">Instagram</span><div class="size-label">1080 × 1080</div></div>
+<div class="graphic-wrapper">
+  <div class="graphic bg-reveal" style="width:1080px;height:1080px;">
+    <div class="orb orb-purple" style="width:500px;height:500px;top:-150px;left:100px;"></div>
+    <div class="orb orb-pink" style="width:350px;height:350px;bottom:-100px;right:-50px;"></div>
+    <div class="countdown-badge">5 DAYS</div>
+    <div class="tag" style="font-size:15px;">INTRODUCING</div>
+    <div class="headline logo-text" style="font-size:100px;background:linear-gradient(135deg,#fff,#B8B0FF,#FF6B9D);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">HABITRA</div>
+    <div class="subtext" style="font-size:22px;max-width:550px;">Habits that actually stick.</div>
+    <div class="subtext" style="font-size:18px;margin-top:8px;">Built for the way you really live.</div>
+    <div class="pill-row" style="margin-top:30px;">
+      <span class="pill active">Apple Health</span>
+      <span class="pill active">Smart Streaks</span>
+      <span class="pill active">Flexible Schedules</span>
+    </div>
+    <div class="logo-mark">HABITRA</div>
+  </div>
+</div>
+
+<br>
+<!-- TikTok -->
+<div><span class="platform-label">TikTok</span><div class="size-label">1080 × 1920</div></div>
+<div class="graphic-wrapper">
+  <div class="graphic bg-reveal" style="width:1080px;height:1920px;">
+    <div class="orb orb-purple" style="width:600px;height:600px;top:100px;left:-100px;"></div>
+    <div class="orb orb-pink" style="width:400px;height:400px;bottom:300px;right:-100px;"></div>
+    <div class="countdown-badge">5 DAYS</div>
+    <div style="margin-top:-200px;">
+      <div class="tag" style="font-size:18px;">INTRODUCING</div>
+      <div class="headline logo-text" style="font-size:120px;background:linear-gradient(135deg,#fff,#B8B0FF,#FF6B9D);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">HABITRA</div>
+      <div class="subtext" style="font-size:26px;margin-top:10px;">Habits that actually stick.</div>
+      <div class="subtext" style="font-size:20px;margin-top:8px;">Built for the way you really live.</div>
+      <div class="pill-row" style="margin-top:40px;">
+        <span class="pill active" style="font-size:14px;padding:10px 20px;">Apple Health</span>
+        <span class="pill active" style="font-size:14px;padding:10px 20px;">Smart Streaks</span>
+      </div>
+      <div class="pill-row" style="margin-top:10px;">
+        <span class="pill active" style="font-size:14px;padding:10px 20px;">Flexible Schedules</span>
+      </div>
+    </div>
+    <div class="logo-mark" style="font-size:18px;">HABITRA</div>
+  </div>
+</div>
+
+<!-- =============================================
+     DAY 4 — APPLE HEALTH FEATURE
+     ============================================= -->
+<h1 style="margin-top:60px;">DAY 4 — APPLE HEALTH INTEGRATION</h1>
+<p style="color:#888; margin-bottom:20px;">Theme: Feature spotlight. Multi-workout selection.</p>
+
+<!-- Facebook -->
+<div><span class="platform-label">Facebook</span><div class="size-label">1200 × 628</div></div>
+<div class="graphic-wrapper">
+  <div class="graphic bg-health" style="width:1200px;height:628px;">
+    <div class="orb orb-purple" style="width:300px;height:300px;bottom:-50px;right:100px;"></div>
+    <div class="orb orb-pink" style="width:200px;height:200px;top:50px;left:200px;opacity:0.3;"></div>
+    <div class="countdown-badge">4 DAYS</div>
+    <div class="tag">APPLE HEALTH INTEGRATION</div>
+    <div class="headline" style="font-size:44px;">Your workouts.<br>Auto-tracked.</div>
+    <div class="subtext" style="font-size:16px;max-width:550px;">Select one workout — or many. Habitra syncs with Apple Health<br>and auto-completes your habits when you move.</div>
+    <div class="workout-grid" style="max-width:320px;">
+      <div class="workout-chip selected"><span class="icon">🏃</span>Running</div>
+      <div class="workout-chip selected"><span class="icon">🚴</span>Cycling</div>
+      <div class="workout-chip"><span class="icon">🏊</span>Swimming</div>
+      <div class="workout-chip selected"><span class="icon">🧘</span>Yoga</div>
+      <div class="workout-chip"><span class="icon">🔥</span>HIIT</div>
+      <div class="workout-chip"><span class="icon">🏋️</span>Strength</div>
+    </div>
+    <div class="logo-mark">HABITRA</div>
+  </div>
+</div>
+
+<br>
+<!-- Twitter -->
+<div><span class="platform-label">Twitter / X</span><div class="size-label">1200 × 675</div></div>
+<div class="graphic-wrapper">
+  <div class="graphic bg-health" style="width:1200px;height:675px;">
+    <div class="orb orb-purple" style="width:300px;height:300px;bottom:-50px;right:100px;"></div>
+    <div class="orb orb-pink" style="width:200px;height:200px;top:50px;left:200px;opacity:0.3;"></div>
+    <div class="countdown-badge">4 DAYS</div>
+    <div class="tag">APPLE HEALTH INTEGRATION</div>
+    <div class="headline" style="font-size:46px;">Your workouts.<br>Auto-tracked.</div>
+    <div class="subtext" style="font-size:16px;max-width:550px;">Select one workout — or many. Habitra syncs with Apple Health<br>and auto-completes your habits when you move.</div>
+    <div class="workout-grid" style="max-width:320px;">
+      <div class="workout-chip selected"><span class="icon">🏃</span>Running</div>
+      <div class="workout-chip selected"><span class="icon">🚴</span>Cycling</div>
+      <div class="workout-chip"><span class="icon">🏊</span>Swimming</div>
+      <div class="workout-chip selected"><span class="icon">🧘</span>Yoga</div>
+      <div class="workout-chip"><span class="icon">🔥</span>HIIT</div>
+      <div class="workout-chip"><span class="icon">🏋️</span>Strength</div>
+    </div>
+    <div class="logo-mark">HABITRA</div>
+  </div>
+</div>
+
+<br>
+<!-- Instagram -->
+<div><span class="platform-label">Instagram</span><div class="size-label">1080 × 1080</div></div>
+<div class="graphic-wrapper">
+  <div class="graphic bg-health" style="width:1080px;height:1080px;">
+    <div class="orb orb-purple" style="width:400px;height:400px;bottom:-100px;right:-50px;"></div>
+    <div class="orb orb-pink" style="width:250px;height:250px;top:100px;left:100px;opacity:0.3;"></div>
+    <div class="countdown-badge">4 DAYS</div>
+    <div class="tag" style="font-size:13px;">APPLE HEALTH INTEGRATION</div>
+    <div class="headline" style="font-size:58px;">Your workouts.<br>Auto-tracked.</div>
+    <div class="subtext" style="font-size:18px;max-width:550px;">Select one workout — or many.<br>Habitra auto-completes when you move.</div>
+    <div class="workout-grid" style="max-width:360px;margin-top:30px;">
+      <div class="workout-chip selected" style="padding:14px 4px;"><span class="icon" style="font-size:22px;">🏃</span>Running</div>
+      <div class="workout-chip selected" style="padding:14px 4px;"><span class="icon" style="font-size:22px;">🚴</span>Cycling</div>
+      <div class="workout-chip" style="padding:14px 4px;"><span class="icon" style="font-size:22px;">🏊</span>Swimming</div>
+      <div class="workout-chip selected" style="padding:14px 4px;"><span class="icon" style="font-size:22px;">🧘</span>Yoga</div>
+      <div class="workout-chip" style="padding:14px 4px;"><span class="icon" style="font-size:22px;">🔥</span>HIIT</div>
+      <div class="workout-chip" style="padding:14px 4px;"><span class="icon" style="font-size:22px;">🏋️</span>Strength</div>
+    </div>
+    <div class="logo-mark">HABITRA</div>
+  </div>
+</div>
+
+<br>
+<!-- TikTok -->
+<div><span class="platform-label">TikTok</span><div class="size-label">1080 × 1920</div></div>
+<div class="graphic-wrapper">
+  <div class="graphic bg-health" style="width:1080px;height:1920px;">
+    <div class="orb orb-purple" style="width:500px;height:500px;bottom:200px;right:-100px;"></div>
+    <div class="orb orb-pink" style="width:300px;height:300px;top:200px;left:0;opacity:0.3;"></div>
+    <div class="countdown-badge">4 DAYS</div>
+    <div style="margin-top:-200px;">
+      <div class="tag" style="font-size:16px;">APPLE HEALTH INTEGRATION</div>
+      <div class="headline" style="font-size:66px;">Your workouts.<br>Auto-tracked.</div>
+      <div class="subtext" style="font-size:22px;max-width:600px;">Select one workout — or many.<br>Habitra auto-completes when you move.</div>
+      <div class="workout-grid" style="max-width:420px;margin-top:40px;">
+        <div class="workout-chip selected" style="padding:18px 4px;font-size:13px;"><span class="icon" style="font-size:28px;">🏃</span>Running</div>
+        <div class="workout-chip selected" style="padding:18px 4px;font-size:13px;"><span class="icon" style="font-size:28px;">🚴</span>Cycling</div>
+        <div class="workout-chip" style="padding:18px 4px;font-size:13px;"><span class="icon" style="font-size:28px;">🏊</span>Swimming</div>
+        <div class="workout-chip selected" style="padding:18px 4px;font-size:13px;"><span class="icon" style="font-size:28px;">🧘</span>Yoga</div>
+        <div class="workout-chip" style="padding:18px 4px;font-size:13px;"><span class="icon" style="font-size:28px;">🔥</span>HIIT</div>
+        <div class="workout-chip" style="padding:18px 4px;font-size:13px;"><span class="icon" style="font-size:28px;">🏋️</span>Strength</div>
+        <div class="workout-chip" style="padding:18px 4px;font-size:13px;"><span class="icon" style="font-size:28px;">💃</span>Dance</div>
+        <div class="workout-chip" style="padding:18px 4px;font-size:13px;"><span class="icon" style="font-size:28px;">🥾</span>Hiking</div>
+        <div class="workout-chip" style="padding:18px 4px;font-size:13px;"><span class="icon" style="font-size:28px;">🥊</span>Martial Arts</div>
+      </div>
+    </div>
+    <div class="logo-mark" style="font-size:18px;">HABITRA</div>
+  </div>
+</div>
+
+<!-- =============================================
+     DAY 3 — SMART FEATURES
+     ============================================= -->
+<h1 style="margin-top:60px;">DAY 3 — SMART FEATURES</h1>
+<p style="color:#888; margin-bottom:20px;">Theme: Streaks, flexibility, built for real life.</p>
+
+<!-- Facebook -->
+<div><span class="platform-label">Facebook</span><div class="size-label">1200 × 628</div></div>
+<div class="graphic-wrapper">
+  <div class="graphic bg-features" style="width:1200px;height:628px;">
+    <div class="orb orb-purple" style="width:300px;height:300px;top:-50px;left:200px;"></div>
+    <div class="orb orb-blue" style="width:200px;height:200px;bottom:-30px;right:200px;opacity:0.3;"></div>
+    <div class="countdown-badge">3 DAYS</div>
+    <div class="tag">BUILT FOR REAL LIFE</div>
+    <div class="headline" style="font-size:44px;">Weekdays only? 3× a day?<br>Your rules.</div>
+    <div class="subtext" style="font-size:16px;max-width:600px;">Custom schedules, multi-completion tracking, and streaks<br>that celebrate consistency — not perfection.</div>
+    <div class="streak-row" style="margin-top:24px;">
+      <div class="streak-dot done">M</div>
+      <div class="streak-dot done">T</div>
+      <div class="streak-dot done">W</div>
+      <div class="streak-dot empty">T</div>
+      <div class="streak-dot done">F</div>
+      <div class="streak-dot done">S</div>
+      <div class="streak-dot today">S</div>
+    </div>
+    <div style="margin-top:8px;font-size:12px;color:rgba(255,255,255,0.4);font-weight:600;">6 DAY STREAK 🔥</div>
+    <div class="logo-mark">HABITRA</div>
+  </div>
+</div>
+
+<br>
+<!-- Twitter -->
+<div><span class="platform-label">Twitter / X</span><div class="size-label">1200 × 675</div></div>
+<div class="graphic-wrapper">
+  <div class="graphic bg-features" style="width:1200px;height:675px;">
+    <div class="orb orb-purple" style="width:300px;height:300px;top:-50px;left:200px;"></div>
+    <div class="orb orb-blue" style="width:200px;height:200px;bottom:-30px;right:200px;opacity:0.3;"></div>
+    <div class="countdown-badge">3 DAYS</div>
+    <div class="tag">BUILT FOR REAL LIFE</div>
+    <div class="headline" style="font-size:46px;">Weekdays only? 3× a day?<br>Your rules.</div>
+    <div class="subtext" style="font-size:16px;max-width:600px;">Custom schedules, multi-completion tracking, and streaks<br>that celebrate consistency — not perfection.</div>
+    <div class="streak-row" style="margin-top:24px;">
+      <div class="streak-dot done">M</div>
+      <div class="streak-dot done">T</div>
+      <div class="streak-dot done">W</div>
+      <div class="streak-dot empty">T</div>
+      <div class="streak-dot done">F</div>
+      <div class="streak-dot done">S</div>
+      <div class="streak-dot today">S</div>
+    </div>
+    <div style="margin-top:8px;font-size:12px;color:rgba(255,255,255,0.4);font-weight:600;">6 DAY STREAK 🔥</div>
+    <div class="logo-mark">HABITRA</div>
+  </div>
+</div>
+
+<br>
+<!-- Instagram -->
+<div><span class="platform-label">Instagram</span><div class="size-label">1080 × 1080</div></div>
+<div class="graphic-wrapper">
+  <div class="graphic bg-features" style="width:1080px;height:1080px;">
+    <div class="orb orb-purple" style="width:400px;height:400px;top:-80px;left:100px;"></div>
+    <div class="orb orb-blue" style="width:250px;height:250px;bottom:-50px;right:100px;opacity:0.3;"></div>
+    <div class="countdown-badge">3 DAYS</div>
+    <div class="tag" style="font-size:14px;">BUILT FOR REAL LIFE</div>
+    <div class="headline" style="font-size:54px;">Weekdays only?<br>3× a day?<br>Your rules.</div>
+    <div class="subtext" style="font-size:18px;max-width:550px;">Custom schedules. Multi-completion.<br>Streaks that celebrate consistency.</div>
+    <div class="streak-row" style="margin-top:30px;">
+      <div class="streak-dot done" style="width:36px;height:36px;font-size:13px;">M</div>
+      <div class="streak-dot done" style="width:36px;height:36px;font-size:13px;">T</div>
+      <div class="streak-dot done" style="width:36px;height:36px;font-size:13px;">W</div>
+      <div class="streak-dot empty" style="width:36px;height:36px;font-size:13px;">T</div>
+      <div class="streak-dot done" style="width:36px;height:36px;font-size:13px;">F</div>
+      <div class="streak-dot done" style="width:36px;height:36px;font-size:13px;">S</div>
+      <div class="streak-dot today" style="width:36px;height:36px;font-size:13px;">S</div>
+    </div>
+    <div style="margin-top:12px;font-size:14px;color:rgba(255,255,255,0.4);font-weight:600;">6 DAY STREAK 🔥</div>
+    <div class="logo-mark">HABITRA</div>
+  </div>
+</div>
+
+<br>
+<!-- TikTok -->
+<div><span class="platform-label">TikTok</span><div class="size-label">1080 × 1920</div></div>
+<div class="graphic-wrapper">
+  <div class="graphic bg-features" style="width:1080px;height:1920px;">
+    <div class="orb orb-purple" style="width:500px;height:500px;top:100px;left:-100px;"></div>
+    <div class="orb orb-blue" style="width:300px;height:300px;bottom:300px;right:-50px;opacity:0.3;"></div>
+    <div class="countdown-badge">3 DAYS</div>
+    <div style="margin-top:-200px;">
+      <div class="tag" style="font-size:16px;">BUILT FOR REAL LIFE</div>
+      <div class="headline" style="font-size:64px;">Weekdays only?<br>3× a day?<br>Your rules.</div>
+      <div class="subtext" style="font-size:22px;max-width:600px;margin-top:10px;">Custom schedules. Multi-completion.<br>Streaks that celebrate consistency.</div>
+      <div class="streak-row" style="margin-top:40px;">
+        <div class="streak-dot done" style="width:44px;height:44px;font-size:15px;">M</div>
+        <div class="streak-dot done" style="width:44px;height:44px;font-size:15px;">T</div>
+        <div class="streak-dot done" style="width:44px;height:44px;font-size:15px;">W</div>
+        <div class="streak-dot empty" style="width:44px;height:44px;font-size:15px;">T</div>
+        <div class="streak-dot done" style="width:44px;height:44px;font-size:15px;">F</div>
+        <div class="streak-dot done" style="width:44px;height:44px;font-size:15px;">S</div>
+        <div class="streak-dot today" style="width:44px;height:44px;font-size:15px;">S</div>
+      </div>
+      <div style="margin-top:14px;font-size:16px;color:rgba(255,255,255,0.4);font-weight:600;">6 DAY STREAK 🔥</div>
+    </div>
+    <div class="logo-mark" style="font-size:18px;">HABITRA</div>
+  </div>
+</div>
+
+<!-- =============================================
+     DAY 2 — SOCIAL PROOF / COMMUNITY
+     ============================================= -->
+<h1 style="margin-top:60px;">DAY 2 — SOCIAL PROOF</h1>
+<p style="color:#888; margin-bottom:20px;">Theme: Community. FOMO. "Join the movement."</p>
+
+<!-- Facebook -->
+<div><span class="platform-label">Facebook</span><div class="size-label">1200 × 628</div></div>
+<div class="graphic-wrapper">
+  <div class="graphic bg-social" style="width:1200px;height:628px;">
+    <div class="orb orb-pink" style="width:400px;height:400px;top:-100px;right:100px;"></div>
+    <div class="orb orb-purple" style="width:200px;height:200px;bottom:-30px;left:200px;opacity:0.4;"></div>
+    <div class="countdown-badge">2 DAYS</div>
+    <div class="tag">ALMOST HERE</div>
+    <div class="headline" style="font-size:44px;">The waitlist is growing.<br>Are you on it?</div>
+    <div class="subtext" style="font-size:17px;max-width:600px;">Join thousands who are ready to build better habits<br>with Apple Health, smart streaks, and zero guilt.</div>
+    <div class="cta-badge">Get Early Access →</div>
+    <div class="logo-mark">HABITRA</div>
+  </div>
+</div>
+
+<br>
+<!-- Twitter -->
+<div><span class="platform-label">Twitter / X</span><div class="size-label">1200 × 675</div></div>
+<div class="graphic-wrapper">
+  <div class="graphic bg-social" style="width:1200px;height:675px;">
+    <div class="orb orb-pink" style="width:400px;height:400px;top:-100px;right:100px;"></div>
+    <div class="orb orb-purple" style="width:200px;height:200px;bottom:-30px;left:200px;opacity:0.4;"></div>
+    <div class="countdown-badge">2 DAYS</div>
+    <div class="tag">ALMOST HERE</div>
+    <div class="headline" style="font-size:46px;">The waitlist is growing.<br>Are you on it?</div>
+    <div class="subtext" style="font-size:17px;max-width:600px;">Join thousands who are ready to build better habits<br>with Apple Health, smart streaks, and zero guilt.</div>
+    <div class="cta-badge">Get Early Access →</div>
+    <div class="logo-mark">HABITRA</div>
+  </div>
+</div>
+
+<br>
+<!-- Instagram -->
+<div><span class="platform-label">Instagram</span><div class="size-label">1080 × 1080</div></div>
+<div class="graphic-wrapper">
+  <div class="graphic bg-social" style="width:1080px;height:1080px;">
+    <div class="orb orb-pink" style="width:500px;height:500px;top:-150px;right:-50px;"></div>
+    <div class="orb orb-purple" style="width:300px;height:300px;bottom:-50px;left:100px;opacity:0.4;"></div>
+    <div class="countdown-badge">2 DAYS</div>
+    <div class="tag" style="font-size:15px;">ALMOST HERE</div>
+    <div class="headline" style="font-size:58px;">The waitlist<br>is growing.</div>
+    <div class="headline" style="font-size:42px;color:#FFD700;margin-top:-5px;">Are you on it?</div>
+    <div class="subtext" style="font-size:18px;max-width:550px;margin-top:10px;">Apple Health integration.<br>Smart streaks. Zero guilt.</div>
+    <div class="cta-badge" style="font-size:16px;padding:14px 36px;margin-top:30px;">Get Early Access →</div>
+    <div class="logo-mark">HABITRA</div>
+  </div>
+</div>
+
+<br>
+<!-- TikTok -->
+<div><span class="platform-label">TikTok</span><div class="size-label">1080 × 1920</div></div>
+<div class="graphic-wrapper">
+  <div class="graphic bg-social" style="width:1080px;height:1920px;">
+    <div class="orb orb-pink" style="width:600px;height:600px;top:100px;right:-150px;"></div>
+    <div class="orb orb-purple" style="width:400px;height:400px;bottom:300px;left:-100px;opacity:0.4;"></div>
+    <div class="countdown-badge">2 DAYS</div>
+    <div style="margin-top:-200px;">
+      <div class="tag" style="font-size:18px;">ALMOST HERE</div>
+      <div class="headline" style="font-size:72px;">The waitlist<br>is growing.</div>
+      <div class="headline" style="font-size:56px;color:#FFD700;margin-top:-5px;">Are you on it?</div>
+      <div class="subtext" style="font-size:24px;max-width:600px;margin-top:20px;">Apple Health integration.<br>Smart streaks. Zero guilt.</div>
+      <div class="cta-badge" style="font-size:20px;padding:18px 44px;margin-top:40px;">Get Early Access →</div>
+    </div>
+    <div class="logo-mark" style="font-size:18px;">HABITRA</div>
+  </div>
+</div>
+
+<!-- =============================================
+     DAY 1 — LAUNCH DAY
+     ============================================= -->
+<h1 style="margin-top:60px;">DAY 1 — LAUNCH DAY</h1>
+<p style="color:#888; margin-bottom:20px;">Theme: Maximum energy. "It's here. Download now."</p>
+
+<!-- Facebook -->
+<div><span class="platform-label">Facebook</span><div class="size-label">1200 × 628</div></div>
+<div class="graphic-wrapper">
+  <div class="graphic bg-launch" style="width:1200px;height:628px;">
+    <div class="orb orb-purple" style="width:400px;height:400px;top:-100px;left:200px;"></div>
+    <div class="orb orb-pink" style="width:350px;height:350px;bottom:-100px;right:150px;"></div>
+    <div class="countdown-badge" style="background:linear-gradient(135deg,#FFD700,#FF6B9D);border:none;color:#000;font-weight:800;">LAUNCH DAY</div>
+    <div class="tag" style="color:#FFD700;">IT'S FINALLY HERE</div>
+    <div class="headline logo-text" style="font-size:72px;background:linear-gradient(135deg,#fff,#FFD700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">HABITRA</div>
+    <div class="subtext" style="font-size:18px;">Habits that stick. Powered by Apple Health.</div>
+    <div class="cta-badge" style="background:linear-gradient(135deg,#FFD700,#FF6B9D);color:#000;font-size:16px;padding:14px 36px;margin-top:20px;">Download Free on the App Store →</div>
+    <div class="logo-mark">HABITRA</div>
+  </div>
+</div>
+
+<br>
+<!-- Twitter -->
+<div><span class="platform-label">Twitter / X</span><div class="size-label">1200 × 675</div></div>
+<div class="graphic-wrapper">
+  <div class="graphic bg-launch" style="width:1200px;height:675px;">
+    <div class="orb orb-purple" style="width:400px;height:400px;top:-100px;left:200px;"></div>
+    <div class="orb orb-pink" style="width:350px;height:350px;bottom:-100px;right:150px;"></div>
+    <div class="countdown-badge" style="background:linear-gradient(135deg,#FFD700,#FF6B9D);border:none;color:#000;font-weight:800;">LAUNCH DAY</div>
+    <div class="tag" style="color:#FFD700;">IT'S FINALLY HERE</div>
+    <div class="headline logo-text" style="font-size:74px;background:linear-gradient(135deg,#fff,#FFD700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">HABITRA</div>
+    <div class="subtext" style="font-size:18px;">Habits that stick. Powered by Apple Health.</div>
+    <div class="cta-badge" style="background:linear-gradient(135deg,#FFD700,#FF6B9D);color:#000;font-size:16px;padding:14px 36px;margin-top:20px;">Download Free on the App Store →</div>
+    <div class="logo-mark">HABITRA</div>
+  </div>
+</div>
+
+<br>
+<!-- Instagram -->
+<div><span class="platform-label">Instagram</span><div class="size-label">1080 × 1080</div></div>
+<div class="graphic-wrapper">
+  <div class="graphic bg-launch" style="width:1080px;height:1080px;">
+    <div class="orb orb-purple" style="width:500px;height:500px;top:-150px;left:100px;"></div>
+    <div class="orb orb-pink" style="width:400px;height:400px;bottom:-100px;right:-50px;"></div>
+    <div class="countdown-badge" style="background:linear-gradient(135deg,#FFD700,#FF6B9D);border:none;color:#000;font-weight:800;">LAUNCH DAY</div>
+    <div class="tag" style="color:#FFD700;font-size:16px;">IT'S FINALLY HERE</div>
+    <div class="headline logo-text" style="font-size:100px;background:linear-gradient(135deg,#fff,#FFD700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">HABITRA</div>
+    <div class="subtext" style="font-size:22px;margin-top:5px;">Habits that stick.<br>Powered by Apple Health.</div>
+    <div class="cta-badge" style="background:linear-gradient(135deg,#FFD700,#FF6B9D);color:#000;font-size:18px;padding:16px 40px;margin-top:30px;">Download Free →</div>
+    <div class="logo-mark">HABITRA</div>
+  </div>
+</div>
+
+<br>
+<!-- TikTok -->
+<div><span class="platform-label">TikTok</span><div class="size-label">1080 × 1920</div></div>
+<div class="graphic-wrapper">
+  <div class="graphic bg-launch" style="width:1080px;height:1920px;">
+    <div class="orb orb-purple" style="width:600px;height:600px;top:100px;left:-100px;"></div>
+    <div class="orb orb-pink" style="width:500px;height:500px;bottom:200px;right:-150px;"></div>
+    <div class="countdown-badge" style="background:linear-gradient(135deg,#FFD700,#FF6B9D);border:none;color:#000;font-weight:800;font-size:16px;">LAUNCH DAY</div>
+    <div style="margin-top:-200px;">
+      <div class="tag" style="color:#FFD700;font-size:20px;">IT'S FINALLY HERE</div>
+      <div class="headline logo-text" style="font-size:130px;background:linear-gradient(135deg,#fff,#FFD700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">HABITRA</div>
+      <div class="subtext" style="font-size:26px;margin-top:10px;">Habits that stick.<br>Powered by Apple Health.</div>
+      <div class="cta-badge" style="background:linear-gradient(135deg,#FFD700,#FF6B9D);color:#000;font-size:22px;padding:20px 50px;margin-top:40px;">Download Free →</div>
+    </div>
+    <div class="logo-mark" style="font-size:18px;">HABITRA</div>
+  </div>
+</div>
+
+</body>
+</html>

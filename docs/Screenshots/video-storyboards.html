@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Habitra - App Preview Video Storyboards</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0D0D14;
+      --surface: #1A1A2E;
+      --surface-light: #242442;
+      --accent: #6C63FF;
+      --accent-bright: #7C73FF;
+      --accent-glow: #A89AFF;
+      --text-primary: #EEEDFE;
+      --text-secondary: #AFA9EC;
+      --text-tertiary: #7A74B0;
+      --vital: #F59E0B;
+      --vital-glow: #FCD34D;
+      --success: #4ADE80;
+      --warning: #FBBF24;
+      --danger: #F87171;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Header */
+    .page-header {
+      padding: 60px 0 20px;
+      text-align: center;
+    }
+    .page-header h1 {
+      font-size: 36px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .page-header h1 span { color: var(--accent); }
+    .page-header p {
+      color: var(--text-secondary);
+      font-size: 15px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Spec banner */
+    .spec-banner {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin: 32px 0 48px;
+      flex-wrap: wrap;
+    }
+    .spec-item {
+      text-align: center;
+    }
+    .spec-item .value {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--accent-glow);
+    }
+    .spec-item .label {
+      font-size: 11px;
+      color: var(--text-tertiary);
+      margin-top: 2px;
+    }
+
+    /* Video section */
+    .video-section {
+      margin-bottom: 64px;
+    }
+    .video-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 8px;
+    }
+    .video-number {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-bright));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+    .video-title {
+      font-size: 24px;
+      font-weight: 700;
+    }
+    .video-meta {
+      display: flex;
+      gap: 16px;
+      margin: 12px 0 24px;
+      flex-wrap: wrap;
+    }
+    .video-meta-tag {
+      font-size: 12px;
+      padding: 4px 12px;
+      border-radius: 8px;
+      background: var(--surface);
+      border: 1px solid var(--surface-light);
+      color: var(--text-secondary);
+    }
+    .video-meta-tag strong {
+      color: var(--text-primary);
+    }
+    .video-concept {
+      color: var(--text-secondary);
+      font-size: 14px;
+      margin-bottom: 24px;
+      padding: 16px;
+      background: var(--surface);
+      border-radius: 12px;
+      border-left: 3px solid var(--accent);
+    }
+
+    /* Timeline */
+    .timeline {
+      position: relative;
+      padding-left: 32px;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 12px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--surface-light);
+    }
+    .scene {
+      position: relative;
+      margin-bottom: 24px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--surface-light);
+    }
+    .scene:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+    .scene::before {
+      content: '';
+      position: absolute;
+      left: -26px;
+      top: 4px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--bg);
+      z-index: 1;
+    }
+    .scene.end-card::before {
+      background: var(--vital);
+    }
+    .scene-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .scene-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent-glow);
+    }
+    .scene-time {
+      font-size: 11px;
+      color: var(--text-tertiary);
+      font-weight: 500;
+    }
+    .scene-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .scene-description {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    .scene-visual {
+      margin-top: 10px;
+      padding: 10px 14px;
+      background: rgba(108, 99, 255, 0.06);
+      border: 1px solid rgba(108, 99, 255, 0.12);
+      border-radius: 10px;
+      font-size: 12px;
+      color: var(--accent-glow);
+    }
+    .scene-visual strong {
+      color: var(--text-primary);
+    }
+    .scene-audio {
+      margin-top: 8px;
+      font-size: 11px;
+      color: var(--text-tertiary);
+    }
+    .scene-audio::before {
+      content: '♫ ';
+    }
+    .scene-text-overlay {
+      margin-top: 8px;
+      display: inline-block;
+      padding: 4px 12px;
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.2);
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--vital-glow);
+    }
+
+    /* End card mockup */
+    .end-card-mockup {
+      margin-top: 16px;
+      background: var(--surface);
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+      border: 1px solid var(--surface-light);
+    }
+    .end-card-mockup .logo {
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+    .end-card-mockup .logo span { color: var(--accent); }
+    .end-card-mockup .tagline {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+    }
+    .end-card-mockup .app-store-badge {
+      display: inline-block;
+      padding: 8px 20px;
+      background: white;
+      color: #000;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    /* Divider */
+    .section-divider {
+      border: none;
+      border-top: 1px solid var(--surface-light);
+      margin: 48px 0;
+    }
+
+    /* Tips section */
+    .tips-section {
+      margin: 48px 0;
+      padding: 24px;
+      background: var(--surface);
+      border-radius: 16px;
+      border: 1px solid var(--surface-light);
+    }
+    .tips-section h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .tip-item {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+    .tip-item .bullet {
+      color: var(--accent);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 640px) {
+      .page-header h1 { font-size: 28px; }
+      .spec-banner { gap: 20px; }
+      .video-title { font-size: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="page-header">
+    <div class="container">
+      <h1>App Preview <span>Storyboards</span></h1>
+      <p>3 short video concepts for the App Store. Each video showcases a different value prop of Habitra.</p>
+    </div>
+  </section>
+
+  <div class="container">
+
+    <div class="spec-banner">
+      <div class="spec-item">
+        <div class="value">3</div>
+        <div class="label">Videos</div>
+      </div>
+      <div class="spec-item">
+        <div class="value">15-20s</div>
+        <div class="label">Duration Each</div>
+      </div>
+      <div class="spec-item">
+        <div class="value">1080x1920</div>
+        <div class="label">Portrait Resolution</div>
+      </div>
+      <div class="spec-item">
+        <div class="value">30fps</div>
+        <div class="label">Frame Rate</div>
+      </div>
+      <div class="spec-item">
+        <div class="value">H.264</div>
+        <div class="label">Codec</div>
+      </div>
+    </div>
+
+    <!-- ================================ -->
+    <!-- VIDEO 1: A Day with Habitra      -->
+    <!-- ================================ -->
+    <div class="video-section">
+      <div class="video-header">
+        <div class="video-number">1</div>
+        <div class="video-title">A Day with Habitra</div>
+      </div>
+      <div class="video-meta">
+        <span class="video-meta-tag"><strong>Duration:</strong> 15 seconds</span>
+        <span class="video-meta-tag"><strong>Focus:</strong> Daily workflow</span>
+        <span class="video-meta-tag"><strong>Mood:</strong> Energetic, upbeat</span>
+      </div>
+      <div class="video-concept">
+        Quick montage of a user's morning routine with Habitra. Shows the core loop: check widget, open app, complete habits, celebrate. Communicates "this fits naturally into your day."
+      </div>
+
+      <div class="timeline">
+        <div class="scene">
+          <div class="scene-header">
+            <span class="scene-label">Scene 1</span>
+            <span class="scene-time">0:00 - 0:03</span>
+          </div>
+          <div class="scene-title">Lock Screen Wake</div>
+          <div class="scene-description">iPhone Lock Screen fades in. The Habitra streak widget is visible showing "4/6 habits today" with the progress ring. Time reads 7:15 AM. User taps to unlock.</div>
+          <div class="scene-visual"><strong>Visual:</strong> Lock Screen with Habitra widget glowing softly. Subtle sunrise gradient in wallpaper.</div>
+          <div class="scene-audio">Soft chime + upbeat lo-fi beat begins</div>
+        </div>
+
+        <div class="scene">
+          <div class="scene-header">
+            <span class="scene-label">Scene 2</span>
+            <span class="scene-time">0:03 - 0:06</span>
+          </div>
+          <div class="scene-title">Today Tab Opens</div>
+          <div class="scene-description">App opens to the Today tab. AI coaching banner reads "Good morning! 6 habits scheduled today." The habit list appears with clean animations. Progress ring shows 0/6.</div>
+          <div class="scene-visual"><strong>Visual:</strong> Today tab with habit list animating in. Purple accent color pops against dark background.</div>
+        </div>
+
+        <div class="scene">
+          <div class="scene-header">
+            <span class="scene-label">Scene 3</span>
+            <span class="scene-time">0:06 - 0:09</span>
+          </div>
+          <div class="scene-title">Completing Habits</div>
+          <div class="scene-description">Rapid sequence: User taps "Morning Walk" circle - pulse animation, streak badge shows 21. Taps "Read 20 min" - another pulse, streak 14. Taps "Meditate" - pulse animation, streak hits 30. XP popup floats: "+10 XP".</div>
+          <div class="scene-visual"><strong>Visual:</strong> Three quick completion taps with satisfying pulse rings. Each circle fills with color. Streak numbers increment.</div>
+          <div class="scene-audio">Three satisfying haptic-like sound effects in rhythm</div>
+        </div>
+
+        <div class="scene">
+          <div class="scene-header">
+            <span class="scene-label">Scene 4</span>
+            <span class="scene-time">0:09 - 0:11</span>
+          </div>
+          <div class="scene-title">Mood Check-in</div>
+          <div class="scene-description">Quick cut to mood check-in. User taps the "Good" emoji (smile face). It scales up with a soft glow. Text appears: "Mood logged."</div>
+          <div class="scene-visual"><strong>Visual:</strong> Mood emoji row with "Good" highlighted and glowing.</div>
+        </div>
+
+        <div class="scene">
+          <div class="scene-header">
+            <span class="scene-label">Scene 5</span>
+            <span class="scene-time">0:11 - 0:13</span>
+          </div>
+          <div class="scene-title">Perfect Day Celebration</div>
+          <div class="scene-description">Progress ring fills to 6/6 (100%). Confetti bursts from the center. "Perfect Day!" celebration overlay with gold gradient.</div>
+          <div class="scene-visual"><strong>Visual:</strong> Confetti animation, progress ring completing with gold glow, "Perfect Day!" text in gold.</div>
+          <div class="scene-audio">Celebratory chime + confetti sound</div>
+        </div>
+
+        <div class="scene end-card">
+          <div class="scene-header">
+            <span class="scene-label">End Card</span>
+            <span class="scene-time">0:13 - 0:15</span>
+          </div>
+          <div class="scene-title">Branding + CTA</div>
+          <div class="scene-description">Fade to dark background. Habitra logo animates in (progress ring with heartbeat pulse). Tagline appears below. App Store download badge.</div>
+          <div class="scene-text-overlay">Your habits. Your rhythm.</div>
+          <div class="end-card-mockup">
+            <div class="logo">Habitr<span>a</span></div>
+            <div class="tagline">Your habits. Your rhythm.</div>
+            <div class="app-store-badge">Download on the App Store</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- ================================ -->
+    <!-- VIDEO 2: AI That Gets You        -->
+    <!-- ================================ -->
+    <div class="video-section">
+      <div class="video-header">
+        <div class="video-number">2</div>
+        <div class="video-title">AI That Gets You</div>
+      </div>
+      <div class="video-meta">
+        <span class="video-meta-tag"><strong>Duration:</strong> 20 seconds</span>
+        <span class="video-meta-tag"><strong>Focus:</strong> AI intelligence</span>
+        <span class="video-meta-tag"><strong>Mood:</strong> Thoughtful, impressive</span>
+      </div>
+      <div class="video-concept">
+        Showcases Habitra's on-device AI capabilities. Highlights predictions, pattern detection, health correlations, and the weekly recap. Key message: "smart AI that respects your privacy."
+      </div>
+
+      <div class="timeline">
+        <div class="scene">
+          <div class="scene-header">
+            <span class="scene-label">Scene 1</span>
+            <span class="scene-time">0:00 - 0:03</span>
+          </div>
+          <div class="scene-title">Text Hook</div>
+          <div class="scene-description">Black screen. Text types out letter by letter: "Your habits have patterns." Brief pause. "Habitra finds them." Text fades out.</div>
+          <div class="scene-visual"><strong>Visual:</strong> Minimal text on dark background with typing animation. Purple accent on "patterns" and "finds".</div>
+          <div class="scene-audio">Subtle electronic ambient begins, building slowly</div>
+        </div>
+
+        <div class="scene">
+          <div class="scene-header">
+            <span class="scene-label">Scene 2</span>
+            <span class="scene-time">0:03 - 0:07</span>
+          </div>
+          <div class="scene-title">Coach Tab - Predictions</div>
+          <div class="scene-description">Coach tab opens with a smooth scroll. Camera pans down through prediction cards. "Morning Walk - 22% chance tomorrow" (red border pulses). "Meditate - 94% likely" (green glow). "Workout - 55%" (amber).</div>
+          <div class="scene-visual"><strong>Visual:</strong> Prediction cards with color-coded risk borders (red/amber/green). Percentages animate counting up.</div>
+        </div>
+
+        <div class="scene">
+          <div class="scene-header">
+            <span class="scene-label">Scene 3</span>
+            <span class="scene-time">0:07 - 0:10</span>
+          </div>
+          <div class="scene-title">Pattern Detection</div>
+          <div class="scene-description">Smooth transition to pattern insight card. Text reveals: "You skip Fridays 80% of the time." Second card: "Meditate + Exercise succeed together 87% of the time." Correlation lines animate between habit icons.</div>
+          <div class="scene-visual"><strong>Visual:</strong> Pattern cards with animated connection lines between habit icons. Numbers animate in.</div>
+        </div>
+
+        <div class="scene">
+          <div class="scene-header">
+            <span class="scene-label">Scene 4</span>
+            <span class="scene-time">0:10 - 0:14</span>
+          </div>
+          <div class="scene-title">Health Correlations</div>
+          <div class="scene-description">Transition to Health Insights. Cards slide in: "Workout +40% more likely with 7+ hrs sleep" with a sleep icon. Steps, sleep, HRV metric tiles animate with real-looking data. "Meditation lowers resting HR by 3 bpm."</div>
+          <div class="scene-visual"><strong>Visual:</strong> Health metric tiles with HealthKit-style icons. Correlation cards with percentage badges.</div>
+        </div>
+
+        <div class="scene">
+          <div class="scene-header">
+            <span class="scene-label">Scene 5</span>
+            <span class="scene-time">0:14 - 0:17</span>
+          </div>
+          <div class="scene-title">Weekly Recap Generation</div>
+          <div class="scene-description">Weekly Recap view assembles itself: completion rate counter ticks up to 82%, bar chart draws in, "Best Day: Thursday" highlights, AI coaching message types out in real-time.</div>
+          <div class="scene-visual"><strong>Visual:</strong> Recap building itself with counting animations. Bar chart growing. AI text typing effect.</div>
+        </div>
+
+        <div class="scene">
+          <div class="scene-header">
+            <span class="scene-label">Scene 6</span>
+            <span class="scene-time">0:17 - 0:18</span>
+          </div>
+          <div class="scene-title">AI Model Status</div>
+          <div class="scene-description">Quick flash of the on-device AI model card: "Core ML - 145 data points - 82% accurate". A lock icon pulses next to "On-Device Only".</div>
+          <div class="scene-visual"><strong>Visual:</strong> Model status card with pulsing lock icon. "On-Device" badge glows green.</div>
+        </div>
+
+        <div class="scene end-card">
+          <div class="scene-header">
+            <span class="scene-label">End Card</span>
+            <span class="scene-time">0:18 - 0:20</span>
+          </div>
+          <div class="scene-title">Branding + Privacy Message</div>
+          <div class="scene-description">Fade to dark. Lock icon transforms into Habitra logo. Tagline appears. App Store badge.</div>
+          <div class="scene-text-overlay">Intelligence that stays on your device.</div>
+          <div class="end-card-mockup">
+            <div class="logo">Habitr<span>a</span></div>
+            <div class="tagline">Intelligence that stays on your device.</div>
+            <div class="app-store-badge">Download on the App Store</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- ================================ -->
+    <!-- VIDEO 3: From 0 to Streak        -->
+    <!-- ================================ -->
+    <div class="video-section">
+      <div class="video-header">
+        <div class="video-number">3</div>
+        <div class="video-title">From 0 to Streak</div>
+      </div>
+      <div class="video-meta">
+        <span class="video-meta-tag"><strong>Duration:</strong> 20 seconds</span>
+        <span class="video-meta-tag"><strong>Focus:</strong> Streak journey</span>
+        <span class="video-meta-tag"><strong>Mood:</strong> Motivational, building momentum</span>
+      </div>
+      <div class="video-concept">
+        Compressed journey from creating a first habit to reaching a 30-day streak. Shows the full gamification loop: habit creation, daily completions, milestones, badges, stats, and sharing. Key message: "build habits that stick."
+      </div>
+
+      <div class="timeline">
+        <div class="scene">
+          <div class="scene-header">
+            <span class="scene-label">Scene 1</span>
+            <span class="scene-time">0:00 - 0:04</span>
+          </div>
+          <div class="scene-title">Day 1: Create First Habit</div>
+          <div class="scene-description">User taps "+" button. Habit creation form slides up. Types "Read 20 min", picks book icon, selects cyan color, sets Daily frequency, enables 7 AM reminder. Taps "Save". Habit appears in Today list with a fresh empty circle.</div>
+          <div class="scene-visual"><strong>Visual:</strong> Smooth form animation. Icon picker with colorful options. Habit card materializing in the list.</div>
+          <div class="scene-text-overlay">Day 1</div>
+          <div class="scene-audio">Uplifting piano melody begins, building throughout</div>
+        </div>
+
+        <div class="scene">
+          <div class="scene-header">
+            <span class="scene-label">Scene 2</span>
+            <span class="scene-time">0:04 - 0:06</span>
+          </div>
+          <div class="scene-title">Day 3: Building Momentum</div>
+          <div class="scene-description">Quick montage of three taps (Day 1, 2, 3). Streak badge appears: fire emoji + "3". Small XP popup: "+10 XP". The circle fills each time with a satisfying pulse.</div>
+          <div class="scene-visual"><strong>Visual:</strong> Three rapid completion animations. Streak counter incrementing 1 > 2 > 3.</div>
+          <div class="scene-text-overlay">Day 3</div>
+        </div>
+
+        <div class="scene">
+          <div class="scene-header">
+            <span class="scene-label">Scene 3</span>
+            <span class="scene-time">0:06 - 0:09</span>
+          </div>
+          <div class="scene-title">Day 7: First Milestone</div>
+          <div class="scene-description">Streak hits 7. Milestone celebration screen: "1 Week!" in large text with confetti. Badge earned animation: "Week Warrior" badge slides in with gold glow. XP bar fills showing level progress.</div>
+          <div class="scene-visual"><strong>Visual:</strong> Confetti burst, badge animation with sparkle effect, XP bar filling up.</div>
+          <div class="scene-text-overlay">Day 7 - First Milestone!</div>
+          <div class="scene-audio">Celebration chime layered over building music</div>
+        </div>
+
+        <div class="scene">
+          <div class="scene-header">
+            <span class="scene-label">Scene 4</span>
+            <span class="scene-time">0:09 - 0:12</span>
+          </div>
+          <div class="scene-title">Day 21: Stats Growing</div>
+          <div class="scene-description">Stats tab showing the 30-day view. Calendar heatmap mostly green/purple. Health score "A-" animates in. Trend line going up. Weekly bar chart with consistently tall bars. "Improving" badge glows.</div>
+          <div class="scene-visual"><strong>Visual:</strong> Stats dashboard assembling itself. Heatmap filling with color. Charts drawing in.</div>
+          <div class="scene-text-overlay">Day 21</div>
+        </div>
+
+        <div class="scene">
+          <div class="scene-header">
+            <span class="scene-label">Scene 5</span>
+            <span class="scene-time">0:12 - 0:16</span>
+          </div>
+          <div class="scene-title">Day 30: Achievement Unlocked</div>
+          <div class="scene-description">Streak hits 30. Epic celebration: "30 Day Streak!" with gold confetti and larger animation. "Monthly Master" badge earned. Share card appears with gradient theme options. User picks a theme and shares to Messages.</div>
+          <div class="scene-visual"><strong>Visual:</strong> Grand celebration animation. Badge shelf showing collection growing. Share card with beautiful gradient.</div>
+          <div class="scene-text-overlay">Day 30 - Monthly Master!</div>
+          <div class="scene-audio">Music crescendos to triumphant peak</div>
+        </div>
+
+        <div class="scene">
+          <div class="scene-header">
+            <span class="scene-label">Scene 6</span>
+            <span class="scene-time">0:16 - 0:18</span>
+          </div>
+          <div class="scene-title">Zoom Out: Full Heatmap</div>
+          <div class="scene-description">Camera zooms out to show the full monthly heatmap - almost entirely filled with deep purple/green. A beautiful visual of consistency. Numbers overlay: "30 days, 96% completion, 1 badge earned."</div>
+          <div class="scene-visual"><strong>Visual:</strong> Full heatmap glowing. Overlaid stats counting up. Peaceful, accomplished feeling.</div>
+        </div>
+
+        <div class="scene end-card">
+          <div class="scene-header">
+            <span class="scene-label">End Card</span>
+            <span class="scene-time">0:18 - 0:20</span>
+          </div>
+          <div class="scene-title">Branding + Motivation CTA</div>
+          <div class="scene-description">Heatmap dissolves into Habitra logo. Tagline fades in. App Store badge appears. Music resolves.</div>
+          <div class="scene-text-overlay">Build habits that stick.</div>
+          <div class="end-card-mockup">
+            <div class="logo">Habitr<span>a</span></div>
+            <div class="tagline">Build habits that stick.</div>
+            <div class="app-store-badge">Download on the App Store</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Production Tips -->
+    <div class="tips-section">
+      <h3>Production Notes</h3>
+      <div class="tip-item">
+        <span class="bullet">1.</span>
+        <span><strong>Apple Requirements:</strong> App previews must be 15-30 seconds, recorded from actual device or simulator footage. Use iPhone 15 Pro Max (1290x2796) for 6.7" display class. H.264 codec, 30fps.</span>
+      </div>
+      <div class="tip-item">
+        <span class="bullet">2.</span>
+        <span><strong>Recording:</strong> Use Xcode Simulator screen recording (Cmd+R) or QuickTime Player mirroring a physical device. The HTML screenshot mockups in screenshots.html can serve as reference frames.</span>
+      </div>
+      <div class="tip-item">
+        <span class="bullet">3.</span>
+        <span><strong>Audio:</strong> Background music must be royalty-free. Keep it minimal and upbeat. Sound effects for completions and celebrations add polish. Apple allows audio in previews.</span>
+      </div>
+      <div class="tip-item">
+        <span class="bullet">4.</span>
+        <span><strong>Text Overlays:</strong> Keep overlaid text large (44pt+) and brief. Use Habitra's brand font (Inter or SF Pro). Ensure contrast meets accessibility standards.</span>
+      </div>
+      <div class="tip-item">
+        <span class="bullet">5.</span>
+        <span><strong>Pacing:</strong> Quick cuts keep energy high. Each scene should have clear motion - scrolling, tapping, animations filling. Avoid static frames longer than 2 seconds.</span>
+      </div>
+      <div class="tip-item">
+        <span class="bullet">6.</span>
+        <span><strong>End Cards:</strong> Apple requires the last frame to be meaningful. Show the app logo, a clear tagline, and optionally the App Store badge. Hold for 2 seconds minimum.</span>
+      </div>
+      <div class="tip-item">
+        <span class="bullet">7.</span>
+        <span><strong>Order in App Store:</strong> Video 1 (Daily Flow) as primary, Video 3 (Streak Journey) as second, Video 2 (AI Features) as third. Lead with the core experience.</span>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

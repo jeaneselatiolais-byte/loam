@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support - Habitra</title>
+  <meta name="description" content="Get help with Habitra. Find answers to common questions, troubleshooting tips, and contact information.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0D0D14;
+      --surface: #1A1A2E;
+      --surface-light: #242442;
+      --accent: #6C63FF;
+      --accent-bright: #7C73FF;
+      --accent-glow: #A89AFF;
+      --text-primary: #EEEDFE;
+      --text-secondary: #AFA9EC;
+      --text-tertiary: #7A74B0;
+      --success: #34D399;
+      --warning: #FBBF24;
+      --radius: 16px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--accent-glow); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Nav */
+    nav {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--surface-light);
+      max-width: 960px;
+      margin: 0 auto;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+    nav .inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.5px;
+    }
+    .logo span { color: var(--accent); }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 28px;
+    }
+    nav ul a {
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    nav ul a:hover { color: var(--text-primary); text-decoration: none; }
+    nav ul a.active { color: var(--accent-glow); }
+
+    /* Header */
+    .page-header {
+      padding: 60px 0 40px;
+      text-align: center;
+    }
+    .page-header h1 {
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .page-header p {
+      color: var(--text-secondary);
+      font-size: 16px;
+    }
+
+    /* Contact Card */
+    .contact-card {
+      background: var(--surface);
+      border: 1px solid var(--surface-light);
+      border-radius: var(--radius);
+      padding: 32px;
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .contact-card h2 {
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+    .contact-card p {
+      color: var(--text-secondary);
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+    .contact-btn {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      font-weight: 600;
+      font-size: 15px;
+      padding: 12px 28px;
+      border-radius: 10px;
+      transition: background 0.2s;
+    }
+    .contact-btn:hover {
+      background: var(--accent-bright);
+      text-decoration: none;
+    }
+    .contact-email {
+      margin-top: 12px;
+      color: var(--text-tertiary);
+      font-size: 13px;
+    }
+
+    /* FAQ */
+    .faq-section h2 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--surface-light);
+    }
+    .faq-item {
+      margin-bottom: 24px;
+    }
+    .faq-item h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+    .faq-item p {
+      color: var(--text-secondary);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    .faq-divider {
+      border: none;
+      border-top: 1px solid var(--surface-light);
+      margin: 24px 0;
+    }
+
+    /* Troubleshooting */
+    .troubleshoot {
+      background: var(--surface);
+      border: 1px solid var(--surface-light);
+      border-radius: var(--radius);
+      padding: 28px;
+      margin: 48px 0;
+    }
+    .troubleshoot h2 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    .troubleshoot-item {
+      margin-bottom: 20px;
+    }
+    .troubleshoot-item:last-child { margin-bottom: 0; }
+    .troubleshoot-item h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--warning);
+      margin-bottom: 4px;
+    }
+    .troubleshoot-item p {
+      color: var(--text-secondary);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    /* System Req */
+    .sys-req {
+      margin: 48px 0;
+    }
+    .sys-req h2 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .req-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .req-list li {
+      background: var(--surface);
+      border: 1px solid var(--surface-light);
+      border-radius: 10px;
+      padding: 14px 18px;
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+    .req-list li strong {
+      color: var(--text-primary);
+      display: block;
+      font-size: 13px;
+      margin-bottom: 2px;
+    }
+
+    /* Footer */
+    footer {
+      padding: 40px 0;
+      border-top: 1px solid var(--surface-light);
+      max-width: 960px;
+      margin: 0 auto;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+    footer .inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    footer p {
+      color: var(--text-tertiary);
+      font-size: 13px;
+    }
+    footer ul {
+      list-style: none;
+      display: flex;
+      gap: 24px;
+    }
+    footer ul a {
+      color: var(--text-tertiary);
+      font-size: 13px;
+    }
+    footer ul a:hover { color: var(--text-secondary); }
+
+    /* Pricing Comparison */
+    .pricing-section {
+      margin: 48px 0;
+      padding-top: 48px;
+      border-top: 1px solid var(--surface-light);
+    }
+    .pricing-section h2 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .pricing-section .pricing-subtitle {
+      color: var(--text-secondary);
+      font-size: 14px;
+      margin-bottom: 32px;
+    }
+    .pricing-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      background: var(--surface);
+      border: 1px solid var(--surface-light);
+      border-radius: var(--radius);
+      overflow: hidden;
+      font-size: 13px;
+    }
+    .pricing-table thead th {
+      background: var(--surface-light);
+      padding: 14px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-primary);
+      text-align: center;
+      border-bottom: 1px solid var(--surface-light);
+    }
+    .pricing-table thead th:first-child {
+      text-align: left;
+    }
+    .pricing-table thead th.featured-col {
+      background: rgba(108, 99, 255, 0.15);
+      color: var(--accent-glow);
+    }
+    .pricing-table tbody td {
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(36, 36, 66, 0.6);
+      color: var(--text-secondary);
+      text-align: center;
+      vertical-align: middle;
+    }
+    .pricing-table tbody td:first-child {
+      text-align: left;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+    .pricing-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+    .pricing-table .check-icon {
+      color: var(--success);
+      font-weight: 700;
+      font-size: 15px;
+    }
+    .pricing-table .cross-icon {
+      color: var(--text-tertiary);
+      opacity: 0.4;
+      font-size: 14px;
+    }
+    .pricing-table .price-row td {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-primary);
+      padding: 16px 12px;
+      background: rgba(13, 13, 20, 0.3);
+    }
+    .pricing-table .price-row td small {
+      display: block;
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--text-tertiary);
+      margin-top: 2px;
+    }
+    .pricing-table .price-row td .trial-note {
+      color: var(--success);
+      font-size: 10px;
+      font-weight: 600;
+    }
+    .best-value-tag {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      font-size: 9px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-left: 4px;
+      vertical-align: middle;
+      letter-spacing: 0.3px;
+    }
+
+    @media (max-width: 640px) {
+      nav ul { gap: 16px; }
+      .page-header { padding: 40px 0 30px; }
+      .req-list { grid-template-columns: 1fr; }
+      footer .inner { flex-direction: column; text-align: center; }
+      .pricing-table { font-size: 12px; }
+      .pricing-table thead th, .pricing-table tbody td { padding: 8px 6px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="inner">
+      <a href="index.html" class="logo">Habitr<span>a</span></a>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="support.html" class="active">Support</a></li>
+        <li><a href="privacy.html">Privacy</a></li>
+        <li><a href="copyright.html">Terms</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="page-header">
+    <div class="container">
+      <h1>Support</h1>
+      <p>Find answers to common questions or get in touch with us.</p>
+    </div>
+  </section>
+
+  <div class="container">
+
+    <div class="contact-card">
+      <h2>Need help?</h2>
+      <p>We typically respond within 24 hours on business days.</p>
+      <a href="mailto:habitra@outlook.com" class="contact-btn">Contact Support</a>
+      <p class="contact-email">habitra@outlook.com</p>
+    </div>
+
+    <section class="faq-section">
+      <h2>Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <h3>How do I create a habit?</h3>
+        <p>Tap the <strong>+</strong> button on the Today tab. Enter a name, choose an icon and color, set your frequency (daily, weekdays, weekends, or custom days), optionally assign a category, and tap Save. Your new habit will appear in your daily list immediately.</p>
+      </div>
+      <hr class="faq-divider">
+
+      <div class="faq-item">
+        <h3>How do I complete a habit?</h3>
+        <p>On the Today tab, tap the circle next to any habit to mark it complete. You'll feel a satisfying haptic tap and see your streak update. To undo, tap the circle again before midnight.</p>
+      </div>
+      <hr class="faq-divider">
+
+      <div class="faq-item">
+        <h3>How do I edit or delete a habit?</h3>
+        <p>Long-press any habit on the Today tab to open the context menu. From there you can choose <strong>Edit</strong> to modify the habit, <strong>Archive</strong> to hide it without losing data, or <strong>Delete</strong> to permanently remove it and all its history.</p>
+      </div>
+      <hr class="faq-divider">
+
+      <div class="faq-item">
+        <h3>Can I track a habit multiple times per day?</h3>
+        <p>Yes! When creating or editing a habit, set <strong>Times per Day</strong> to your target (e.g., 8 for water, 2 for skincare, 3 for medication). Each tap adds one completion. A progress ring fills as you go, showing your count (e.g., "3 of 8"). Your streak counts the day as complete only when you hit the daily target. Tap the completed habit to reset all completions for the day.</p>
+      </div>
+      <hr class="faq-divider">
+
+      <div class="faq-item">
+        <h3>What are habit categories?</h3>
+        <p>Categories let you group related habits (e.g., Health, Productivity, Mindfulness). You can create custom categories with their own names, icons, and colors in the habit creation form. Filter habits by category on the Today tab.</p>
+      </div>
+      <hr class="faq-divider">
+
+      <div class="faq-item">
+        <h3>How do streaks work?</h3>
+        <p>Your current streak counts consecutive scheduled days where you completed the habit. If you miss a scheduled day, the streak resets to zero. Your longest streak is always preserved. Milestones are celebrated at 7, 14, 21, 30, 60, 90, 100, 180, and 365 days.</p>
+      </div>
+      <hr class="faq-divider">
+
+      <div class="faq-item">
+        <h3>How does AI prediction work?</h3>
+        <p>Habitra analyzes your completion patterns using on-device Core ML to predict which habits are at risk of being missed. The Predictions view shows risk levels (low, medium, high) and suggests actions. All processing happens locally on your device &mdash; no data is sent anywhere.</p>
+      </div>
+      <hr class="faq-divider">
+
+      <div class="faq-item">
+        <h3>What is Mood Tracking?</h3>
+        <p>Habitra lets you log your mood daily with five levels (Great, Good, Okay, Low, Rough) and optional notes. Over time, the AI finds correlations between your mood and habit completion, helping you understand which routines improve how you feel.</p>
+      </div>
+      <hr class="faq-divider">
+
+      <div class="faq-item">
+        <h3>How does HealthKit integration work?</h3>
+        <p>With your permission, Habitra reads steps, sleep, heart rate, heart rate variability (HRV), and workout duration from Apple Health to correlate your physical health with habit performance. This is entirely optional and all analysis happens on-device. Go to Settings &gt; HealthKit Integration to enable it.</p>
+      </div>
+      <hr class="faq-divider">
+
+      <div class="faq-item">
+        <h3>What do the Weekly Recaps include?</h3>
+        <p>Every week, Habitra generates an AI-powered recap with your completion rate, streak highlights, mood trends, pattern insights, and personalized coaching tips. Find them in the Stats tab.</p>
+      </div>
+      <hr class="faq-divider">
+
+      <div class="faq-item">
+        <h3>How do I set up the widget?</h3>
+        <p>Long-press your iPhone home screen, tap the <strong>+</strong> in the top corner, search for "Habitra", and add the widget. It shows your daily habits and completion progress at a glance.</p>
+      </div>
+      <hr class="faq-divider">
+
+      <div class="faq-item">
+        <h3>Is my data backed up?</h3>
+        <p>With iCloud Sync enabled (Settings &gt; iCloud Sync), your habits, completions, and mood entries sync across all your devices via CloudKit. You can also export your data as CSV or JSON from Settings &gt; Export Data.</p>
+      </div>
+      <hr class="faq-divider">
+
+      <div class="faq-item">
+        <h3>What is Habitra Pro?</h3>
+        <p>Habitra is free for up to 5 habits. Habitra Pro unlocks unlimited habits, all streak themes, advanced AI insights, data export, HealthKit integration, and iCloud sync. Choose monthly, annual, or lifetime plans.</p>
+      </div>
+      <hr class="faq-divider">
+
+      <div class="faq-item">
+        <h3>How do I restore my purchase?</h3>
+        <p>Go to Settings &gt; Subscription and tap <strong>Restore Purchases</strong>. Your Pro subscription is tied to your Apple ID and will be restored automatically.</p>
+      </div>
+      <hr class="faq-divider">
+
+      <div class="faq-item">
+        <h3>How do I switch between dark and light mode?</h3>
+        <p>Go to Settings and toggle <strong>Dark Mode</strong>. Habitra supports both light and dark themes with colors optimized for readability in each mode.</p>
+      </div>
+      <hr class="faq-divider">
+
+      <div class="faq-item">
+        <h3>What are Badges and how do I earn them?</h3>
+        <p>Badges are earned by hitting milestones like streak counts (7, 14, 30, 100+ days), perfect days, perfect weeks, and seasonal achievements. View your badge collection in the Stats tab under Badge Shelf. There are 50+ unique badges to collect.</p>
+      </div>
+      <hr class="faq-divider">
+
+      <div class="faq-item">
+        <h3>What are Quests?</h3>
+        <p>Quests are weekly and monthly challenges that reward you with bonus XP and special badges. Check the Stats tab for active quests. New quests generate automatically so there's always something to work toward.</p>
+      </div>
+      <hr class="faq-divider">
+
+      <div class="faq-item">
+        <h3>How does the XP and leveling system work?</h3>
+        <p>You earn 10 XP for each habit completion, with bonuses for streaks and perfect days. As you level up, you unlock recognition for your consistency. XP popups show your progress after each completion.</p>
+      </div>
+      <hr class="faq-divider">
+
+      <div class="faq-item">
+        <h3>Can I share my streak achievements?</h3>
+        <p>Yes! From the Stats tab, tap any streak to open the share card. Choose from multiple gradient themes and share directly to Messages, social media, or save the image.</p>
+      </div>
+    </section>
+
+    <div class="troubleshoot">
+      <h2>Troubleshooting</h2>
+
+      <div class="troubleshoot-item">
+        <h4>Notifications aren't arriving</h4>
+        <p>Open your iPhone's Settings &gt; Notifications &gt; Habitra and ensure notifications are enabled with Banners, Sounds, and Lock Screen turned on. Also check that Do Not Disturb or a Focus mode isn't blocking them.</p>
+      </div>
+
+      <div class="troubleshoot-item">
+        <h4>Widget shows stale data</h4>
+        <p>Widgets update on iOS's schedule. Try removing and re-adding the widget. Ensure both the Habitra app and HabitraWidget share the same App Group in Settings &gt; Signing &amp; Capabilities.</p>
+      </div>
+
+      <div class="troubleshoot-item">
+        <h4>HealthKit data not appearing</h4>
+        <p>Go to iPhone Settings &gt; Health &gt; Data Access &amp; Devices &gt; Habitra and make sure Steps, Sleep Analysis, Heart Rate, Heart Rate Variability, and Workouts are enabled. Then return to Habitra Settings &gt; HealthKit Integration and toggle it on.</p>
+      </div>
+
+      <div class="troubleshoot-item">
+        <h4>iCloud Sync not working</h4>
+        <p>Ensure you're signed into iCloud on your device (iPhone Settings &gt; Apple ID &gt; iCloud). Verify that Habitra has iCloud permissions enabled. Try toggling the sync off and on in Habitra Settings.</p>
+      </div>
+
+      <div class="troubleshoot-item">
+        <h4>App crashes on launch</h4>
+        <p>Try force-quitting the app and reopening it. If the issue persists, ensure you're running the latest version from the App Store. As a last resort, delete and reinstall the app (your data will be preserved if iCloud Sync is enabled).</p>
+      </div>
+    </div>
+
+    <section class="sys-req">
+      <h2>System Requirements</h2>
+      <ul class="req-list">
+        <li>
+          <strong>Platform</strong>
+          iPhone
+        </li>
+        <li>
+          <strong>iOS Version</strong>
+          iOS 17.0 or later
+        </li>
+        <li>
+          <strong>Storage</strong>
+          ~25 MB
+        </li>
+        <li>
+          <strong>Optional</strong>
+          HealthKit, iCloud, Notifications
+        </li>
+      </ul>
+    </section>
+
+    <section class="pricing-section" id="pricing">
+      <h2>Plans &amp; Pricing</h2>
+      <p class="pricing-subtitle">Start free with 5 habits. Upgrade anytime for the full experience.</p>
+
+      <table class="pricing-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Free</th>
+            <th>Monthly</th>
+            <th class="featured-col">Annual <span class="best-value-tag">SAVE 33%</span></th>
+            <th>Lifetime</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="price-row">
+            <td>Price</td>
+            <td>$0<small>forever</small></td>
+            <td>$4.99<small>per month</small></td>
+            <td>$39.99<small>per year</small><span class="trial-note">14-day free trial</span></td>
+            <td>$79.99<small>one time</small></td>
+          </tr>
+          <tr>
+            <td>Habits</td>
+            <td>Up to 5</td>
+            <td><span class="check-icon">&#10003;</span> Unlimited</td>
+            <td><span class="check-icon">&#10003;</span> Unlimited</td>
+            <td><span class="check-icon">&#10003;</span> Unlimited</td>
+          </tr>
+          <tr>
+            <td>Streak Tracking</td>
+            <td><span class="check-icon">&#10003;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+          </tr>
+          <tr>
+            <td>XP &amp; Badges</td>
+            <td><span class="check-icon">&#10003;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+          </tr>
+          <tr>
+            <td>Smart Reminders</td>
+            <td><span class="check-icon">&#10003;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+          </tr>
+          <tr>
+            <td>Categories</td>
+            <td><span class="cross-icon">&#10005;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+          </tr>
+          <tr>
+            <td>AI Nudges &amp; Coaching</td>
+            <td><span class="cross-icon">&#10005;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+          </tr>
+          <tr>
+            <td>Predictive Alerts</td>
+            <td><span class="cross-icon">&#10005;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+          </tr>
+          <tr>
+            <td>Mood Check-in</td>
+            <td><span class="cross-icon">&#10005;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+          </tr>
+          <tr>
+            <td>HealthKit Integration</td>
+            <td><span class="cross-icon">&#10005;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+          </tr>
+          <tr>
+            <td>iCloud Sync</td>
+            <td><span class="cross-icon">&#10005;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+          </tr>
+          <tr>
+            <td>All Widgets + StandBy</td>
+            <td><span class="cross-icon">&#10005;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+          </tr>
+          <tr>
+            <td>CSV Export</td>
+            <td><span class="cross-icon">&#10005;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+          </tr>
+          <tr>
+            <td>Custom Streak Themes</td>
+            <td><span class="cross-icon">&#10005;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+          </tr>
+          <tr>
+            <td>Quests &amp; Collections</td>
+            <td><span class="cross-icon">&#10005;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+          </tr>
+          <tr>
+            <td>Seasonal Badges</td>
+            <td><span class="cross-icon">&#10005;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+          </tr>
+          <tr>
+            <td>Family Sharing</td>
+            <td><span class="cross-icon">&#10005;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+  </div>
+
+  <footer>
+    <div class="inner">
+      <p>&copy; 2026 Habitra. All rights reserved.</p>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="copyright.html">Terms of Use</a></li>
+      </ul>
+    </div>
+  </footer>
+
+</body>
+</html>

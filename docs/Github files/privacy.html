@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy - Habitra</title>
+  <meta name="description" content="Habitra Privacy Policy. Learn how we protect your data and respect your privacy.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0D0D14;
+      --surface: #1A1A2E;
+      --surface-light: #242442;
+      --accent: #6C63FF;
+      --accent-bright: #7C73FF;
+      --accent-glow: #A89AFF;
+      --text-primary: #EEEDFE;
+      --text-secondary: #AFA9EC;
+      --text-tertiary: #7A74B0;
+      --success: #34D399;
+      --radius: 16px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--accent-glow); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Nav */
+    nav {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--surface-light);
+      max-width: 960px;
+      margin: 0 auto;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+    nav .inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.5px;
+    }
+    .logo span { color: var(--accent); }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 28px;
+    }
+    nav ul a {
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    nav ul a:hover { color: var(--text-primary); text-decoration: none; }
+    nav ul a.active { color: var(--accent-glow); }
+
+    /* Header */
+    .page-header {
+      padding: 60px 0 20px;
+      text-align: center;
+    }
+    .page-header h1 {
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .page-header .effective {
+      color: var(--text-tertiary);
+      font-size: 14px;
+    }
+
+    /* Privacy badge */
+    .privacy-badge {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(52, 211, 153, 0.08);
+      border: 1px solid rgba(52, 211, 153, 0.2);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin: 32px 0 48px;
+    }
+    .privacy-badge .icon {
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+    .privacy-badge p {
+      color: var(--success);
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    /* Content */
+    .policy-content h2 {
+      font-size: 22px;
+      font-weight: 700;
+      margin: 40px 0 16px;
+      padding-top: 20px;
+    }
+    .policy-content h2:first-child {
+      margin-top: 0;
+      padding-top: 0;
+    }
+    .policy-content h3 {
+      font-size: 17px;
+      font-weight: 600;
+      margin: 24px 0 10px;
+      color: var(--accent-glow);
+    }
+    .policy-content p {
+      color: var(--text-secondary);
+      font-size: 15px;
+      margin-bottom: 14px;
+    }
+    .policy-content ul {
+      color: var(--text-secondary);
+      font-size: 15px;
+      margin: 0 0 14px 20px;
+    }
+    .policy-content li {
+      margin-bottom: 6px;
+    }
+    .policy-content strong {
+      color: var(--text-primary);
+    }
+
+    /* Data table */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 24px;
+      font-size: 14px;
+    }
+    .data-table th {
+      text-align: left;
+      padding: 12px 16px;
+      background: var(--surface);
+      color: var(--text-primary);
+      font-weight: 600;
+      border-bottom: 1px solid var(--surface-light);
+    }
+    .data-table th:first-child {
+      border-radius: 8px 0 0 0;
+    }
+    .data-table th:last-child {
+      border-radius: 0 8px 0 0;
+    }
+    .data-table td {
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--surface-light);
+      color: var(--text-secondary);
+      vertical-align: top;
+    }
+    .data-table tr:last-child td {
+      border-bottom: none;
+    }
+    .badge-no {
+      display: inline-block;
+      background: rgba(52, 211, 153, 0.1);
+      color: var(--success);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 2px 10px;
+      border-radius: 100px;
+    }
+    .badge-optional {
+      display: inline-block;
+      background: rgba(251, 191, 36, 0.1);
+      color: #FBBF24;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 2px 10px;
+      border-radius: 100px;
+    }
+
+    /* Divider */
+    .section-divider {
+      border: none;
+      border-top: 1px solid var(--surface-light);
+      margin: 40px 0;
+    }
+
+    /* Footer */
+    footer {
+      padding: 40px 0;
+      border-top: 1px solid var(--surface-light);
+      max-width: 960px;
+      margin: 60px auto 0;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+    footer .inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    footer p {
+      color: var(--text-tertiary);
+      font-size: 13px;
+    }
+    footer ul {
+      list-style: none;
+      display: flex;
+      gap: 24px;
+    }
+    footer ul a {
+      color: var(--text-tertiary);
+      font-size: 13px;
+    }
+    footer ul a:hover { color: var(--text-secondary); }
+
+    /* Pricing Table in Privacy */
+    .pricing-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      background: var(--surface);
+      border: 1px solid var(--surface-light);
+      border-radius: 12px;
+      overflow: hidden;
+      font-size: 13px;
+      margin: 20px 0 14px;
+    }
+    .pricing-table thead th {
+      background: var(--surface-light);
+      padding: 12px 10px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-primary);
+      text-align: center;
+      border-bottom: 1px solid var(--surface-light);
+    }
+    .pricing-table thead th:first-child {
+      text-align: left;
+    }
+    .pricing-table thead th.featured-col {
+      background: rgba(108, 99, 255, 0.15);
+      color: var(--accent-glow);
+    }
+    .pricing-table tbody td {
+      padding: 8px 10px;
+      border-bottom: 1px solid rgba(36, 36, 66, 0.6);
+      color: var(--text-secondary);
+      text-align: center;
+      vertical-align: middle;
+      font-size: 13px;
+    }
+    .pricing-table tbody td:first-child {
+      text-align: left;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+    .pricing-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+    .pricing-table .check-icon {
+      color: var(--success);
+      font-weight: 700;
+      font-size: 14px;
+    }
+    .pricing-table .cross-icon {
+      color: var(--text-tertiary);
+      opacity: 0.4;
+      font-size: 13px;
+    }
+    .pricing-table .price-row td {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-primary);
+      padding: 14px 10px;
+      background: rgba(13, 13, 20, 0.3);
+    }
+    .pricing-table .price-row td small {
+      display: block;
+      font-size: 10px;
+      font-weight: 400;
+      color: var(--text-tertiary);
+      margin-top: 2px;
+    }
+    .best-value-tag {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      font-size: 9px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-left: 4px;
+      vertical-align: middle;
+    }
+
+    @media (max-width: 640px) {
+      nav ul { gap: 16px; }
+      .page-header { padding: 40px 0 16px; }
+      .data-table { font-size: 13px; }
+      .data-table th, .data-table td { padding: 8px 10px; }
+      .pricing-table { font-size: 11px; }
+      .pricing-table thead th, .pricing-table tbody td { padding: 6px 5px; }
+      footer .inner { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="inner">
+      <a href="index.html" class="logo">Habitr<span>a</span></a>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="support.html">Support</a></li>
+        <li><a href="privacy.html" class="active">Privacy</a></li>
+        <li><a href="copyright.html">Terms</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="page-header">
+    <div class="container">
+      <h1>Privacy Policy</h1>
+      <p class="effective">Effective date: April 5, 2026</p>
+    </div>
+  </section>
+
+  <div class="container">
+
+    <div class="privacy-badge">
+      <div class="icon">&#128274;</div>
+      <p>Habitra is built with a privacy-first architecture. All data processing happens on your device. We do not operate servers that collect, store, or process your personal data.</p>
+    </div>
+
+    <div class="policy-content">
+
+      <h2>1. Overview</h2>
+      <p>Habitra ("the App") is a habit tracking application for iOS developed by Jeanese Latiolais ("we", "us", "our"). This Privacy Policy explains what information the App accesses, how it is used, and your rights regarding that information.</p>
+      <p>We are committed to protecting your privacy. Habitra is designed so that your habit data, mood entries, health information, and personal patterns <strong>never leave your device</strong> unless you explicitly choose to sync via iCloud.</p>
+
+      <h2>2. Information We Do Not Collect</h2>
+      <p>Habitra does <strong>not</strong> collect, transmit, or store any of the following on external servers:</p>
+      <ul>
+        <li>Personal identification information (name, email, phone number)</li>
+        <li>Habit names, completions, or streak data</li>
+        <li>Mood entries or sentiment analysis results</li>
+        <li>Health data from Apple HealthKit</li>
+        <li>AI-generated insights, predictions, or coaching messages</li>
+        <li>Location data</li>
+        <li>Device identifiers or advertising IDs</li>
+        <li>Usage analytics or behavioral tracking data</li>
+      </ul>
+
+      <h2>3. Data Stored on Your Device</h2>
+      <p>The following data is created and stored locally on your device using Apple's SwiftData framework:</p>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Data Type</th>
+            <th>Purpose</th>
+            <th>Shared Externally</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Habits &amp; completions</td>
+            <td>Core tracking functionality</td>
+            <td><span class="badge-no">No</span></td>
+          </tr>
+          <tr>
+            <td>Mood entries</td>
+            <td>Mood-habit correlation analysis</td>
+            <td><span class="badge-no">No</span></td>
+          </tr>
+          <tr>
+            <td>Categories &amp; preferences</td>
+            <td>App personalization</td>
+            <td><span class="badge-no">No</span></td>
+          </tr>
+          <tr>
+            <td>AI model weights</td>
+            <td>On-device prediction via Core ML</td>
+            <td><span class="badge-no">No</span></td>
+          </tr>
+          <tr>
+            <td>Notification schedules</td>
+            <td>Reminder delivery</td>
+            <td><span class="badge-no">No</span></td>
+          </tr>
+          <tr>
+            <td>Health metrics (steps, sleep, heart rate)</td>
+            <td>Health-habit correlation (optional)</td>
+            <td><span class="badge-no">No</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>4. Apple HealthKit</h2>
+      <p>If you grant permission, Habitra reads the following data from Apple HealthKit:</p>
+      <ul>
+        <li><strong>Step count</strong> &mdash; daily step totals</li>
+        <li><strong>Sleep analysis</strong> &mdash; sleep duration</li>
+        <li><strong>Heart rate</strong> &mdash; resting heart rate</li>
+        <li><strong>Heart rate variability (HRV)</strong> &mdash; stress and recovery indicators</li>
+        <li><strong>Workout duration</strong> &mdash; exercise session length</li>
+      </ul>
+      <p>This data is used exclusively for on-device correlation analysis to show how health metrics relate to your habit completion patterns. In compliance with Apple's HealthKit guidelines:</p>
+      <ul>
+        <li>Health data is <strong>never</strong> sent to external servers</li>
+        <li>Health data is <strong>never</strong> used for advertising or marketing</li>
+        <li>Health data is <strong>never</strong> shared with third parties</li>
+        <li>Health data is <strong>never</strong> sold or monetized in any way</li>
+        <li>Habitra does <strong>not</strong> write any data to HealthKit</li>
+      </ul>
+      <p>You can revoke HealthKit access at any time via iPhone Settings &gt; Health &gt; Data Access &amp; Devices &gt; Habitra.</p>
+
+      <h2>5. iCloud Sync</h2>
+      <p>If you enable iCloud Sync in the App's settings, your habit data, completions, mood entries, and categories are synced across your devices using Apple's CloudKit framework. This data is:</p>
+      <ul>
+        <li>Stored in <strong>your private iCloud account</strong>, not on our servers</li>
+        <li>Encrypted in transit and at rest by Apple</li>
+        <li>Accessible only by you on devices signed into your Apple ID</li>
+        <li>Subject to <a href="https://www.apple.com/legal/privacy/">Apple's Privacy Policy</a></li>
+      </ul>
+      <p>iCloud Sync is entirely optional and disabled by default. You can disable it at any time in the App's settings.</p>
+
+      <h2>6. On-Device AI Processing</h2>
+      <p>Habitra uses Apple's Core ML framework to provide intelligent features including:</p>
+      <ul>
+        <li>Pattern detection and habit insights</li>
+        <li>Streak risk prediction</li>
+        <li>Mood-habit correlation analysis</li>
+        <li>Adaptive reminder optimization</li>
+        <li>Health scoring and coaching messages</li>
+      </ul>
+      <p>All AI and machine learning processing occurs <strong>entirely on your device</strong>. No data is sent to cloud-based AI services, and no AI model training data leaves your device.</p>
+
+      <h2>7. In-App Purchases</h2>
+      <p>Habitra offers optional subscription plans and tip jar purchases through Apple's App Store. All payment processing is handled by Apple. We do not have access to your payment information, credit card details, or Apple ID. Purchase history and subscription status are managed by Apple's StoreKit framework on your device.</p>
+
+      <p>The following table summarizes what is included in each plan:</p>
+
+      <table class="pricing-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Free</th>
+            <th>Monthly</th>
+            <th class="featured-col">Annual <span class="best-value-tag">SAVE 33%</span></th>
+            <th>Lifetime</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="price-row">
+            <td>Price</td>
+            <td>$0<small>forever</small></td>
+            <td>$4.99<small>/month</small></td>
+            <td>$39.99<small>/year</small></td>
+            <td>$79.99<small>one time</small></td>
+          </tr>
+          <tr>
+            <td>Habits</td>
+            <td>Up to 5</td>
+            <td><span class="check-icon">&#10003;</span> Unlimited</td>
+            <td><span class="check-icon">&#10003;</span> Unlimited</td>
+            <td><span class="check-icon">&#10003;</span> Unlimited</td>
+          </tr>
+          <tr>
+            <td>Streak Tracking</td>
+            <td><span class="check-icon">&#10003;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+          </tr>
+          <tr>
+            <td>XP &amp; Badges</td>
+            <td><span class="check-icon">&#10003;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+          </tr>
+          <tr>
+            <td>Categories</td>
+            <td><span class="cross-icon">&#10005;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+          </tr>
+          <tr>
+            <td>AI Nudges &amp; Coaching</td>
+            <td><span class="cross-icon">&#10005;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+          </tr>
+          <tr>
+            <td>HealthKit Integration</td>
+            <td><span class="cross-icon">&#10005;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+          </tr>
+          <tr>
+            <td>iCloud Sync</td>
+            <td><span class="cross-icon">&#10005;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+          </tr>
+          <tr>
+            <td>CSV Export</td>
+            <td><span class="cross-icon">&#10005;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+          </tr>
+          <tr>
+            <td>Custom Themes</td>
+            <td><span class="cross-icon">&#10005;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+            <td><span class="check-icon">&#10003;</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>No personal data is collected, transmitted, or stored during any purchase flow. Tip jar purchases are optional one-time consumables ($1.99, $4.99, $9.99) that support development and do not unlock features.</p>
+
+      <h2>8. Notifications</h2>
+      <p>With your permission, Habitra sends local notifications to remind you about habits. These notifications are:</p>
+      <ul>
+        <li>Scheduled locally on your device</li>
+        <li>Not routed through any external push notification service we operate</li>
+        <li>Configurable per-habit in the App's settings</li>
+      </ul>
+      <p>You can manage notification permissions in iPhone Settings &gt; Notifications &gt; Habitra.</p>
+
+      <h2>9. Third-Party Services</h2>
+      <p>Habitra does <strong>not</strong> integrate with any third-party analytics, advertising, or tracking services. The App does not contain:</p>
+      <ul>
+        <li>Advertising SDKs</li>
+        <li>Analytics frameworks (no Google Analytics, Firebase, Mixpanel, etc.)</li>
+        <li>Social media tracking pixels</li>
+        <li>Crash reporting services that transmit personal data</li>
+      </ul>
+
+      <h2>10. Data Export &amp; Deletion</h2>
+      <h3>Export</h3>
+      <p>You can export all your habit data, completions, and mood entries at any time from Settings &gt; Export Data. Exports are available in CSV and JSON formats and are generated locally on your device.</p>
+      <h3>Deletion</h3>
+      <p>To delete all your data, you can:</p>
+      <ul>
+        <li>Delete individual habits (long-press &gt; Delete) which removes the habit and all its completion history</li>
+        <li>Uninstall the App, which removes all locally stored data</li>
+        <li>If iCloud Sync was enabled, also go to iPhone Settings &gt; Apple ID &gt; iCloud &gt; Manage Storage &gt; Habitra to remove cloud data</li>
+      </ul>
+
+      <h2>11. Children's Privacy</h2>
+      <p>Habitra does not knowingly collect information from children under 13. The App does not require account creation, does not collect personal information, and does not include advertising. If you believe a child is using the App and have concerns, please contact us.</p>
+
+      <h2>12. Changes to This Policy</h2>
+      <p>We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated effective date. Since we do not collect email addresses or contact information, we encourage you to review this page periodically.</p>
+
+      <h2>13. Your Rights (GDPR, CCPA &amp; Global Privacy)</h2>
+      <p>Since Habitra does not collect or store your data on external servers, most traditional data rights are inherently satisfied &mdash; your data is already entirely under your control on your device.</p>
+      <h3>For EU/EEA residents (GDPR)</h3>
+      <p>Habitra does not process personal data on external servers, so GDPR obligations regarding data controllers and processors do not apply in the traditional sense. You have full control over your data at all times. You can access, export, or delete all data directly from your device.</p>
+      <h3>For California residents (CCPA/CPRA)</h3>
+      <p>Habitra does <strong>not</strong> sell, share, or disclose personal information to third parties. We do not collect personal information as defined under the CCPA. There are no categories of personal information to disclose because no data leaves your device.</p>
+      <h3>For all users</h3>
+      <p>Regardless of your location, you can:</p>
+      <ul>
+        <li><strong>Access</strong> all your data directly within the app</li>
+        <li><strong>Export</strong> your data via Settings &gt; Export Data (CSV format)</li>
+        <li><strong>Delete</strong> any or all data by removing habits or uninstalling the app</li>
+        <li><strong>Revoke</strong> HealthKit or notification permissions at any time via iOS Settings</li>
+      </ul>
+      <p>If you have questions about exercising any privacy rights, please contact us.</p>
+
+      <h2>14. Contact</h2>
+      <p>If you have any questions about this Privacy Policy or the App's privacy practices, please contact us at:</p>
+      <p><strong>Email:</strong> <a href="mailto:habitra@outlook.com">habitra@outlook.com</a></p>
+
+    </div>
+  </div>
+
+  <footer>
+    <div class="inner">
+      <p>&copy; 2026 Habitra. All rights reserved.</p>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="support.html">Support</a></li>
+        <li><a href="copyright.html">Terms of Use</a></li>
+      </ul>
+    </div>
+  </footer>
+
+</body>
+</html>
