@@ -1,0 +1,408 @@
+<!-- Free v1.0 privacy policy. Pro version preserved at privacy.html. See docs/RELEASE_STRATEGY.md -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy - Habitra</title>
+  <meta name="description" content="Habitra Privacy Policy. Learn how we protect your data and respect your privacy.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0D0D14;
+      --surface: #1A1A2E;
+      --surface-light: #242442;
+      --accent: #6C63FF;
+      --accent-bright: #7C73FF;
+      --accent-glow: #A89AFF;
+      --text-primary: #EEEDFE;
+      --text-secondary: #AFA9EC;
+      --text-tertiary: #7A74B0;
+      --success: #34D399;
+      --radius: 16px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--accent-glow); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Nav */
+    nav {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--surface-light);
+      max-width: 960px;
+      margin: 0 auto;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+    nav .inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.5px;
+    }
+    .logo span { color: var(--accent); }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 28px;
+    }
+    nav ul a {
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    nav ul a:hover { color: var(--text-primary); text-decoration: none; }
+    nav ul a.active { color: var(--accent-glow); }
+
+    /* Header */
+    .page-header {
+      padding: 60px 0 20px;
+      text-align: center;
+    }
+    .page-header h1 {
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .page-header .effective {
+      color: var(--text-tertiary);
+      font-size: 14px;
+    }
+
+    /* Privacy badge */
+    .privacy-badge {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(52, 211, 153, 0.08);
+      border: 1px solid rgba(52, 211, 153, 0.2);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin: 32px 0 48px;
+    }
+    .privacy-badge .icon {
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+    .privacy-badge p {
+      color: var(--success);
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    /* Content */
+    .policy-content h2 {
+      font-size: 22px;
+      font-weight: 700;
+      margin: 40px 0 16px;
+      padding-top: 20px;
+    }
+    .policy-content h2:first-child {
+      margin-top: 0;
+      padding-top: 0;
+    }
+    .policy-content h3 {
+      font-size: 17px;
+      font-weight: 600;
+      margin: 24px 0 10px;
+      color: var(--accent-glow);
+    }
+    .policy-content p {
+      color: var(--text-secondary);
+      font-size: 15px;
+      margin-bottom: 14px;
+    }
+    .policy-content ul {
+      color: var(--text-secondary);
+      font-size: 15px;
+      margin: 0 0 14px 20px;
+    }
+    .policy-content li {
+      margin-bottom: 6px;
+    }
+    .policy-content strong {
+      color: var(--text-primary);
+    }
+
+    /* Data table */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 24px;
+      font-size: 14px;
+    }
+    .data-table th {
+      text-align: left;
+      padding: 12px 16px;
+      background: var(--surface);
+      color: var(--text-primary);
+      font-weight: 600;
+      border-bottom: 1px solid var(--surface-light);
+    }
+    .data-table th:first-child {
+      border-radius: 8px 0 0 0;
+    }
+    .data-table th:last-child {
+      border-radius: 0 8px 0 0;
+    }
+    .data-table td {
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--surface-light);
+      color: var(--text-secondary);
+      vertical-align: top;
+    }
+    .data-table tr:last-child td {
+      border-bottom: none;
+    }
+    .badge-no {
+      display: inline-block;
+      background: rgba(52, 211, 153, 0.1);
+      color: var(--success);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 2px 10px;
+      border-radius: 100px;
+    }
+    .badge-optional {
+      display: inline-block;
+      background: rgba(251, 191, 36, 0.1);
+      color: #FBBF24;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 2px 10px;
+      border-radius: 100px;
+    }
+
+    /* Divider */
+    .section-divider {
+      border: none;
+      border-top: 1px solid var(--surface-light);
+      margin: 40px 0;
+    }
+
+    /* Footer */
+    footer {
+      padding: 40px 0;
+      border-top: 1px solid var(--surface-light);
+      max-width: 960px;
+      margin: 60px auto 0;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+    footer .inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    footer p {
+      color: var(--text-tertiary);
+      font-size: 13px;
+    }
+    footer ul {
+      list-style: none;
+      display: flex;
+      gap: 24px;
+    }
+    footer ul a {
+      color: var(--text-tertiary);
+      font-size: 13px;
+    }
+    footer ul a:hover { color: var(--text-secondary); }
+
+    @media (max-width: 640px) {
+      nav ul { gap: 16px; }
+      .page-header { padding: 40px 0 16px; }
+      .data-table { font-size: 13px; }
+      .data-table th, .data-table td { padding: 8px 10px; }
+      footer .inner { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="inner">
+      <a href="index-free.html" class="logo">Habitr<span>a</span></a>
+      <ul>
+        <li><a href="index-free.html">Home</a></li>
+        <li><a href="support-free.html">Support</a></li>
+        <li><a href="privacy-free.html" class="active">Privacy</a></li>
+        <li><a href="copyright-free.html">Terms</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="page-header">
+    <div class="container">
+      <h1>Privacy Policy</h1>
+      <p class="effective">Effective date: April 5, 2026</p>
+    </div>
+  </section>
+
+  <div class="container">
+
+    <div class="privacy-badge">
+      <div class="icon">&#128274;</div>
+      <p>Habitra is built with a privacy-first architecture. All data processing happens on your device. We do not operate servers that collect, store, or process your personal data.</p>
+    </div>
+
+    <div class="policy-content">
+
+      <h2>1. Overview</h2>
+      <p>Habitra ("the App") is a habit tracking application for iOS developed by Jeanese Latiolais ("we", "us", "our"). This Privacy Policy explains what information the App accesses, how it is used, and your rights regarding that information.</p>
+      <p>We are committed to protecting your privacy. Habitra is designed so that your habit data and personal patterns <strong>never leave your device</strong>.</p>
+
+      <h2>2. Information We Do Not Collect</h2>
+      <p>Habitra does <strong>not</strong> collect, transmit, or store any of the following on external servers:</p>
+      <ul>
+        <li>Personal identification information (name, email, phone number)</li>
+        <li>Habit names, completions, or streak data</li>
+        <li>Location data</li>
+        <li>Device identifiers or advertising IDs</li>
+        <li>Usage analytics or behavioral tracking data</li>
+      </ul>
+
+      <h2>3. Data Stored on Your Device</h2>
+      <p>The following data is created and stored locally on your device using Apple's SwiftData framework:</p>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Data Type</th>
+            <th>Purpose</th>
+            <th>Shared Externally</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Habits &amp; completions</td>
+            <td>Core tracking functionality</td>
+            <td><span class="badge-no">No</span></td>
+          </tr>
+          <tr>
+            <td>User preferences</td>
+            <td>App personalization</td>
+            <td><span class="badge-no">No</span></td>
+          </tr>
+          <tr>
+            <td>Notification schedules</td>
+            <td>Reminder delivery</td>
+            <td><span class="badge-no">No</span></td>
+          </tr>
+          <tr>
+            <td>Badge &amp; achievement data</td>
+            <td>Gamification and progress tracking</td>
+            <td><span class="badge-no">No</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>4. Apple HealthKit</h2>
+      <p>Apple HealthKit integration is planned for a future update. When it ships, Habitra will only request read-only access to health metrics. No health data will ever be sent to external servers. The privacy commitments described in the full privacy policy will apply.</p>
+
+      <h2>5. iCloud Sync</h2>
+      <p>iCloud Sync is planned for a future update. When it ships, all synced data will be end-to-end encrypted by Apple's CloudKit framework. Habitra will have no server and cannot access your synced data.</p>
+
+      <h2>6. On-Device AI</h2>
+      <p>On-device AI features are planned for a future update. When they ship, all AI processing will use Apple's Core ML framework on your device. No data will ever be sent to external AI services.</p>
+
+      <h2>7. In-App Purchases</h2>
+      <p>Habitra is free. We offer optional tip purchases ($1.99, $4.99, $9.99) through Apple's App Store to support development. Tips are one-time consumable purchases processed by Apple. They do not unlock additional features. No subscription data is collected as there are no subscriptions.</p>
+      <p>No personal data is collected, transmitted, or stored during any purchase flow. All payment processing is handled by Apple. We do not have access to your payment information, credit card details, or Apple ID.</p>
+
+      <h2>8. Notifications</h2>
+      <p>With your permission, Habitra sends local notifications to remind you about habits. These notifications are:</p>
+      <ul>
+        <li>Scheduled locally on your device</li>
+        <li>Not routed through any external push notification service we operate</li>
+        <li>Configurable per-habit in the App's settings</li>
+      </ul>
+      <p>You can manage notification permissions in iPhone Settings &gt; Notifications &gt; Habitra.</p>
+
+      <h2>9. Third-Party Services</h2>
+      <p>Habitra does <strong>not</strong> integrate with any third-party analytics, advertising, or tracking services. The App does not contain:</p>
+      <ul>
+        <li>Advertising SDKs</li>
+        <li>Analytics frameworks (no Google Analytics, Firebase, Mixpanel, etc.)</li>
+        <li>Social media tracking pixels</li>
+        <li>Crash reporting services that transmit personal data</li>
+      </ul>
+
+      <h2>10. Data Export &amp; Deletion</h2>
+      <h3>Export</h3>
+      <p>You can export all your habit data and completions at any time from Settings &gt; Export Data. Exports are generated locally on your device.</p>
+      <h3>Deletion</h3>
+      <p>To delete all your data, you can:</p>
+      <ul>
+        <li>Delete individual habits (long-press &gt; Delete) which removes the habit and all its completion history</li>
+        <li>Uninstall the App, which removes all locally stored data</li>
+      </ul>
+
+      <h2>11. Children's Privacy</h2>
+      <p>Habitra does not knowingly collect information from children under 13. The App does not require account creation, does not collect personal information, and does not include advertising. If you believe a child is using the App and have concerns, please contact us.</p>
+
+      <h2>12. Changes to This Policy</h2>
+      <p>We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated effective date. Since we do not collect email addresses or contact information, we encourage you to review this page periodically.</p>
+
+      <h2>13. Your Rights (GDPR, CCPA &amp; Global Privacy)</h2>
+      <p>Since Habitra does not collect or store your data on external servers, most traditional data rights are inherently satisfied &mdash; your data is already entirely under your control on your device.</p>
+      <h3>For EU/EEA residents (GDPR)</h3>
+      <p>Habitra does not process personal data on external servers, so GDPR obligations regarding data controllers and processors do not apply in the traditional sense. You have full control over your data at all times. You can access, export, or delete all data directly from your device.</p>
+      <h3>For California residents (CCPA/CPRA)</h3>
+      <p>Habitra does <strong>not</strong> sell, share, or disclose personal information to third parties. We do not collect personal information as defined under the CCPA. There are no categories of personal information to disclose because no data leaves your device.</p>
+      <h3>For all users</h3>
+      <p>Regardless of your location, you can:</p>
+      <ul>
+        <li><strong>Access</strong> all your data directly within the app</li>
+        <li><strong>Export</strong> your data via Settings &gt; Export Data</li>
+        <li><strong>Delete</strong> any or all data by removing habits or uninstalling the app</li>
+        <li><strong>Revoke</strong> notification permissions at any time via iOS Settings</li>
+      </ul>
+      <p>If you have questions about exercising any privacy rights, please contact us.</p>
+
+      <h2>14. Contact</h2>
+      <p>If you have any questions about this Privacy Policy or the App's privacy practices, please contact us at:</p>
+      <p><strong>Email:</strong> <a href="mailto:habitra@outlook.com">habitra@outlook.com</a></p>
+
+    </div>
+  </div>
+
+  <footer>
+    <div class="inner">
+      <p>&copy; 2026 Habitra. All rights reserved.</p>
+      <ul>
+        <li><a href="index-free.html">Home</a></li>
+        <li><a href="support-free.html">Support</a></li>
+        <li><a href="copyright-free.html">Terms of Use</a></li>
+      </ul>
+    </div>
+  </footer>
+
+</body>
+</html>

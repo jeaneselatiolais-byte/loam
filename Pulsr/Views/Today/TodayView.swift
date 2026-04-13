@@ -121,13 +121,12 @@ struct TodayView: View {
                         .presentationDragIndicator(.visible)
                     }
                 }
+                // v1.0: hidden via FeatureAvailability — see docs/RELEASE_STRATEGY.md
+                // Free-only release: keep the 5-habit limit but drop "Upgrade to Pro" CTA.
                 .alert("Habit Limit Reached", isPresented: $showingLimitAlert) {
-                    Button("Upgrade to Pro", role: .none) {
-                        showingPaywall = true
-                    }
                     Button("OK", role: .cancel) {}
                 } message: {
-                    Text("Free accounts can track up to \(HabitViewModel.freeHabitLimit) habits. Upgrade to Habitra Pro for unlimited habits.")
+                    Text("You can track up to \(HabitViewModel.freeHabitLimit) habits in this release. Focused is better — pick the ones that matter most. More capacity is on the roadmap.")
                 }
                 .onAppear {
                     refreshCoachingMessage()
@@ -138,12 +137,11 @@ struct TodayView: View {
                     }
                     // XP backfill for existing users
                     XPEngine.backfillIfNeeded(habits: allHabits, earnedBadges: earnedBadges)
-                    // Ensure quests exist
-                    if SubscriptionManager.canUseQuests {
+                    // v1.0: hidden via FeatureAvailability — see docs/RELEASE_STRATEGY.md
+                    if FeatureAvailability.quests && SubscriptionManager.canUseQuests {
                         QuestGenerator.ensureCurrentQuests(context: modelContext)
                     }
-                    // Ensure collections exist
-                    if SubscriptionManager.canUseCollections {
+                    if FeatureAvailability.collections && SubscriptionManager.canUseCollections {
                         CollectionCatalog.ensureCollections(context: modelContext)
                     }
                 }

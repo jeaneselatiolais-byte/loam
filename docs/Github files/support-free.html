@@ -1,0 +1,520 @@
+<!-- Free v1.0 support page. Pro version preserved at support.html. See docs/RELEASE_STRATEGY.md -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support - Habitra</title>
+  <meta name="description" content="Get help with Habitra. Find answers to common questions, troubleshooting tips, and contact information.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0D0D14;
+      --surface: #1A1A2E;
+      --surface-light: #242442;
+      --accent: #6C63FF;
+      --accent-bright: #7C73FF;
+      --accent-glow: #A89AFF;
+      --text-primary: #EEEDFE;
+      --text-secondary: #AFA9EC;
+      --text-tertiary: #7A74B0;
+      --success: #34D399;
+      --warning: #FBBF24;
+      --radius: 16px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--accent-glow); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Nav */
+    nav {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--surface-light);
+      max-width: 960px;
+      margin: 0 auto;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+    nav .inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.5px;
+    }
+    .logo span { color: var(--accent); }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 28px;
+    }
+    nav ul a {
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    nav ul a:hover { color: var(--text-primary); text-decoration: none; }
+    nav ul a.active { color: var(--accent-glow); }
+
+    /* Header */
+    .page-header {
+      padding: 60px 0 40px;
+      text-align: center;
+    }
+    .page-header h1 {
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .page-header p {
+      color: var(--text-secondary);
+      font-size: 16px;
+    }
+
+    /* Contact Card */
+    .contact-card {
+      background: var(--surface);
+      border: 1px solid var(--surface-light);
+      border-radius: var(--radius);
+      padding: 32px;
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .contact-card h2 {
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+    .contact-card p {
+      color: var(--text-secondary);
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+    .contact-btn {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      font-weight: 600;
+      font-size: 15px;
+      padding: 12px 28px;
+      border-radius: 10px;
+      transition: background 0.2s;
+    }
+    .contact-btn:hover {
+      background: var(--accent-bright);
+      text-decoration: none;
+    }
+    .contact-email {
+      margin-top: 12px;
+      color: var(--text-tertiary);
+      font-size: 13px;
+    }
+
+    /* FAQ */
+    .faq-section h2 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--surface-light);
+    }
+    .faq-item {
+      margin-bottom: 24px;
+    }
+    .faq-item h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+    .faq-item p {
+      color: var(--text-secondary);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    .faq-divider {
+      border: none;
+      border-top: 1px solid var(--surface-light);
+      margin: 24px 0;
+    }
+
+    /* Troubleshooting */
+    .troubleshoot {
+      background: var(--surface);
+      border: 1px solid var(--surface-light);
+      border-radius: var(--radius);
+      padding: 28px;
+      margin: 48px 0;
+    }
+    .troubleshoot h2 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    .troubleshoot-item {
+      margin-bottom: 20px;
+    }
+    .troubleshoot-item:last-child { margin-bottom: 0; }
+    .troubleshoot-item h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--warning);
+      margin-bottom: 4px;
+    }
+    .troubleshoot-item p {
+      color: var(--text-secondary);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    /* System Req */
+    .sys-req {
+      margin: 48px 0;
+    }
+    .sys-req h2 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .req-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .req-list li {
+      background: var(--surface);
+      border: 1px solid var(--surface-light);
+      border-radius: 10px;
+      padding: 14px 18px;
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+    .req-list li strong {
+      color: var(--text-primary);
+      display: block;
+      font-size: 13px;
+      margin-bottom: 2px;
+    }
+
+    /* Tip Jar */
+    .tip-jar-section {
+      margin: 48px 0;
+      padding-top: 48px;
+      border-top: 1px solid var(--surface-light);
+    }
+    .tip-jar-section h2 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .tip-jar-section .tip-subtitle {
+      color: var(--text-secondary);
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+    .tip-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .tip-card {
+      background: var(--surface);
+      border: 1px solid var(--surface-light);
+      border-radius: var(--radius);
+      padding: 24px 16px;
+      text-align: center;
+    }
+    .tip-card .tip-emoji {
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+    .tip-card .tip-name {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+    .tip-card .tip-price {
+      font-size: 14px;
+      color: var(--accent-glow);
+      font-weight: 700;
+    }
+    .tip-note {
+      color: var(--text-tertiary);
+      font-size: 13px;
+      margin-top: 16px;
+      text-align: center;
+    }
+
+    /* Footer */
+    footer {
+      padding: 40px 0;
+      border-top: 1px solid var(--surface-light);
+      max-width: 960px;
+      margin: 0 auto;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+    footer .inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    footer p {
+      color: var(--text-tertiary);
+      font-size: 13px;
+    }
+    footer ul {
+      list-style: none;
+      display: flex;
+      gap: 24px;
+    }
+    footer ul a {
+      color: var(--text-tertiary);
+      font-size: 13px;
+    }
+    footer ul a:hover { color: var(--text-secondary); }
+
+    @media (max-width: 640px) {
+      nav ul { gap: 16px; }
+      .page-header { padding: 40px 0 30px; }
+      .req-list { grid-template-columns: 1fr; }
+      .tip-cards { grid-template-columns: 1fr; }
+      footer .inner { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="inner">
+      <a href="index-free.html" class="logo">Habitr<span>a</span></a>
+      <ul>
+        <li><a href="index-free.html">Home</a></li>
+        <li><a href="support-free.html" class="active">Support</a></li>
+        <li><a href="privacy-free.html">Privacy</a></li>
+        <li><a href="copyright-free.html">Terms</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="page-header">
+    <div class="container">
+      <h1>Support</h1>
+      <p>Find answers to common questions or get in touch with us.</p>
+    </div>
+  </section>
+
+  <div class="container">
+
+    <div class="contact-card">
+      <h2>Need help?</h2>
+      <p>We typically respond within 24 hours on business days.</p>
+      <a href="mailto:habitra@outlook.com" class="contact-btn">Contact Support</a>
+      <p class="contact-email">habitra@outlook.com</p>
+    </div>
+
+    <section class="faq-section">
+      <h2>Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <h3>How do I create a habit?</h3>
+        <p>Tap the <strong>+</strong> button on the Today tab. Enter a name, choose an icon and color, set your frequency (daily, weekdays, weekends, or custom days), and tap Save. Your new habit will appear in your daily list immediately.</p>
+      </div>
+      <hr class="faq-divider">
+
+      <div class="faq-item">
+        <h3>How do I complete a habit?</h3>
+        <p>On the Today tab, tap the circle next to any habit to mark it complete. You'll feel a satisfying haptic tap and see your streak update. To undo, tap the circle again before midnight.</p>
+      </div>
+      <hr class="faq-divider">
+
+      <div class="faq-item">
+        <h3>How do I edit or delete a habit?</h3>
+        <p>Long-press any habit on the Today tab to open the context menu. From there you can choose <strong>Edit</strong> to modify the habit, <strong>Archive</strong> to hide it without losing data, or <strong>Delete</strong> to permanently remove it and all its history.</p>
+      </div>
+      <hr class="faq-divider">
+
+      <div class="faq-item">
+        <h3>Can I track a habit multiple times per day?</h3>
+        <p>Yes! When creating or editing a habit, set <strong>Times per Day</strong> to your target (e.g., 8 for water, 2 for skincare, 3 for medication). Each tap adds one completion. A progress ring fills as you go, showing your count (e.g., "3 of 8"). Your streak counts the day as complete only when you hit the daily target. Tap the completed habit to reset all completions for the day.</p>
+      </div>
+      <hr class="faq-divider">
+
+      <div class="faq-item">
+        <h3>How do streaks work?</h3>
+        <p>Your current streak counts consecutive scheduled days where you completed the habit. If you miss a scheduled day, the streak resets to zero. Your longest streak is always preserved. Milestones are celebrated at 7, 14, 21, 30, 60, 90, 100, 180, and 365 days.</p>
+      </div>
+      <hr class="faq-divider">
+
+      <div class="faq-item">
+        <h3>Will Habitra have AI features?</h3>
+        <p>Yes! On-device AI coaching is on our roadmap. When it ships, all AI processing will happen privately on your phone. Follow us for updates.</p>
+      </div>
+      <hr class="faq-divider">
+
+      <div class="faq-item">
+        <h3>Will Habitra have mood tracking?</h3>
+        <p>Mood tracking with journal entries and sentiment analysis is planned for a future update.</p>
+      </div>
+      <hr class="faq-divider">
+
+      <div class="faq-item">
+        <h3>Will Habitra connect to Apple Health?</h3>
+        <p>Apple Health integration is on our roadmap. It will auto-complete habits from steps, workouts, sleep, and more &mdash; all read-only and private.</p>
+      </div>
+      <hr class="faq-divider">
+
+      <div class="faq-item">
+        <h3>How do I set up the widget?</h3>
+        <p>Long-press your iPhone home screen, tap the <strong>+</strong> in the top corner, search for "Habitra", and add the widget. It shows your daily habits and completion progress at a glance.</p>
+      </div>
+      <hr class="faq-divider">
+
+      <div class="faq-item">
+        <h3>Will Habitra support iCloud sync?</h3>
+        <p>iCloud sync is coming soon! We're working on seamless cross-device syncing via CloudKit. For now, your data is stored securely on your device.</p>
+      </div>
+      <hr class="faq-divider">
+
+      <div class="faq-item">
+        <h3>Is Habitra really free?</h3>
+        <p>Yes! Habitra is 100% free with no ads, no paywalls, and no data collection. You can optionally leave a tip ($1.99, $4.99, or $9.99) to support development, but tips don't unlock anything.</p>
+      </div>
+      <hr class="faq-divider">
+
+      <div class="faq-item">
+        <h3>I left a tip. Can I get it back?</h3>
+        <p>Tips are one-time consumable purchases processed by Apple. For refund requests, contact Apple Support through the App Store.</p>
+      </div>
+      <hr class="faq-divider">
+
+      <div class="faq-item">
+        <h3>How do I switch between dark and light mode?</h3>
+        <p>Go to Settings and toggle <strong>Dark Mode</strong>. Habitra supports both light and dark themes with colors optimized for readability in each mode.</p>
+      </div>
+      <hr class="faq-divider">
+
+      <div class="faq-item">
+        <h3>What are Badges and how do I earn them?</h3>
+        <p>Badges are earned by hitting milestones like streak counts (7, 14, 30, 100+ days), perfect days, perfect weeks, and seasonal achievements. View your badge collection in the Stats tab under Badge Shelf. There are 50+ unique badges to collect.</p>
+      </div>
+      <hr class="faq-divider">
+
+      <div class="faq-item">
+        <h3>How does the XP and leveling system work?</h3>
+        <p>You earn 10 XP for each habit completion, with bonuses for streaks and perfect days. As you level up, you unlock recognition for your consistency. XP popups show your progress after each completion.</p>
+      </div>
+      <hr class="faq-divider">
+
+      <div class="faq-item">
+        <h3>Can I share my streak achievements?</h3>
+        <p>Yes! From the Stats tab, tap any streak to open the share card. Choose from multiple gradient themes and share directly to Messages, social media, or save the image.</p>
+      </div>
+    </section>
+
+    <div class="troubleshoot">
+      <h2>Troubleshooting</h2>
+
+      <div class="troubleshoot-item">
+        <h4>Notifications aren't arriving</h4>
+        <p>Open your iPhone's Settings &gt; Notifications &gt; Habitra and ensure notifications are enabled with Banners, Sounds, and Lock Screen turned on. Also check that Do Not Disturb or a Focus mode isn't blocking them.</p>
+      </div>
+
+      <div class="troubleshoot-item">
+        <h4>Widget shows stale data</h4>
+        <p>Widgets update on iOS's schedule. Try removing and re-adding the widget. Ensure both the Habitra app and HabitraWidget share the same App Group in Settings &gt; Signing &amp; Capabilities.</p>
+      </div>
+
+      <div class="troubleshoot-item">
+        <h4>App crashes on launch</h4>
+        <p>Try force-quitting the app and reopening it. If the issue persists, ensure you're running the latest version from the App Store. As a last resort, delete and reinstall the app.</p>
+      </div>
+    </div>
+
+    <section class="sys-req">
+      <h2>System Requirements</h2>
+      <ul class="req-list">
+        <li>
+          <strong>Platform</strong>
+          iPhone
+        </li>
+        <li>
+          <strong>iOS Version</strong>
+          iOS 17.0 or later
+        </li>
+        <li>
+          <strong>Storage</strong>
+          ~25 MB
+        </li>
+        <li>
+          <strong>Optional</strong>
+          Notifications
+        </li>
+      </ul>
+    </section>
+
+    <section class="tip-jar-section" id="tip-jar">
+      <h2>Tip Jar</h2>
+      <p class="tip-subtitle">Habitra is free. If you enjoy it, you can leave a tip to support development.</p>
+
+      <div class="tip-cards">
+        <div class="tip-card">
+          <div class="tip-emoji">&#9749;</div>
+          <div class="tip-name">Coffee</div>
+          <div class="tip-price">$1.99</div>
+        </div>
+        <div class="tip-card">
+          <div class="tip-emoji">&#127828;</div>
+          <div class="tip-name">Lunch</div>
+          <div class="tip-price">$4.99</div>
+        </div>
+        <div class="tip-card">
+          <div class="tip-emoji">&#127860;</div>
+          <div class="tip-name">Dinner</div>
+          <div class="tip-price">$9.99</div>
+        </div>
+      </div>
+      <p class="tip-note">Tips are optional and don't unlock any features.</p>
+    </section>
+
+  </div>
+
+  <footer>
+    <div class="inner">
+      <p>&copy; 2026 Habitra. All rights reserved.</p>
+      <ul>
+        <li><a href="index-free.html">Home</a></li>
+        <li><a href="privacy-free.html">Privacy Policy</a></li>
+        <li><a href="copyright-free.html">Terms of Use</a></li>
+      </ul>
+    </div>
+  </footer>
+
+</body>
+</html>

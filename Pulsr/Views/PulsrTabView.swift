@@ -28,6 +28,17 @@ struct HabitraTabView: View {
             case .settings: return "gearshape.fill"
             }
         }
+
+        /// Tabs visible in v1.0. Coach is hidden until AI features ship.
+        /// v1.0: hidden via FeatureAvailability — see docs/RELEASE_STRATEGY.md
+        static var visibleCases: [Tab] {
+            allCases.filter { tab in
+                switch tab {
+                case .coach: return FeatureAvailability.aiInsights
+                default: return true
+                }
+            }
+        }
     }
 
     var body: some View {
@@ -57,11 +68,14 @@ struct HabitraTabView: View {
                 }
                 .tag(Tab.stats)
 
-            AIInsightsView()
-                .tabItem {
-                    Label(Tab.coach.rawValue, systemImage: Tab.coach.icon)
-                }
-                .tag(Tab.coach)
+            // v1.0: hidden via FeatureAvailability — see docs/RELEASE_STRATEGY.md
+            if FeatureAvailability.aiInsights {
+                AIInsightsView()
+                    .tabItem {
+                        Label(Tab.coach.rawValue, systemImage: Tab.coach.icon)
+                    }
+                    .tag(Tab.coach)
+            }
 
             SettingsView()
                 .tabItem {
@@ -80,7 +94,7 @@ struct HabitraTabView: View {
     private var iPadLayout: some View {
         NavigationSplitView {
             List(selection: $selectedTab) {
-                ForEach(HabitraTabView.Tab.allCases) { tab in
+                ForEach(HabitraTabView.Tab.visibleCases) { tab in
                     Label(tab.rawValue, systemImage: tab.icon)
                         .tag(tab)
                 }
@@ -102,7 +116,12 @@ struct HabitraTabView: View {
         case .stats:
             StatsView()
         case .coach:
-            AIInsightsView()
+            // v1.0: hidden via FeatureAvailability — see docs/RELEASE_STRATEGY.md
+            if FeatureAvailability.aiInsights {
+                AIInsightsView()
+            } else {
+                TodayView()
+            }
         case .settings:
             SettingsView()
         }

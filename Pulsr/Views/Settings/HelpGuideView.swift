@@ -40,8 +40,8 @@ struct HelpGuideView: View {
                             ),
                             HelpItem(
                                 icon: "5.circle.fill",
-                                title: "Free Habit Limit",
-                                body: "Free accounts can track up to 5 habits. Upgrade to Habitra Pro for unlimited habits and categories."
+                                title: "Habit Limit",
+                                body: "You can track up to 5 habits in this release. Focused is better — pick the ones that matter most. More capacity is on the roadmap."
                             ),
                         ]
                     )
@@ -120,14 +120,9 @@ struct HelpGuideView: View {
                         title: "TODAY VIEW",
                         items: [
                             HelpItem(
-                                icon: "brain.head.profile",
-                                title: "AI Coaching Banner",
-                                body: "A contextual coaching message appears at the top of the Today tab. It adapts to your current progress — motivating you in the morning, warning about at-risk streaks in the evening, and celebrating when you're all done. Tap the X to dismiss."
-                            ),
-                            HelpItem(
-                                icon: "arrow.up.arrow.down",
-                                title: "Smart Sort (AI)",
-                                body: "Tap the + menu and toggle \"Smart Sort (AI)\" to have your habits automatically ordered by priority. Incomplete habits needing the most attention appear first, based on their AI health score. Toggle back to return to manual order."
+                                icon: "checkmark.circle.fill",
+                                title: "Daily Overview",
+                                body: "The Today tab shows all habits scheduled for today with a progress ring at the top. Tap the circle on any habit to mark it done. A pulse animation and haptic feedback confirm each completion."
                             ),
                             HelpItem(
                                 icon: "moon.stars.fill",
@@ -144,7 +139,7 @@ struct HelpGuideView: View {
                             HelpItem(
                                 icon: "chart.bar.fill",
                                 title: "Stats Overview",
-                                body: "The Stats tab shows active habit count, your best streak, and completion rate. Use the time range picker (7D, 30D, 90D, All) to adjust the view. An AI Health Score section shows each habit's grade (A+ through F)."
+                                body: "The Stats tab shows active habit count, your best streak, and completion rate. Use the time range picker (7D, 30D, 90D, All) to adjust the view."
                             ),
                             HelpItem(
                                 icon: "chart.xyaxis.line",
@@ -164,12 +159,14 @@ struct HelpGuideView: View {
                             HelpItem(
                                 icon: "square.and.arrow.up",
                                 title: "Share Streaks",
-                                body: "Long-press a habit in Stats and choose \"Share Streak\" to generate a branded streak card. Choose from 10 gradient themes (2 free, 8 Pro) and share the image to social media or messages."
+                                body: "Long-press a habit in Stats and choose \"Share Streak\" to generate a branded streak card. Choose from gradient themes and share the image to social media or messages."
                             ),
                         ]
                     )
 
                     // MARK: - AI Coach
+                    // v1.0: hidden via FeatureAvailability — see docs/RELEASE_STRATEGY.md
+                    if FeatureAvailability.aiInsights {
                     collapsibleSection(
                         title: "AI COACH",
                         items: [
@@ -206,7 +203,11 @@ struct HelpGuideView: View {
                         ]
                     )
 
+                    } // end AI Coach FeatureAvailability gate
+
                     // MARK: - Mood Tracking
+                    // v1.0: hidden via FeatureAvailability — see docs/RELEASE_STRATEGY.md
+                    if FeatureAvailability.moodCheckin {
                     collapsibleSection(
                         title: "MOOD TRACKING",
                         items: [
@@ -228,7 +229,11 @@ struct HelpGuideView: View {
                         ]
                     )
 
+                    } // end Mood Tracking FeatureAvailability gate
+
                     // MARK: - Health
+                    // v1.0: hidden via FeatureAvailability — see docs/RELEASE_STRATEGY.md
+                    if FeatureAvailability.healthKit {
                     collapsibleSection(
                         title: "HEALTH INSIGHTS",
                         items: [
@@ -245,6 +250,8 @@ struct HelpGuideView: View {
                         ]
                     )
 
+                    } // end Health FeatureAvailability gate
+
                     // MARK: - Widgets
                     collapsibleSection(
                         title: "WIDGETS",
@@ -254,16 +261,8 @@ struct HelpGuideView: View {
                                 title: "Lock Screen Widget",
                                 body: "Add the Streak widget to your Lock Screen. It shows your top streak count and daily progress in circular, rectangular, or inline format."
                             ),
-                            HelpItem(
-                                icon: "square.grid.2x2.fill",
-                                title: "Habit Grid Widget",
-                                body: "A small or medium Home Screen widget showing each habit with its icon, name, and a checkmark when completed today. Pro feature."
-                            ),
-                            HelpItem(
-                                icon: "chart.bar.xaxis",
-                                title: "Progress Bar Widget",
-                                body: "A medium or large Home Screen widget showing weekly progress bars for each habit, streak badges, and an overall progress ring. Pro feature."
-                            ),
+                            // v1.0: Habit Grid and Progress Bar widgets hidden — Pro feature
+                            // These items will be restored when FeatureAvailability.allWidgets is true
                             HelpItem(
                                 icon: "timer",
                                 title: "Live Activity",
@@ -278,6 +277,9 @@ struct HelpGuideView: View {
                     )
 
                     // MARK: - Data & Sync
+                    // v1.0: hidden via FeatureAvailability — see docs/RELEASE_STRATEGY.md
+                    // iCloud Sync and CSV Export are hidden in v1.0; section only shown when at least one is available
+                    if FeatureAvailability.iCloudSync || FeatureAvailability.exportCSV {
                     collapsibleSection(
                         title: "DATA & SYNC",
                         items: [
@@ -293,6 +295,7 @@ struct HelpGuideView: View {
                             ),
                         ]
                     )
+                    }
 
                     // MARK: - Appearance
                     collapsibleSection(
@@ -311,7 +314,7 @@ struct HelpGuideView: View {
                             HelpItem(
                                 icon: "sparkles",
                                 title: "Streak Themes",
-                                body: "When sharing a streak card, choose from 10 gradient themes: Midnight and Ocean (free), plus Sunset, Forest, Aurora, Ember, Lavender, Minimal, Neon, and Cosmic (Pro). Themes change the background gradient and text color of your share card."
+                                body: "When sharing a streak card, choose from gradient themes including Midnight and Ocean. Themes change the background gradient and text color of your share card. More themes are on the roadmap."
                             ),
                         ]
                     )
@@ -338,24 +341,25 @@ struct HelpGuideView: View {
                         ]
                     )
 
-                    // MARK: - Free vs Pro
+                    // MARK: - Support & Roadmap
+                    // v1.0: replaces "Free vs Pro" — see docs/RELEASE_STRATEGY.md
                     collapsibleSection(
-                        title: "FREE VS PRO",
+                        title: "SUPPORT HABITRA",
                         items: [
                             HelpItem(
                                 icon: "gift.fill",
-                                title: "Free Tier",
-                                body: "Track up to 3 habits with streaks, basic stats, the Lock Screen streak widget, reminders, AI coaching messages, and light/dark mode. Free forever."
-                            ),
-                            HelpItem(
-                                icon: "sparkles",
-                                title: "Habitra Pro",
-                                body: "Unlimited habits and categories, all widget sizes (Habit Grid, Progress Bars, Standby), on-device AI predictions and nudges, mood check-in and trends, HealthKit integration, iCloud sync across devices, CSV data export, custom streak themes, and AI report sharing.\n\n$4.99/mo · $39.99/yr · $79.99 lifetime\n14-day free trial on the annual plan."
+                                title: "Free Forever",
+                                body: "Habitra is 100% free. Track up to 5 habits with streaks, stats, Lock Screen widget, reminders, and light/dark mode. No ads, no tracking, no cloud."
                             ),
                             HelpItem(
                                 icon: "heart.fill",
                                 title: "Tip Jar",
-                                body: "Love Habitra? The Tip Jar on the upgrade screen lets you leave a one-time tip ($1.99, $4.99, or $9.99) to support indie development."
+                                body: "Love Habitra? Go to Settings > Support & Roadmap to leave an optional one-time tip ($1.99, $4.99, or $9.99). Tips don't unlock anything — they fuel development of the features on the roadmap."
+                            ),
+                            HelpItem(
+                                icon: "sparkles",
+                                title: "What's Coming",
+                                body: "We're building: on-device AI Coach, Apple Health integration, iCloud sync, more widgets, and weekly quests. See Settings > Support & Roadmap for the full list. No dates — we ship when they're ready."
                             ),
                         ]
                     )
@@ -372,12 +376,7 @@ struct HelpGuideView: View {
                             HelpItem(
                                 icon: "clock.fill",
                                 title: "Set Reminders",
-                                body: "A well-timed reminder dramatically increases your chance of sticking with a habit. Check the Coach tab's adaptive reminder suggestions to find your optimal time."
-                            ),
-                            HelpItem(
-                                icon: "face.smiling",
-                                title: "Track Your Mood",
-                                body: "Log your mood daily in the Coach tab. Over time, Habitra will discover how your mood affects specific habits and offer personalized insights."
+                                body: "A well-timed reminder dramatically increases your chance of sticking with a habit. Set one when creating or editing any habit."
                             ),
                             HelpItem(
                                 icon: "rectangle.on.rectangle",
@@ -390,9 +389,9 @@ struct HelpGuideView: View {
                                 body: "Review the Stats tab weekly. The heatmap, health scores, and AI insights help you spot patterns and adjust your routine."
                             ),
                             HelpItem(
-                                icon: "doc.text.fill",
-                                title: "Read Your Weekly Recap",
-                                body: "Every Sunday at 7 PM, you'll get a notification to check your AI-generated weekly recap. It highlights your wins, areas to improve, and predictions for next week."
+                                icon: "chart.line.uptrend.xyaxis",
+                                title: "Review Weekly",
+                                body: "Check the Stats tab at least once a week. The heatmap and completion trends help you spot patterns and stay accountable."
                             ),
                         ]
                     )
@@ -416,21 +415,8 @@ struct HelpGuideView: View {
                                 title: "Habits Not Showing",
                                 body: "If a habit isn't showing on the Today tab, check its frequency — it may not be scheduled for today. Look under the \"Other Habits\" section at the bottom, or check if it was accidentally archived in Settings > Archived Habits."
                             ),
-                            HelpItem(
-                                icon: "brain",
-                                title: "AI Model Not Training",
-                                body: "The AI model needs at least 30 data points (habit completions across multiple days). Keep tracking for 1-2 weeks and the model will train automatically. You can also manually trigger training from Coach > AI Model."
-                            ),
-                            HelpItem(
-                                icon: "heart.slash",
-                                title: "HealthKit Not Connecting",
-                                body: "Make sure you've granted Habitra access in iOS Settings > Privacy & Security > Health > Habitra. HealthKit requires a Pro subscription. If data isn't showing, wait a few hours for Apple Health to sync new data."
-                            ),
-                            HelpItem(
-                                icon: "icloud.slash",
-                                title: "iCloud Sync Issues",
-                                body: "Verify you're signed into iCloud in iOS Settings. iCloud sync requires a Pro subscription and an active internet connection. Changes may take a few minutes to appear on other devices. Check Settings > iCloud Sync for current status."
-                            ),
+                            // v1.0: AI Model, HealthKit, iCloud troubleshooting hidden — Pro features
+                            // Restore these when FeatureAvailability flags are flipped
                         ]
                     )
                 }

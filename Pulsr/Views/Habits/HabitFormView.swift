@@ -475,6 +475,16 @@ struct HabitFormView: View {
 
     @ViewBuilder
     private var healthKitSection: some View {
+        // v1.0: hidden via FeatureAvailability — see docs/RELEASE_STRATEGY.md
+        if FeatureAvailability.healthKit {
+            healthKitSectionContent
+        } else {
+            EmptyView()
+        }
+    }
+
+    @ViewBuilder
+    private var healthKitSectionContent: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text("APPLE HEALTH").habitraCaption().sectionHeaderAccessibility()
 

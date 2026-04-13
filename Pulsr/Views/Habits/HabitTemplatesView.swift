@@ -33,6 +33,7 @@ struct HabitTemplatesView: View {
 
     @State private var createdTemplateName: String?
     @State private var showCreatedConfirmation = false
+    @State private var showingLimitAlert = false
 
     private var viewModel: HabitViewModel {
         HabitViewModel(modelContext: modelContext)
@@ -119,6 +120,11 @@ struct HabitTemplatesView: View {
                         .foregroundStyle(Color.habitraTextSecondary)
                 }
             }
+            .alert("Habit Limit Reached", isPresented: $showingLimitAlert) {
+                Button("OK", role: .cancel) {}
+            } message: {
+                Text("You can track up to \(HabitViewModel.freeHabitLimit) habits in this release. Focused is better — pick the ones that matter most. More capacity is on the roadmap.")
+            }
         }
     }
 
@@ -187,7 +193,10 @@ struct HabitTemplatesView: View {
     private func createHabit(from template: HabitTemplate) {
         let vm = viewModel
 
-        guard vm.canCreateHabit else { return }
+        guard vm.canCreateHabit else {
+            showingLimitAlert = true
+            return
+        }
 
         vm.createHabit(
             name: template.name,

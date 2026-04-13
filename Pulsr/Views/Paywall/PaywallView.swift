@@ -4,19 +4,23 @@
 //
 //  Created by Jeanese Raymond on 3/24/26.
 //
+//  v1.0: This file has been rewritten as a Support + Roadmap view.
+//  The struct name `PaywallView` is preserved so existing presentation
+//  call sites compile without changes. When paid tiers return, restore
+//  the subscription-tier layout from git tag `v1.0-free-only`.
+//
+//  See docs/RELEASE_STRATEGY.md for details.
+//
 
 import SwiftUI
 import StoreKit
 
 struct PaywallView: View {
     @Environment(\.dismiss) private var dismiss
-    @State private var selectedPlan: HabitraProduct = .proAnnual
-    @State private var purchaseSuccess = false
+    @State private var loadingTipID: String? = nil
+    @State private var showThankYou = false
     @State private var showError = false
     @State private var errorMessage = ""
-    @State private var showRestoreResult = false
-    @State private var restoreMessage = ""
-    @State private var isRestoring = false
 
     private var storeKit: StoreKitManager { .shared }
 
@@ -28,9 +32,9 @@ struct PaywallView: View {
                 ScrollView {
                     VStack(spacing: HabitraTheme.spacingLarge) {
                         headerSection
-                        featuresSection
-                        plansSection
-                        purchaseButton
+                        freeCalloutSection
+                        tipJarSection
+                        comingSoonSection
                         footerSection
                     }
                     .padding(.horizontal, HabitraTheme.screenPadding)
@@ -49,23 +53,18 @@ struct PaywallView: View {
                     }
                 }
             }
-            .alert("Welcome to Pro!", isPresented: $purchaseSuccess) {
-                Button("Let's Go") { dismiss() }
+            .alert("Thank You! 💛", isPresented: $showThankYou) {
+                Button("You're Welcome") { dismiss() }
             } message: {
-                Text("You've unlocked unlimited habits, AI coaching, and all widgets. Enjoy!")
+                Text("Your support means the world. It keeps Habitra free and helps us build what's next.")
             }
-            .alert("Purchase Error", isPresented: $showError) {
+            .alert("Something Went Wrong", isPresented: $showError) {
                 Button("OK", role: .cancel) {}
             } message: {
                 Text(errorMessage)
             }
-            .alert("Restore Purchases", isPresented: $showRestoreResult) {
-                Button("OK", role: .cancel) {}
-            } message: {
-                Text(restoreMessage)
-            }
             .task {
-                if storeKit.subscriptionProducts.isEmpty {
+                if storeKit.tipProducts.isEmpty {
                     await storeKit.loadProducts()
                 }
             }
@@ -76,193 +75,229 @@ struct PaywallView: View {
 
     private var headerSection: some View {
         VStack(spacing: 12) {
-            // Pulse icon
             ZStack {
                 Circle()
                     .fill(Color.habitraAccent.opacity(0.15))
                     .frame(width: 80, height: 80)
 
-                Image(systemName: "waveform.path.ecg")
+                Image(systemName: "heart.fill")
                     .font(.system(size: 36))
                     .foregroundStyle(Color.habitraAccent)
             }
             .padding(.top, 20)
 
-            Text("Habitra Pro")
+            Text("Support Habitra")
                 .font(HabitraFont.largeTitle())
                 .foregroundStyle(Color.habitraTextPrimary)
 
-            Text("Unlock the full power of your habits")
+            Text("Free forever. Tips optional. Always yours.")
                 .font(HabitraFont.body())
                 .foregroundStyle(Color.habitraTextSecondary)
+                .multilineTextAlignment(.center)
         }
     }
 
-    // MARK: - Features
+    // MARK: - Free Callout
 
-    private var featuresSection: some View {
+    private var freeCalloutSection: some View {
         VStack(alignment: .leading, spacing: 10) {
-            featureRow("infinity", "Unlimited habits & categories")
-            featureRow("brain.head.profile", "On-device AI nudges & coaching")
-            featureRow("chart.xyaxis.line", "Predictive failure alerts")
-            featureRow("rectangle.stack.fill", "All widget sizes + Standby")
-            featureRow("heart.fill", "HealthKit integration")
-            featureRow("icloud.fill", "iCloud sync across devices")
-            featureRow("square.and.arrow.up", "CSV export")
-            featureRow("paintpalette.fill", "Custom streak themes")
+            HStack(spacing: 10) {
+                Image(systemName: "checkmark.seal.fill")
+                    .font(.system(size: 20))
+                    .foregroundStyle(Color.habitraHabitGreen)
+                Text("Habitra is 100% free")
+                    .font(HabitraFont.headline())
+                    .foregroundStyle(Color.habitraTextPrimary)
+            }
+
+            Text("No ads. No tracking. No cloud. Your habits stay on your phone, and every feature in this release is yours to use — no strings attached.")
+                .font(HabitraFont.body())
+                .foregroundStyle(Color.habitraTextSecondary)
+                .fixedSize(horizontal: false, vertical: true)
         }
         .habitraCard()
     }
 
-    private func featureRow(_ icon: String, _ text: String) -> some View {
-        HStack(spacing: 12) {
+    // MARK: - Tip Jar
+
+    private var tipJarSection: some View {
+        VStack(alignment: .leading, spacing: HabitraTheme.spacing) {
+            HStack(spacing: 8) {
+                Image(systemName: "cup.and.saucer.fill")
+                    .foregroundStyle(Color.habitraAccent)
+                Text("Leave a tip")
+                    .font(HabitraFont.headline())
+                    .foregroundStyle(Color.habitraTextPrimary)
+            }
+
+            Text("If Habitra helps you build the habits you want, you can say thanks with an optional tip. It funds the features coming next.")
+                .font(HabitraFont.footnote())
+                .foregroundStyle(Color.habitraTextSecondary)
+                .fixedSize(horizontal: false, vertical: true)
+
+            HStack(spacing: HabitraTheme.spacing) {
+                if storeKit.tipProducts.isEmpty {
+                    tipPlaceholderButton("☕", "$1.99", productID: "small")
+                    tipPlaceholderButton("🍱", "$4.99", productID: "medium")
+                    tipPlaceholderButton("💰", "$9.99", productID: "large")
+                } else {
+                    ForEach(storeKit.tipProducts, id: \.id) { product in
+                        tipButton(product)
+                    }
+                }
+            }
+            .padding(.top, 4)
+        }
+        .habitraCard()
+    }
+
+    private func tipButton(_ product: Product) -> some View {
+        let isPurchasingThis = loadingTipID == product.id
+        return Button {
+            guard loadingTipID == nil else { return }
+            Task {
+                loadingTipID = product.id
+                let success = await storeKit.purchase(product)
+                loadingTipID = nil
+                if success {
+                    showThankYou = true
+                } else if let err = storeKit.purchaseError {
+                    errorMessage = err
+                    showError = true
+                }
+            }
+        } label: {
+            VStack(spacing: 6) {
+                if isPurchasingThis {
+                    ProgressView()
+                        .frame(width: 28, height: 28)
+                } else {
+                    Text(tipEmoji(for: product))
+                        .font(.system(size: 28))
+                        .opacity(loadingTipID != nil ? 0.4 : 1)
+                }
+                Text(product.displayPrice)
+                    .font(HabitraFont.footnote())
+                    .foregroundStyle(Color.habitraTextPrimary)
+                    .opacity(loadingTipID != nil && !isPurchasingThis ? 0.4 : 1)
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 14)
+            .background(Color.habitraSurfaceLight)
+            .clipShape(RoundedRectangle(cornerRadius: HabitraTheme.cornerRadiusSmall))
+        }
+        .buttonStyle(.plain)
+        .disabled(loadingTipID != nil)
+    }
+
+    private func tipPlaceholderButton(_ emoji: String, _ price: String, productID: String) -> some View {
+        let isThisLoading = loadingTipID == productID
+        return Button {
+            guard loadingTipID == nil else { return }
+            Task {
+                loadingTipID = productID
+                await storeKit.loadProducts()
+                loadingTipID = nil
+            }
+        } label: {
+            VStack(spacing: 6) {
+                if isThisLoading {
+                    ProgressView()
+                        .frame(width: 28, height: 28)
+                } else {
+                    Text(emoji)
+                        .font(.system(size: 28))
+                        .opacity(loadingTipID != nil ? 0.4 : 1)
+                }
+                Text(price)
+                    .font(HabitraFont.footnote())
+                    .foregroundStyle(Color.habitraTextTertiary)
+                    .opacity(loadingTipID != nil && !isThisLoading ? 0.4 : 1)
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 14)
+            .background(Color.habitraSurfaceLight)
+            .clipShape(RoundedRectangle(cornerRadius: HabitraTheme.cornerRadiusSmall))
+        }
+        .buttonStyle(.plain)
+        .disabled(loadingTipID != nil)
+    }
+
+    private func tipEmoji(for product: Product) -> String {
+        if product.id.contains("small") { return "☕" }
+        if product.id.contains("medium") { return "🍱" }
+        return "💰"
+    }
+
+    // MARK: - Coming Soon (Roadmap)
+
+    private var comingSoonSection: some View {
+        VStack(alignment: .leading, spacing: HabitraTheme.spacing) {
+            HStack(spacing: 8) {
+                Image(systemName: "sparkles")
+                    .foregroundStyle(Color.habitraAccentGlow)
+                Text("On the roadmap")
+                    .font(HabitraFont.headline())
+                    .foregroundStyle(Color.habitraTextPrimary)
+            }
+
+            Text("A few things we're building next. No dates yet — we ship when they're ready.")
+                .font(HabitraFont.footnote())
+                .foregroundStyle(Color.habitraTextSecondary)
+                .fixedSize(horizontal: false, vertical: true)
+
+            VStack(spacing: 10) {
+                roadmapRow(
+                    icon: "brain.head.profile",
+                    title: "On-device AI Coach",
+                    blurb: "Gentle nudges and pattern insights — all computed privately on your phone."
+                )
+                roadmapRow(
+                    icon: "heart.fill",
+                    title: "Apple Health integration",
+                    blurb: "Auto-complete habits from steps, workouts, sleep, and mindful minutes."
+                )
+                roadmapRow(
+                    icon: "icloud.fill",
+                    title: "iCloud sync",
+                    blurb: "Keep your habits in sync across iPhone, iPad, and Mac — end-to-end encrypted."
+                )
+                roadmapRow(
+                    icon: "rectangle.stack.fill",
+                    title: "More widgets & StandBy",
+                    blurb: "Lock Screen, medium, large, and StandBy widgets for every glance."
+                )
+                roadmapRow(
+                    icon: "flag.checkered",
+                    title: "Weekly Quests",
+                    blurb: "Opt-in mini-challenges that reward consistency with XP and badges."
+                )
+            }
+            .padding(.top, 4)
+        }
+        .habitraCard()
+    }
+
+    private func roadmapRow(icon: String, title: String, blurb: String) -> some View {
+        HStack(alignment: .top, spacing: 12) {
             Image(systemName: icon)
                 .font(.system(size: 16))
                 .foregroundStyle(Color.habitraAccent)
-                .frame(width: 24)
+                .frame(width: 28, height: 28)
+                .background(Color.habitraAccent.opacity(0.12))
+                .clipShape(RoundedRectangle(cornerRadius: 8))
 
-            Text(text)
-                .font(HabitraFont.body())
-                .foregroundStyle(Color.habitraTextPrimary)
+            VStack(alignment: .leading, spacing: 2) {
+                Text(title)
+                    .font(HabitraFont.body())
+                    .foregroundStyle(Color.habitraTextPrimary)
+                Text(blurb)
+                    .font(HabitraFont.footnote())
+                    .foregroundStyle(Color.habitraTextSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
 
             Spacer()
-        }
-    }
-
-    // MARK: - Plans
-
-    private var plansSection: some View {
-        VStack(spacing: HabitraTheme.spacing) {
-            planCard(
-                product: .proAnnual,
-                title: "Annual",
-                badge: "BEST VALUE — SAVE 33%"
-            )
-            planCard(
-                product: .proMonthly,
-                title: "Monthly",
-                badge: nil
-            )
-            planCard(
-                product: .proLifetime,
-                title: "Lifetime",
-                badge: "ONE TIME"
-            )
-        }
-    }
-
-    private func planCard(product: HabitraProduct, title: String, badge: String?) -> some View {
-        let isSelected = selectedPlan == product
-        let storeProduct = storeKit.product(for: product)
-
-        return Button {
-            selectedPlan = product
-        } label: {
-            HStack {
-                VStack(alignment: .leading, spacing: 4) {
-                    HStack(spacing: 8) {
-                        Text(title)
-                            .font(HabitraFont.headline())
-                            .foregroundStyle(Color.habitraTextPrimary)
-
-                        if let badge {
-                            Text(badge)
-                                .font(.system(.caption2))
-                                .foregroundStyle(Color.habitraAccent)
-                                .padding(.horizontal, 6)
-                                .padding(.vertical, 2)
-                                .background(Color.habitraAccent.opacity(0.15))
-                                .clipShape(Capsule())
-                        }
-                    }
-
-                    if product == .proAnnual {
-                        Text("14-day free trial included")
-                            .font(HabitraFont.footnote())
-                            .foregroundStyle(Color.habitraHabitGreen)
-                    } else if product == .proLifetime {
-                        Text("Pay once, keep forever")
-                            .font(HabitraFont.footnote())
-                            .foregroundStyle(Color.habitraTextTertiary)
-                    }
-                }
-
-                Spacer()
-
-                VStack(alignment: .trailing, spacing: 2) {
-                    Text(storeProduct?.displayPrice ?? priceLabel(for: product))
-                        .font(HabitraFont.headline())
-                        .foregroundStyle(Color.habitraTextPrimary)
-
-                    Text(periodLabel(for: product))
-                        .font(HabitraFont.footnote())
-                        .foregroundStyle(Color.habitraTextTertiary)
-                }
-
-                // Selection indicator
-                ZStack {
-                    Circle()
-                        .stroke(isSelected ? Color.habitraAccent : Color.habitraTextTertiary.opacity(0.3), lineWidth: 2)
-                        .frame(width: 22, height: 22)
-
-                    if isSelected {
-                        Circle()
-                            .fill(Color.habitraAccent)
-                            .frame(width: 14, height: 14)
-                    }
-                }
-                .padding(.leading, 8)
-            }
-            .padding(HabitraTheme.cardPadding)
-            .background(isSelected ? Color.habitraAccent.opacity(0.08) : Color.habitraSurface)
-            .clipShape(RoundedRectangle(cornerRadius: HabitraTheme.cornerRadius))
-            .overlay(
-                RoundedRectangle(cornerRadius: HabitraTheme.cornerRadius)
-                    .stroke(isSelected ? Color.habitraAccent.opacity(0.5) : Color.habitraAccent.opacity(0.1), lineWidth: isSelected ? 1.5 : 1)
-            )
-        }
-        .buttonStyle(.plain)
-    }
-
-    // MARK: - Purchase Button
-
-    private var purchaseButton: some View {
-        VStack(spacing: 8) {
-            Button {
-                Task { await handlePurchase() }
-            } label: {
-                HStack(spacing: 8) {
-                    if storeKit.isPurchasing {
-                        ProgressView()
-                            .tint(.white)
-                    } else {
-                        Image(systemName: "sparkles")
-                            .font(.system(size: 16, weight: .semibold))
-                    }
-                    Text(purchaseButtonTitle)
-                        .font(HabitraFont.headline())
-                }
-                .foregroundStyle(.white)
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 16)
-                .background(Color.habitraAccent)
-                .clipShape(RoundedRectangle(cornerRadius: HabitraTheme.cornerRadiusSmall))
-            }
-            .disabled(storeKit.isPurchasing)
-
-            Button {
-                Task { await handleRestore() }
-            } label: {
-                if isRestoring {
-                    ProgressView()
-                        .controlSize(.small)
-                } else {
-                    Text("Restore Purchases")
-                }
-            }
-            .font(HabitraFont.footnote())
-            .foregroundStyle(Color.habitraTextTertiary)
-            .disabled(isRestoring)
         }
     }
 
@@ -270,10 +305,11 @@ struct PaywallView: View {
 
     private var footerSection: some View {
         VStack(spacing: 6) {
-            Text("Payment will be charged to your Apple ID account. Subscriptions auto-renew unless cancelled at least 24 hours before the end of the current period.")
+            Text("Tips are one-time purchases. They don't unlock anything — Habitra is free for everyone.")
                 .font(.system(.caption2))
-                .foregroundStyle(Color.habitraTextTertiary.opacity(0.6))
+                .foregroundStyle(Color.habitraTextTertiary.opacity(0.7))
                 .multilineTextAlignment(.center)
+                .padding(.horizontal, 20)
 
             HStack(spacing: 16) {
                 NavigationLink("Terms of Use") {
@@ -291,80 +327,6 @@ struct PaywallView: View {
         }
         .padding(.top, 8)
     }
-
-    // MARK: - Helpers
-
-    private func handlePurchase() async {
-        guard let product = storeKit.product(for: selectedPlan) else {
-            // Products haven't loaded — retry once
-            await storeKit.loadProducts()
-            guard let product = storeKit.product(for: selectedPlan) else {
-                if let loadErr = storeKit.loadError {
-                    errorMessage = "Could not load products: \(loadErr)"
-                } else {
-                    errorMessage = "Unable to load subscription options. Please check your internet connection and try again."
-                }
-                showError = true
-                return
-            }
-            let success = await storeKit.purchase(product)
-            if success {
-                purchaseSuccess = true
-            } else if let error = storeKit.purchaseError {
-                errorMessage = error
-                showError = true
-            }
-            return
-        }
-        let success = await storeKit.purchase(product)
-        if success {
-            purchaseSuccess = true
-        } else if let error = storeKit.purchaseError {
-            errorMessage = error
-            showError = true
-        }
-    }
-
-    private func handleRestore() async {
-        isRestoring = true
-        await storeKit.restorePurchases()
-        isRestoring = false
-
-        if storeKit.isProUnlocked {
-            purchaseSuccess = true
-        } else {
-            restoreMessage = "No active subscriptions found for this Apple ID. If you believe this is an error, contact Apple Support."
-            showRestoreResult = true
-        }
-    }
-
-    private var purchaseButtonTitle: String {
-        switch selectedPlan {
-        case .proAnnual:  return "Start Free Trial"
-        case .proMonthly: return "Subscribe Now"
-        case .proLifetime: return "Buy Lifetime"
-        default: return "Subscribe"
-        }
-    }
-
-    private func priceLabel(for product: HabitraProduct) -> String {
-        switch product {
-        case .proMonthly:  return "$4.99"
-        case .proAnnual:   return "$39.99"
-        case .proLifetime: return "$79.99"
-        default: return ""
-        }
-    }
-
-    private func periodLabel(for product: HabitraProduct) -> String {
-        switch product {
-        case .proMonthly:  return "/month"
-        case .proAnnual:   return "/year"
-        case .proLifetime: return "one time"
-        default: return ""
-        }
-    }
-
 }
 
 #Preview {

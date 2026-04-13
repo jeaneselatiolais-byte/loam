@@ -19,7 +19,6 @@ struct SettingsView: View {
     @State private var showingShareSheet = false
     @State private var versionTapCount = 0
     @State private var showingMetadata = false
-    @State private var loadingTipID: String? = nil
     @State private var showingHealthDisconnectAlert = false
     private var storeKit: StoreKitManager { .shared }
 
@@ -112,57 +111,22 @@ struct SettingsView: View {
                         }
                         .padding(.horizontal, HabitraTheme.screenPadding)
 
-                        // MARK: - Pro Section
+                        // MARK: - Support & Roadmap
+                        // v1.0: hidden via FeatureAvailability — see docs/RELEASE_STRATEGY.md
+                        // Replaces the "PRO" upgrade card. Opens the Support + Coming Soon sheet.
                         VStack(alignment: .leading, spacing: HabitraTheme.spacing) {
-                            Text("PRO")
+                            Text("SUPPORT & ROADMAP")
                                 .habitraCaption()
                                 .sectionHeaderAccessibility()
                                 .padding(.horizontal, HabitraTheme.screenPadding)
 
-                            if storeKit.isProUnlocked {
-                                proActiveCard
-                                    .padding(.horizontal, HabitraTheme.screenPadding)
-                            } else {
-                                upgradeCard
-                                    .padding(.horizontal, HabitraTheme.screenPadding)
-                            }
-                        }
-
-                        // MARK: - Tip Jar (free users only)
-                        if !storeKit.isProUnlocked {
-                            VStack(alignment: .leading, spacing: HabitraTheme.spacing) {
-                                Text("SUPPORT")
-                                    .habitraCaption()
-                                    .sectionHeaderAccessibility()
-                                    .padding(.horizontal, HabitraTheme.screenPadding)
-
-                                VStack(spacing: HabitraTheme.spacing) {
-                                    HStack(spacing: 8) {
-                                        Image(systemName: "heart.fill")
-                                            .foregroundStyle(Color.habitraHabitPink)
-                                        Text("Love Habitra? Leave a tip!")
-                                            .font(HabitraFont.body())
-                                            .foregroundStyle(Color.habitraTextPrimary)
-                                    }
-
-                                    HStack(spacing: HabitraTheme.spacing) {
-                                        if storeKit.tipProducts.isEmpty {
-                                            tipPlaceholderButton("☕", "$1.99", productID: "small")
-                                            tipPlaceholderButton("🍱", "$4.99", productID: "medium")
-                                            tipPlaceholderButton("💰", "$9.99", productID: "large")
-                                        } else {
-                                            ForEach(storeKit.tipProducts, id: \.id) { product in
-                                                tipButton(product)
-                                            }
-                                        }
-                                    }
-                                }
-                                .habitraCard()
-                            }
+                            supportRoadmapCard
+                                .padding(.horizontal, HabitraTheme.screenPadding)
                         }
 
                         // MARK: - Health Section (shown when HealthKit is connected)
-                        if SubscriptionManager.canUseHealthKit && HealthKitManager.shared.isAuthorized {
+                        // v1.0: hidden via FeatureAvailability — see docs/RELEASE_STRATEGY.md
+                        if FeatureAvailability.healthKit && SubscriptionManager.canUseHealthKit && HealthKitManager.shared.isAuthorized {
                             VStack(alignment: .leading, spacing: HabitraTheme.spacing) {
                                 Text("APPLE HEALTH")
                                     .habitraCaption()
@@ -273,19 +237,25 @@ struct SettingsView: View {
                                 .sectionHeaderAccessibility()
                                 .padding(.horizontal, HabitraTheme.screenPadding)
 
-                            NavigationLink {
-                                CloudSyncSettingsView()
-                            } label: {
-                                settingsRowLabel(icon: "icloud.fill", title: "iCloud Sync", color: .habitraHabitBlue)
+                            // v1.0: hidden via FeatureAvailability — see docs/RELEASE_STRATEGY.md
+                            if FeatureAvailability.iCloudSync {
+                                NavigationLink {
+                                    CloudSyncSettingsView()
+                                } label: {
+                                    settingsRowLabel(icon: "icloud.fill", title: "iCloud Sync", color: .habitraHabitBlue)
+                                }
+                                .buttonStyle(.plain)
                             }
-                            .buttonStyle(.plain)
 
-                            Button {
-                                showingExportOptions = true
-                            } label: {
-                                settingsRowLabel(icon: "square.and.arrow.up.fill", title: "Export Data", color: .habitraHabitGreen)
+                            // v1.0: hidden via FeatureAvailability — see docs/RELEASE_STRATEGY.md
+                            if FeatureAvailability.exportCSV {
+                                Button {
+                                    showingExportOptions = true
+                                } label: {
+                                    settingsRowLabel(icon: "square.and.arrow.up.fill", title: "Export Data", color: .habitraHabitGreen)
+                                }
+                                .buttonStyle(.plain)
                             }
-                            .buttonStyle(.plain)
 
                             NavigationLink {
                                 PrivacyPolicyView()
@@ -433,180 +403,74 @@ struct SettingsView: View {
         .habitraCard()
     }
 
-    // MARK: - Pro Cards
+    // MARK: - Support & Roadmap Card
+    // v1.0: hidden via FeatureAvailability — see docs/RELEASE_STRATEGY.md
+    // Replaces upgradeCard / proActiveCard in v1.0. The original Pro cards
+    // are preserved in git tag v1.0-free-only if paid tiers return.
 
-    private var upgradeCard: some View {
-        VStack(spacing: HabitraTheme.spacing) {
-            HStack {
-                VStack(alignment: .leading, spacing: 4) {
-                    HStack(spacing: 6) {
-                        Text("Habitra Pro")
-                            .font(HabitraFont.headline())
-                            .foregroundStyle(Color.habitraTextPrimary)
+    private var supportRoadmapCard: some View {
+        Button {
+            showingPaywall = true
+        } label: {
+            VStack(alignment: .leading, spacing: HabitraTheme.spacing) {
+                HStack {
+                    VStack(alignment: .leading, spacing: 4) {
+                        HStack(spacing: 6) {
+                            Text("Habitra is free — forever")
+                                .font(HabitraFont.headline())
+                                .foregroundStyle(Color.habitraTextPrimary)
 
-                        Image(systemName: "sparkles")
-                            .font(.system(size: 14))
-                            .foregroundStyle(Color.habitraAccentGlow)
+                            Image(systemName: "heart.fill")
+                                .font(.system(size: 14))
+                                .foregroundStyle(Color.habitraHabitPink)
+                        }
+
+                        Text("No ads. No cloud. Tips welcome.")
+                            .font(HabitraFont.footnote())
+                            .foregroundStyle(Color.habitraTextSecondary)
                     }
-
-                    Text("Unlimited habits, AI coaching, all widgets, HealthKit")
-                        .font(HabitraFont.footnote())
-                        .foregroundStyle(Color.habitraTextSecondary)
-                }
-                Spacer()
-                VStack(spacing: 2) {
-                    Text("$4.99")
-                        .font(HabitraFont.headline())
-                        .foregroundStyle(Color.habitraAccentGlow)
-                    Text("/month")
-                        .font(HabitraFont.footnote())
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .font(.system(size: 12, weight: .semibold))
                         .foregroundStyle(Color.habitraTextTertiary)
                 }
-                .padding(.horizontal, 12)
-                .padding(.vertical, 8)
-                .background(Color.habitraAccent.opacity(0.15))
-                .clipShape(RoundedRectangle(cornerRadius: 10))
-            }
 
-            VStack(alignment: .leading, spacing: 6) {
-                proFeatureRow("Unlimited habits")
-                proFeatureRow("On-device AI nudges")
-                proFeatureRow("All widget sizes + Standby")
-                proFeatureRow("HealthKit integration")
-                proFeatureRow("iCloud sync across devices")
-            }
-            .padding(.vertical, 4)
+                VStack(alignment: .leading, spacing: 6) {
+                    roadmapPeek("brain.head.profile", "On-device AI Coach")
+                    roadmapPeek("heart.fill", "Apple Health integration")
+                    roadmapPeek("icloud.fill", "iCloud sync")
+                    roadmapPeek("rectangle.stack.fill", "More widgets & StandBy")
+                }
+                .padding(.vertical, 4)
 
-            HabitraButton("Start 14-Day Free Trial", icon: "sparkles") {
-                showingPaywall = true
-            }
-        }
-        .habitraCard()
-        .interactiveCardAccessibility(
-            label: "Habitra Pro, $4.99 per month. Unlimited habits, AI coaching, all widgets, HealthKit",
-            hint: "Double tap to view subscription options"
-        )
-    }
-
-    private var proActiveCard: some View {
-        HStack(spacing: HabitraTheme.spacing) {
-            Image(systemName: "checkmark.seal.fill")
-                .font(.system(size: 28))
-                .foregroundStyle(Color.habitraAccent)
-
-            VStack(alignment: .leading, spacing: 4) {
-                Text("Habitra Pro Active")
-                    .font(HabitraFont.headline())
-                    .foregroundStyle(Color.habitraTextPrimary)
-
-                Text(storeKit.hasLifetime ? "Lifetime access" : "Subscription active")
+                Text("Tap to leave a tip or see what's next →")
                     .font(HabitraFont.footnote())
-                    .foregroundStyle(Color.habitraHabitGreen)
+                    .foregroundStyle(Color.habitraAccent)
             }
-
-            Spacer()
-
-            Button("Manage") {
-                if let url = URL(string: "https://apps.apple.com/account/subscriptions") {
-                    UIApplication.shared.open(url)
-                }
-            }
-            .font(HabitraFont.caption())
-            .tracking(0)
-            .textCase(.none)
-            .foregroundStyle(Color.habitraAccent)
+            .habitraCard()
         }
-        .habitraCard()
+        .buttonStyle(.plain)
         .accessibilityElement(children: .combine)
-        .accessibilityLabel(storeKit.hasLifetime ? "Habitra Pro Active, Lifetime access" : "Habitra Pro Active, Subscription active")
+        .accessibilityLabel("Habitra is free forever. Tap to leave a tip or see upcoming features.")
     }
 
-    // MARK: - Tip Jar Helpers
-
-    private func tipButton(_ product: Product) -> some View {
-        let isPurchasingThis = loadingTipID == product.id
-        return Button {
-            guard loadingTipID == nil else { return }
-            Task {
-                loadingTipID = product.id
-                _ = await storeKit.purchase(product)
-                loadingTipID = nil
-            }
-        } label: {
-            VStack(spacing: 4) {
-                if isPurchasingThis {
-                    ProgressView()
-                        .frame(width: 24, height: 24)
-                } else {
-                    Text(tipEmoji(for: product))
-                        .font(.system(size: 24))
-                        .opacity(loadingTipID != nil ? 0.4 : 1)
-                }
-                Text(product.displayPrice)
-                    .font(HabitraFont.caption())
-                    .tracking(0)
-                    .textCase(.none)
-                    .foregroundStyle(Color.habitraTextPrimary)
-                    .opacity(loadingTipID != nil && !isPurchasingThis ? 0.4 : 1)
-            }
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, 12)
-            .background(Color.habitraSurfaceLight)
-            .clipShape(RoundedRectangle(cornerRadius: HabitraTheme.cornerRadiusSmall))
-        }
-        .buttonStyle(.plain)
-        .disabled(loadingTipID != nil)
-    }
-
-    private func tipPlaceholderButton(_ emoji: String, _ price: String, productID: String) -> some View {
-        let isThisLoading = loadingTipID == productID
-        return Button {
-            guard loadingTipID == nil else { return }
-            Task {
-                loadingTipID = productID
-                await storeKit.loadProducts()
-                loadingTipID = nil
-            }
-        } label: {
-            VStack(spacing: 4) {
-                if isThisLoading {
-                    ProgressView()
-                        .frame(width: 24, height: 24)
-                } else {
-                    Text(emoji)
-                        .font(.system(size: 24))
-                        .opacity(loadingTipID != nil ? 0.4 : 1)
-                }
-                Text(price)
-                    .font(HabitraFont.caption())
-                    .tracking(0)
-                    .textCase(.none)
-                    .foregroundStyle(Color.habitraTextTertiary)
-                    .opacity(loadingTipID != nil && !isThisLoading ? 0.4 : 1)
-            }
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, 12)
-            .background(Color.habitraSurfaceLight)
-            .clipShape(RoundedRectangle(cornerRadius: HabitraTheme.cornerRadiusSmall))
-        }
-        .buttonStyle(.plain)
-        .disabled(loadingTipID != nil)
-    }
-
-    private func tipEmoji(for product: Product) -> String {
-        if product.id.contains("small") { return "☕" }
-        if product.id.contains("medium") { return "🍱" }
-        return "💰"
-    }
-
-    private func proFeatureRow(_ text: String) -> some View {
+    private func roadmapPeek(_ icon: String, _ text: String) -> some View {
         HStack(spacing: 8) {
-            Image(systemName: "checkmark.circle.fill")
-                .font(.system(size: 14))
+            Image(systemName: icon)
+                .font(.system(size: 12))
                 .foregroundStyle(Color.habitraAccent)
+                .frame(width: 16)
             Text(text)
-                .font(HabitraFont.body())
+                .font(HabitraFont.footnote())
                 .foregroundStyle(Color.habitraTextSecondary)
+            Spacer()
+            Text("Soon")
+                .font(.system(.caption2, design: .rounded).weight(.medium))
+                .foregroundStyle(Color.habitraAccentGlow)
+                .padding(.horizontal, 6)
+                .padding(.vertical, 2)
+                .background(Color.habitraAccent.opacity(0.12))
+                .clipShape(Capsule())
         }
     }
 

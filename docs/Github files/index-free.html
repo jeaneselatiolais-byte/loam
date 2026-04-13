@@ -1,0 +1,522 @@
+<!-- Free v1.0 landing page. Pro version preserved at index.html. See docs/RELEASE_STRATEGY.md -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Habitra - Build Habits That Actually Stick</title>
+  <meta name="description" content="Habitra is a free habit tracker for iOS with streaks, smart reminders, and progress tracking. No ads. No accounts. No cloud. Free forever.">
+  <meta name="apple-itunes-app" content="app-id=YOUR_APP_ID">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0D0D14;
+      --surface: #1A1A2E;
+      --surface-light: #242442;
+      --accent: #6C63FF;
+      --accent-bright: #7C73FF;
+      --accent-glow: #A89AFF;
+      --text-primary: #EEEDFE;
+      --text-secondary: #AFA9EC;
+      --text-tertiary: #7A74B0;
+      --success: #34D399;
+      --radius: 16px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--accent-glow); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Nav */
+    nav {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--surface-light);
+    }
+    nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.5px;
+    }
+    .logo span { color: var(--accent); }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 28px;
+    }
+    nav ul a {
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    nav ul a:hover { color: var(--text-primary); text-decoration: none; }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 100px 0 80px;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: var(--surface-light);
+      color: var(--accent-glow);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+      border: 1px solid rgba(108, 99, 255, 0.2);
+    }
+    .hero h1 {
+      font-size: clamp(36px, 6vw, 56px);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      letter-spacing: -1px;
+    }
+    .hero h1 .gradient {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-glow) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 560px;
+      margin: 0 auto 36px;
+    }
+    .app-store-btn {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      font-weight: 600;
+      font-size: 16px;
+      padding: 14px 32px;
+      border-radius: 12px;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .app-store-btn:hover {
+      background: var(--accent-bright);
+      text-decoration: none;
+      transform: translateY(-1px);
+    }
+
+    /* Pulse line decoration */
+    .pulse-line {
+      width: 200px;
+      height: 40px;
+      margin: 40px auto 0;
+      opacity: 0.4;
+    }
+    .pulse-line svg { width: 100%; height: 100%; }
+
+    /* Features */
+    .features {
+      padding: 80px 0;
+    }
+    .features h2 {
+      text-align: center;
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .features .subtitle {
+      text-align: center;
+      color: var(--text-secondary);
+      margin-bottom: 60px;
+      font-size: 16px;
+    }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--surface-light);
+      border-radius: var(--radius);
+      padding: 28px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .feature-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+    .feature-icon {
+      font-size: 28px;
+      margin-bottom: 16px;
+    }
+    .feature-card h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .feature-card p {
+      color: var(--text-secondary);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    /* Roadmap Section (replaces AI Section) */
+    .roadmap-section {
+      padding: 80px 0;
+      border-top: 1px solid var(--surface-light);
+    }
+    .roadmap-section .container {
+      text-align: center;
+    }
+    .roadmap-section h2 {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .roadmap-section .subtitle {
+      color: var(--text-secondary);
+      margin-bottom: 48px;
+      font-size: 16px;
+    }
+    .roadmap-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      text-align: left;
+    }
+    .roadmap-item {
+      background: var(--surface);
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid var(--surface-light);
+    }
+    .roadmap-item h4 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--accent-glow);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .roadmap-item p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+    .planned-badge {
+      display: inline-block;
+      background: rgba(108, 99, 255, 0.15);
+      color: var(--accent-glow);
+      font-size: 9px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 100px;
+      letter-spacing: 0.5px;
+      border: 1px solid rgba(108, 99, 255, 0.25);
+      flex-shrink: 0;
+    }
+
+    /* Privacy callout */
+    .privacy-callout {
+      padding: 60px 0;
+      text-align: center;
+      border-top: 1px solid var(--surface-light);
+    }
+    .privacy-callout .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(52, 211, 153, 0.1);
+      color: var(--success);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 8px 20px;
+      border-radius: 100px;
+      border: 1px solid rgba(52, 211, 153, 0.2);
+      margin-bottom: 16px;
+    }
+    .privacy-callout h3 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .privacy-callout p {
+      color: var(--text-secondary);
+      max-width: 520px;
+      margin: 0 auto;
+      font-size: 15px;
+    }
+
+    /* Footer */
+    footer {
+      padding: 40px 0;
+      border-top: 1px solid var(--surface-light);
+    }
+    footer .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    footer p {
+      color: var(--text-tertiary);
+      font-size: 13px;
+    }
+    footer ul {
+      list-style: none;
+      display: flex;
+      gap: 24px;
+    }
+    footer ul a {
+      color: var(--text-tertiary);
+      font-size: 13px;
+    }
+    footer ul a:hover { color: var(--text-secondary); }
+
+    /* Tip Jar (replaces Pricing) */
+    .tip-jar {
+      padding: 80px 0;
+      border-top: 1px solid var(--surface-light);
+    }
+    .tip-jar h2 {
+      text-align: center;
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .tip-jar .subtitle {
+      text-align: center;
+      color: var(--text-secondary);
+      margin-bottom: 48px;
+      font-size: 16px;
+    }
+    .tip-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .tip-card {
+      background: var(--surface);
+      border: 1px solid var(--surface-light);
+      border-radius: var(--radius);
+      padding: 32px 24px;
+      text-align: center;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .tip-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+    .tip-emoji {
+      font-size: 40px;
+      margin-bottom: 16px;
+    }
+    .tip-name {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+    .tip-price {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--accent-glow);
+      margin-bottom: 8px;
+    }
+    .tip-label {
+      font-size: 13px;
+      color: var(--text-tertiary);
+    }
+    .tip-note {
+      text-align: center;
+      margin-top: 32px;
+      font-size: 14px;
+      color: var(--text-tertiary);
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    @media (max-width: 640px) {
+      nav ul { gap: 16px; }
+      .hero { padding: 60px 0 50px; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .roadmap-grid { grid-template-columns: 1fr 1fr; }
+      .tip-grid { grid-template-columns: 1fr; max-width: 320px; margin: 0 auto; }
+      footer .container { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="container">
+      <div class="logo">Habitr<span>a</span></div>
+      <ul>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#tip-jar">Support</a></li>
+        <li><a href="support-free.html">Help</a></li>
+        <li><a href="privacy-free.html">Privacy</a></li>
+        <li><a href="copyright-free.html">Terms</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-badge">Intelligent Habit Tracking for iOS</div>
+      <h1>Build habits that<br><span class="gradient">actually stick</span></h1>
+      <p>Habitra helps you build lasting habits with streaks, smart reminders, and progress tracking you can see at a glance. No ads. No accounts. No cloud. Free forever.</p>
+      <a href="#" class="app-store-btn">Download on the App Store</a>
+      <div class="pulse-line">
+        <svg viewBox="0 0 200 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 20 H60 L70 5 L80 35 L90 10 L100 30 L110 20 H200" stroke="#6C63FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="features" id="features">
+    <div class="container">
+      <h2>Everything you need to build better habits</h2>
+      <p class="subtitle">Simple on the surface. Powerful underneath.</p>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon">&#9889;</div>
+          <h3>Quick Daily Check-In</h3>
+          <p>Tap to complete habits from your Today view. Track streaks, see progress at a glance, and build momentum with satisfying haptic feedback.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">&#128200;</div>
+          <h3>Stats &amp; Progress</h3>
+          <p>Calendar heatmaps, completion rates, trend analysis, and day-of-week breakdowns. See your patterns at a glance.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">&#128276;</div>
+          <h3>Smart Reminders</h3>
+          <p>Set custom reminder times for each habit. Multi-completion habits get spaced interval reminders throughout the day.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">&#127912;</div>
+          <h3>Icons &amp; Colors</h3>
+          <p>Personalize each habit with custom icons from SF Symbols and 8 beautiful color presets.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">&#127919;</div>
+          <h3>Streak Milestones</h3>
+          <p>Celebrate 7-day, 30-day, 100-day, and 365-day milestones with shareable streak cards and custom themes.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">&#128241;</div>
+          <h3>Lock Screen Widget</h3>
+          <p>See your top streak right on your Lock Screen. Widgets update automatically when you complete habits.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="roadmap-section">
+    <div class="container">
+      <h2>What's next for Habitra</h2>
+      <p class="subtitle">We're building in the open. Here's what's on the roadmap.</p>
+      <div class="roadmap-grid">
+        <div class="roadmap-item">
+          <h4>On-device AI Coach <span class="planned-badge">PLANNED</span></h4>
+          <p>Gentle nudges and pattern insights -- all computed privately on your phone.</p>
+        </div>
+        <div class="roadmap-item">
+          <h4>Apple Health Integration <span class="planned-badge">PLANNED</span></h4>
+          <p>Auto-complete habits from steps, workouts, sleep, and mindful minutes.</p>
+        </div>
+        <div class="roadmap-item">
+          <h4>iCloud Sync <span class="planned-badge">PLANNED</span></h4>
+          <p>Keep your habits in sync across iPhone, iPad, and Mac -- end-to-end encrypted.</p>
+        </div>
+        <div class="roadmap-item">
+          <h4>More Widgets &amp; StandBy <span class="planned-badge">PLANNED</span></h4>
+          <p>Lock Screen, medium, large, and StandBy widgets for every glance.</p>
+        </div>
+        <div class="roadmap-item">
+          <h4>Weekly Quests <span class="planned-badge">PLANNED</span></h4>
+          <p>Opt-in mini-challenges that reward consistency with XP and badges.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="privacy-callout">
+    <div class="container">
+      <div class="badge">&#128274; Privacy First</div>
+      <h3>Your data stays on your device</h3>
+      <p>Habitra processes all AI and analytics on-device using Core ML. We never collect, transmit, or store your habit data, mood entries, or health information on any server. Period.</p>
+    </div>
+  </section>
+
+  <section class="tip-jar" id="tip-jar">
+    <div class="container">
+      <h2>Support Habitra</h2>
+      <p class="subtitle">Habitra is 100% free. If you enjoy it, tips help us keep building.</p>
+
+      <div class="tip-grid">
+        <div class="tip-card">
+          <div class="tip-emoji">&#9749;</div>
+          <div class="tip-name">Coffee Tip</div>
+          <div class="tip-price">$1.99</div>
+          <div class="tip-label">One-time tip</div>
+        </div>
+        <div class="tip-card">
+          <div class="tip-emoji">&#127828;</div>
+          <div class="tip-name">Lunch Tip</div>
+          <div class="tip-price">$4.99</div>
+          <div class="tip-label">One-time tip</div>
+        </div>
+        <div class="tip-card">
+          <div class="tip-emoji">&#127869;</div>
+          <div class="tip-name">Dinner Tip</div>
+          <div class="tip-price">$9.99</div>
+          <div class="tip-label">One-time tip</div>
+        </div>
+      </div>
+
+      <p class="tip-note">Tips are optional and don't unlock anything. Habitra is free for everyone.</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Habitra. All rights reserved.</p>
+      <ul>
+        <li><a href="support-free.html">Support</a></li>
+        <li><a href="privacy-free.html">Privacy Policy</a></li>
+        <li><a href="copyright-free.html">Terms of Use</a></li>
+      </ul>
+    </div>
+  </footer>
+
+</body>
+</html>
